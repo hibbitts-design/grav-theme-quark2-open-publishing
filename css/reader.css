@@ -176,9 +176,26 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     margin: 0;
 }
 
+/* the search box on the right, the same side as the search box on section pages */
 .section-list-actions .reader-search {
     flex: 1 1 14rem;
     max-width: 22rem;
+    margin-left: auto;
+}
+
+/* the same height as the Start button beside it (Quark 2's fields are taller than its buttons) */
+.section-list-actions .reader-search input[type="search"] {
+    height: 2.1875rem;
+    padding-block: 0;
+    line-height: normal;
+}
+
+/* on phones it goes below the button, at full width */
+@media (max-width: 600px) {
+    .section-list-actions .reader-search {
+        margin-left: 0;
+        max-width: none;
+    }
 }
 
 /* Part headings, and headings in the text below the cards, with Quark 2's divider line */

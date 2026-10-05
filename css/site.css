@@ -11,11 +11,12 @@ The templates are the same as in Quark Open Publishing; colours and spacing come
     --q2-text-muted: #6b6b70;
 }
 
-/* "Skip to content": hidden until it gets keyboard focus, then shown at the top left */
+/* "Skip to content": hidden until it gets keyboard focus, then shown at the top left. While hidden it's clipped to an
+   invisible 1px box (the usual way to hide text from view but not from screen readers), which works in every browser */
 .skip-link {
     position: absolute;
     left: 1rem;
-    top: -10rem;
+    top: 1rem;
     z-index: 1000;
     padding: 0.5rem 1rem;
     border-radius: var(--q2-radius);
@@ -27,8 +28,15 @@ The templates are the same as in Quark Open Publishing; colours and spacing come
     text-decoration: none;
 }
 
-.skip-link:focus {
-    top: 1rem;
+.skip-link:not(:focus) {
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    box-shadow: none;
 }
 
 /* ---------- Icons ---------- */
