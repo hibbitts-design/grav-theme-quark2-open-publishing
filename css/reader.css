@@ -33,9 +33,17 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     gap: clamp(2rem, 4vw, 3rem);
 }
 
+/* the page takes its full reading width first (see below), and the side list the rest (at most 22rem, on the right),
+   so the side list sits close beside the page rather than at the far edge */
 @media (min-width: 960px) {
     .columns:has(> #sections-nav) {
-        grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+        grid-template-columns: minmax(0, 42rem) minmax(15rem, 1fr);
+    }
+
+    #sections-nav {
+        width: 100%;
+        max-width: 22rem;
+        justify-self: end;
     }
 }
 
@@ -375,6 +383,7 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
 
 /* the back link and top Previous/Next links look like Quark 2's breadcrumbs (muted, no underline), at body text size */
 .reader-back-link,
+.reader-contents-link,
 .reader-prev-next-top {
     font-family: var(--pico-font-family-sans-serif);
     font-size: 1rem;
@@ -383,6 +392,7 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
 }
 
 .reader-back-link a,
+.reader-contents-link a,
 .reader-prev-next-top a {
     padding: 0.25rem 0; /* a little taller, for easier tapping */
     color: var(--q2-text-muted);
@@ -390,6 +400,7 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
 }
 
 .reader-back-link a:hover,
+.reader-contents-link a:hover,
 .reader-prev-next-top a:hover {
     color: var(--q2-text-strong);
 }
@@ -400,6 +411,7 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
 }
 
 .reader-back-link .fa,
+.reader-contents-link .fa,
 .reader-prev-next-top .fa {
     font-size: 0.75em;
 }
@@ -407,6 +419,39 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
 .reader-prev-next-top-divider {
     color: var(--q2-text-muted);
     margin: 0 0.5rem;
+}
+
+/* the Contents link is only needed when the side list sits below the page (phones and narrow windows) */
+@media (min-width: 960px) {
+    .reader-contents-link {
+        display: none;
+    }
+}
+
+/* ---------- Section pages: comfortable reading, as in a book ---------- */
+
+/* a comfortable line length: the page column is at most about 80 characters of text wide
+   (centred when the page is embedded, without its side list) */
+#sections-content {
+    max-width: 42rem;
+}
+
+#sections-content.col-12 {
+    margin-inline: auto;
+}
+
+/* the page's text a little larger than elsewhere, without words broken across lines
+   (Quark 2 hyphenates by default, which suits cards but interrupts longer reading) */
+.reader-content p,
+.reader-content li,
+.reader-content dd,
+.reader-content blockquote {
+    font-size: 1.0625rem;
+}
+
+.reader-content,
+.reader-content * {
+    hyphens: manual;
 }
 
 /* The search box and side list of sections sit in Quark 2's sidebar cards, as in the blog's sidebar
