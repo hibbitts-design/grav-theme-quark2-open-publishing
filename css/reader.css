@@ -399,7 +399,7 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
 
 /* the back link and top Previous/Next links look like Quark 2's breadcrumbs (muted, no underline), at body text size */
 .reader-back-link,
-.reader-contents-link,
+.reader-sections-link,
 .reader-prev-next-top {
     font-family: var(--pico-font-family-sans-serif);
     font-size: 1rem;
@@ -408,7 +408,7 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
 }
 
 .reader-back-link a,
-.reader-contents-link a,
+.reader-sections-link a,
 .reader-prev-next-top a {
     padding: 0.25rem 0; /* a little taller, for easier tapping */
     color: var(--q2-text-muted);
@@ -416,7 +416,7 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
 }
 
 .reader-back-link a:hover,
-.reader-contents-link a:hover,
+.reader-sections-link a:hover,
 .reader-prev-next-top a:hover {
     color: var(--q2-text-strong);
 }
@@ -427,7 +427,7 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
 }
 
 .reader-back-link .fa,
-.reader-contents-link .fa,
+.reader-sections-link .fa,
 .reader-prev-next-top .fa {
     font-size: 0.75em;
 }
@@ -437,9 +437,9 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     margin: 0 0.5rem;
 }
 
-/* the Contents link is only needed when the side list sits below the page (phones and narrow windows) */
+/* the Sections link is only needed when the side list sits below the page (phones and narrow windows) */
 @media (min-width: 960px) {
-    .reader-contents-link {
+    .reader-sections-link {
         display: none;
     }
 }
