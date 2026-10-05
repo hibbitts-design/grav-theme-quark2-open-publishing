@@ -45,6 +45,22 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
         max-width: 22rem;
         justify-self: end;
     }
+
+    /* the side list stays in view below the header while reading a long page; when the list of sections is taller
+       than the window, it scrolls on its own */
+    #sections-nav {
+        position: sticky;
+        top: calc(var(--q2-header-height) + 1.5rem);
+        align-self: start;
+        display: flex;
+        flex-direction: column;
+        max-height: calc(100vh - var(--q2-header-height) - 3rem);
+    }
+
+    #sections-nav > ul.nav {
+        min-height: 0;
+        overflow-y: auto;
+    }
 }
 
 /* Section cards: 1, 2 or 3 per row (the template gives each card col-12, col-6 or col-4), one per row on phones */
