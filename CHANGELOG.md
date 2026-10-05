@@ -3,6 +3,7 @@
 
 1. [](#improved)
     * Larger links above section pages, with spacing to match
+    * Part headings stand out more from the section cards, and the OER attribution's links are muted
 1. [](#bugfix)
     * Section card images now open their section, like the blog's cards
 
