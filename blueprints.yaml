@@ -110,6 +110,7 @@ form:
             dropdown.enabled:
               type: toggle
               label: 'Display Dropdowns in Menu'
+              help: "On sites with guides, consider turning this off, so a guide's sections don't also appear in the menu."
               highlight: 1
               default: 1
               options:

@@ -71,6 +71,9 @@ All options are available in the Admin Panel under **Themes → Quark 2 Open Pub
 - **Custom Menu Items** – text, icon, URL, and target for extra menu links
 - **Git Sync Link** – location, link type (view or edit), icon and text, and a custom Git repository URL
 
+> [!TIP]
+> On a site with guides, consider turning off **Display Dropdowns in Menu**. Otherwise a guide's sections also appear as a dropdown under its menu item, although readers already move between them with the guide's side list and Previous/Next links. The Open Publishing Space skeleton has dropdowns turned off.
+
 ## Guides, Page URL Parameters and Search
 
 These work the same as in Quark Open Publishing – see its README:
