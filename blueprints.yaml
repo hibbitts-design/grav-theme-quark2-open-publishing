@@ -291,15 +291,6 @@ form:
               validate:
                 type: bool
 
-            phone_text_size:
-              type: select
-              label: 'Text Size on Phones'
-              help: 'Kept so settings from Quark Open Publishing stay valid. Quark 2 already uses a comfortable text size on phones (16px), so this setting has no effect here.'
-              size: medium
-              default: standard
-              options:
-                standard: 'Standard'
-                larger: 'Larger'
         custommenu_options:
           type: tab
           title: 'Custom Menu Items'
