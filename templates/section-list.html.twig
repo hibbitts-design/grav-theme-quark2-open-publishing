@@ -1,0 +1,161 @@
+{# Section List page: a reader home with its details, a Start Reading button and a card for each section (as in Helios Open Reader).
+   Its sections and subsections use the same templates as the Multi-Section page - hibbittsdesign.org #}
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+  {% import 'macros/reader.html.twig' as reader %}
+
+  {% set reader_home = page %}
+  {% set reader_sections = page.collection.visible() %}
+
+  {# Keep a tag filter (/filter:...) on the card and Start Reading links, as the side navigation does #}
+  {% set activetag = uri.param('filter') %}
+  {% set filter_suffix = activetag ? '/filter:' ~ activetag : '' %}
+
+  {# Cover Image Layout: by default a small cover is shown with the title, subtitle, author(s), edition and license
+     beside it; "large" shows it across the full width of the content area at the top, with the title below it #}
+  {% set cover = page.header.cover_image ? page.media[page.header.cover_image] : null %}
+  {% set large_cover = cover and page.header.cover_image_layout == 'large' %}
+  {% set show_title = not(page.header.hide_page_title) and not(grav.uri.param('hidepagetitle')) %}
+  {# with a small cover, the title goes beside it, at the top of the details, like a publication card #}
+  {% set title_beside_cover = cover and not large_cover %}
+
+  <div class="section-list-page">
+
+    {% if large_cover %}
+      <img class="reader-cover-large" src="{{ cover.url }}" alt="{{ 'THEME_QUARK_OPEN_PUBLISHING.READER_COVER'|t(page.title) }}">
+    {% endif %}
+
+    {% if show_title and not title_beside_cover %}
+      <h3 class="sections-page-title-template">{{ page.title }}</h3>
+    {% endif %}
+
+    {% include 'partials/reader_header.html.twig' with { hide_cover: large_cover, show_title: show_title and title_beside_cover } %}
+
+    {# Text above and below the section cards, as in Helios Open Reader: a line with just === in the page's content
+       splits it, with the text before it above the cards and the text after it below them (=== is Grav's summary
+       delimiter, so the text above is the page's summary). Without ===, all of the text is above the cards. #}
+    {# (only when the summary really is the start of the text: === can also appear for other reasons, such as a
+       heading underlined with ===, and then the summary is a shortened copy and all of the text stays above) #}
+    {% set content_above = page.content %}
+    {% set content_below = '' %}
+    {% if '===' in page.rawMarkdown %}
+      {% set summary_text = page.summary %}
+      {% if page.content starts with summary_text %}
+        {% set content_above = summary_text %}
+        {% set content_below = page.content|slice(summary_text|length)|trim %}
+      {% endif %}
+    {% endif %}
+
+    {{ content_above|raw }}
+
+    {# Start button, linking to the first section (an empty start_button_text hides it) #}
+    {% if page.header.start_button_text is defined %}
+      {% set start_text = page.header.start_button_text %}
+    {% else %}
+      {% set start_text = 'THEME_QUARK_OPEN_PUBLISHING.READER_START'|t %}
+    {% endif %}
+    {% set first_section = reader_sections|first %}
+
+    {# A search box beside the Start button (Show Search Box setting, on unless turned off; hidden in embedded mode) #}
+    {% set show_reader_search = (page.header.show_search_box is not defined or page.header.show_search_box)
+      and (config.plugins.simplesearch.enabled or config.plugins.tntsearch.enabled) and not embedded_mode %}
+
+    {% if (start_text and first_section) or show_reader_search %}
+      <div class="section-list-actions">
+        {% if start_text and first_section %}
+          {# Keep My Place (on unless turned off): when this reader has visited a section or subsection page before,
+             js/reader.js changes this button to Continue Reading, linking to that page, as in Helios Open Reader #}
+          {% set keep_my_place = page.header.keep_my_place is not defined or page.header.keep_my_place %}
+          <p class="section-list-start">
+            <a class="btn btn-primary" href="{{ first_section.url ~ filter_suffix }}"
+              {%- if keep_my_place %} data-reader-home="{{ page.url }}" data-continue-text="{{ 'THEME_QUARK_OPEN_PUBLISHING.READER_CONTINUE_READING'|t }}"{% endif %}><span class="section-list-start-text">{{ start_text }}</span> <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+          </p>
+        {% endif %}
+        {% if show_reader_search %}
+          <div class="reader-search">
+            {% include 'partials/search_box.html.twig' with { search_scope: reader_home } %}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {# A card for each section, 1, 2 or 3 per row (one per row on phones) #}
+    {% set cards_per_row = page.header.cards_per_row|default(1) %}
+    {% if cards_per_row == 3 %}
+      {% set card_column = 'col-4 col-md-6 col-sm-12' %}
+    {% elseif cards_per_row == 2 %}
+      {% set card_column = 'col-6 col-sm-12' %}
+    {% else %}
+      {% set card_column = 'col-12' %}
+    {% endif %}
+
+    {# Parts: sections in a row with the same Part setting are grouped under a heading with that title.
+       Sections without a Part have no heading. The numbers keep counting across parts (Unit 1, 2, 3, ...). #}
+    {% set part_groups = [] %}
+    {% set group_title = '' %}
+    {% set group_sections = [] %}
+    {% for section_item in reader_sections %}
+      {% set part_title = section_item.header.part ?? '' %}
+      {# a new group starts when the Part changes #}
+      {% if not loop.first and part_title != group_title %}
+        {% set part_groups = part_groups|merge([{ title: group_title, sections: group_sections }]) %}
+        {% set group_sections = [] %}
+      {% endif %}
+      {% set group_title = part_title %}
+      {% set group_sections = group_sections|merge([section_item]) %}
+      {% if loop.last %}
+        {% set part_groups = part_groups|merge([{ title: group_title, sections: group_sections }]) %}
+      {% endif %}
+    {% endfor %}
+
+    {# the card's number, counting across all parts #}
+    {% set card_number = 0 %}
+
+    {% for part_group in part_groups %}
+      {% if part_group.title %}
+        <h4 class="reader-part-heading">{{ part_group.title }}</h4>
+      {% endif %}
+      <ul class="section-cards columns">
+        {% for section_item in part_group.sections %}
+          {% set card_number = card_number + 1 %}
+          {# the label (for example "Unit 2") uses the card's position; don't loop over reader_sections again inside this loop #}
+          {% set label = reader.section_label(section_item, reader_home, card_number) %}
+          {% set card_image = section_item.header.image ? section_item.media[section_item.header.image] : null %}
+          <li class="column {{ card_column }}">
+            <div class="card section-card">
+              {% if card_image %}
+                <div class="card-image">
+                  <img class="img-responsive" src="{{ card_image.cropZoom(800, 400).url }}" alt="">
+                </div>
+              {% endif %}
+              <div class="card-header">
+                {% if label|length > 0 %}
+                  <p class="reader-section-label">{{ label }}</p>
+                {% endif %}
+                {# the link covers the whole card (see css/reader.css); below a part's heading, the card title is one heading level lower #}
+                {% set card_heading = part_group.title ? 'h5' : 'h4' %}
+                <{{ card_heading }} class="card-title h5"><a class="section-card-link" href="{{ section_item.url ~ filter_suffix }}">{{ section_item.title }}</a></{{ card_heading }}>
+              </div>
+              {% if section_item.header.description %}
+                <div class="card-body">
+                  <p class="section-card-description">{{ section_item.header.description }}</p>
+                </div>
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+
+    {% if content_below %}
+      <div class="section-list-below">
+        {{ content_below|raw }}
+      </div>
+    {% endif %}
+
+    {% include 'partials/reader_attribution.html.twig' %}
+
+  </div>
+
+{% endblock %}

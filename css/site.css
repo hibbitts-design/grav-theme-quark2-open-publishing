@@ -1,0 +1,175 @@
+/*
+Site-wide extras from Quark Open Publishing, in Quark 2's style - hibbittsdesign.org
+The templates are the same as in Quark Open Publishing; colours and spacing come from Quark 2's --q2-* tokens.
+*/
+
+/* ---------- Icons ---------- */
+.fa.fa-github,
+.fa.fa-gitlab,
+.fa.fa-bitbucket,
+.fa.fa-git,
+.fa.fa-twitter,
+.fa.fa-mastodon,
+.fa.fa-linkedin {
+    --fa-family: "Font Awesome 7 Brands";
+    --fa-style: 400;
+}
+
+/* Font Awesome 4's clock-o (reading time) is "clock" in Font Awesome 5 and later */
+.fa.fa-clock-o {
+    --fa: "\f017";
+    --fa-style: 400;
+}
+
+/* Blades CSS shows a link with an icon as a small flex row (with a gap after the icon); centre the icon on the text,
+   rather than stretching it to the line height */
+a:has(> .fa) {
+    align-items: center;
+}
+
+/* ---------- Search boxes ---------- */
+/* A plain field, as in Grav's Quark 2 blog demo (Blades CSS would otherwise draw type="search" fields as a pill with
+   a magnifier icon). The field's colours, border and focus ring are Quark 2's own form styles. */
+.search-box {
+    margin: 0;
+}
+
+.search-box input[type="search"] {
+    margin: 0;
+    border-radius: var(--q2-radius);
+    background-image: none;
+    padding: 0.625rem 0.75rem;
+    padding-inline-start: 0.75rem;
+}
+
+/* ---------- The Git Sync link on pages (Location of Git Sync Link: Page) ---------- */
+.gitrepo-link-note {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--q2-divider);
+    color: var(--q2-text-muted);
+    font-family: var(--pico-font-family-sans-serif);
+    font-size: 0.875rem;
+}
+
+.gitrepo-link-note p {
+    margin: 0;
+}
+
+/* ---------- Creative Commons license, below the page content ---------- */
+.creative-commons-license {
+    margin-top: 2rem;
+    color: var(--q2-text-muted);
+    font-family: var(--pico-font-family-sans-serif);
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.creative-commons-license > br:first-child {
+    display: none;
+}
+
+/* ---------- Footer: the text of the site's "footer" page ---------- */
+#footer .footer-page p {
+    margin: 0 0 0.25rem;
+}
+
+#footer .footer-git-link {
+    margin: 0 0 0.75rem;
+}
+
+/* ---------- Error page ("page not found"), with a way back home and a search box ---------- */
+/* (overrides Quark 2's own #error layout, which places its parts in a row with a very large title) */
+#error.empty {
+    display: block;
+    min-height: 0;
+    max-width: 34rem;
+    margin: 2rem auto;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    background: var(--q2-bg-elev);
+    border-radius: var(--q2-radius-md);
+    box-shadow: var(--q2-shadow-card);
+}
+
+#error .empty-title {
+    font-size: 1.75rem;
+    margin: 0.25rem 0 0.75rem;
+}
+
+#error .empty-subtitle {
+    color: var(--q2-text-muted);
+}
+
+#error .empty-action {
+    margin-top: 1.25rem;
+}
+
+.error-search .search-box {
+    max-width: 20rem;
+    margin: 0 auto;
+}
+
+/* ---------- Blog ---------- */
+/* a notice above the posts (the blog's modular content, for example _important-notice) */
+.blog-notice {
+    margin-bottom: 1.5rem;
+}
+
+/* Bricklayer Layout turned off: posts in a single column */
+.blog-grid.blog-grid-single,
+.columns.has-sidebar .blog-grid.blog-grid-single {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+/* reading time beside the date */
+.blogitem__readingtime {
+    margin-left: 0.75rem;
+}
+
+/* image credit below a post's card image */
+.card .image-credit {
+    margin: 0.4rem 1.375rem 0;
+    color: var(--q2-text-muted);
+    font-size: 0.75rem;
+}
+
+/* the site's "sidebar" page in the blog sidebar */
+.sidebar-page > :last-child {
+    margin-bottom: 0;
+}
+
+/* ---------- Embeds: responsive boxes for H5P, PDF, iFrame and video embeds (Spectre's video-responsive) ---------- */
+.video-responsive {
+    display: block;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+
+.video-responsive::before {
+    content: "";
+    display: block;
+    padding-bottom: 56.25%; /* 16:9 */
+}
+
+.video-responsive-4-3::before {
+    padding-bottom: 75%;
+}
+
+.video-responsive-1-1::before {
+    padding-bottom: 100%;
+}
+
+.video-responsive iframe,
+.video-responsive object,
+.video-responsive embed,
+.video-responsive video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}

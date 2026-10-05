@@ -1,0 +1,9 @@
+{# After the page content: the Git Sync link (Location of Git Sync Link: Page) and the Creative Commons license (not in
+   embedded mode, or when only the summary is shown) - used by the base template and the blog templates - hibbittsdesign.org #}
+{% set summary_only = grav.uri.param('summaryonly') or grav.uri.param('onlysummary') %}
+{% if theme_var('display_of_git_sync_repo_link') == 'page' and not summary_only %}
+    {% include 'partials/git_sync_repo_link_note.html.twig' %}
+{% endif %}
+{% if not embedded_mode and not theme_var('chromeless.enabled') and theme_var('cc_license.enabled') and not page.header.hide_cc_license and not summary_only %}
+    {% include 'partials/creative_commons_license.html.twig' %}
+{% endif %}

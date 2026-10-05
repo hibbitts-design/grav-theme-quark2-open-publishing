@@ -1,0 +1,64 @@
+{# Blog sidebar: Quark 2's sidebar (including its /modules/sidebar page, as in Grav's blog skeleton), plus what Quark Open
+   Publishing adds - the site's "sidebar" page (at the top, or at the bottom with position: bottom), and a search box that
+   uses TNTSearch when it's enabled - hibbittsdesign.org #}
+{% set new_base_url = blog.url == '/' ? '' : blog.url %}
+{% set sidebar_page = pages.find('/sidebar') %}
+{% set sidebar_page_content = sidebar_page.content %}
+{% set sidebar_position = sidebar_page.header.position ?: 'top' %}
+
+{% if config.plugins.tntsearch.enabled or config.plugins.simplesearch.enabled %}
+<div class="sidebar-content">
+    {% include 'partials/search_box.html.twig' %}
+</div>
+{% endif %}
+
+{% if sidebar_position == 'top' and sidebar_page_content is not empty %}
+<div class="sidebar-content sidebar-page">
+    {{ sidebar_page_content|raw }}
+</div>
+{% endif %}
+
+{% if config.plugins.relatedpages.enabled and related_pages|length > 0 %}
+<div class="sidebar-content">
+    <h4>{{ 'THEME_QUARK2.SIDEBAR.RELATED_POSTS.HEADLINE'|t }}</h4>
+    {% include 'partials/relatedpages.html.twig' %}
+</div>
+{% endif %}
+
+{% if config.plugins.random.enabled %}
+<div class="sidebar-content">
+    <h4>{{ 'THEME_QUARK2.SIDEBAR.RANDOM_ARTICLE.HEADLINE'|t }}</h4>
+    <a class="btn btn-ghost btn-sm" href="{{ base_url }}/random"><i class="fa-solid fa-shuffle" aria-hidden="true"></i> {{ 'THEME_QUARK2.SIDEBAR.RANDOM_ARTICLE.FEELING_LUCKY'|t }}</a>
+</div>
+{% endif %}
+
+{# Quark 2's sidebar text, from a /modules/sidebar page (as in Grav's blog skeleton) #}
+{{ page.find('/modules/sidebar').content|raw }}
+
+{% if config.plugins.taxonomylist.enabled %}
+<div class="sidebar-content">
+    <h4>{{ 'THEME_QUARK2.SIDEBAR.POPULAR_TAGS.HEADLINE'|t }}</h4>
+    {% include 'partials/taxonomylist.html.twig' with {'base_url': new_base_url, 'taxonomy': 'tag', 'children_only': true, 'of_page': blog} %}
+</div>
+{% endif %}
+
+{% if config.plugins.archives.enabled %}
+<div class="sidebar-content">
+    <h4>{{ 'THEME_QUARK2.SIDEBAR.ARCHIVES.HEADLINE'|t }}</h4>
+    {% include 'partials/archives.html.twig' with {'base_url': new_base_url} %}
+</div>
+{% endif %}
+
+{% if sidebar_position == 'bottom' and sidebar_page_content is not empty %}
+<div class="sidebar-content sidebar-page">
+    {{ sidebar_page_content|raw }}
+</div>
+{% endif %}
+
+{% if config.plugins.feed.enabled %}
+<div class="sidebar-content syndicate">
+    <h4>{{ 'THEME_QUARK2.SIDEBAR.SYNDICATE.HEADLINE'|t }}</h4>
+    <a class="btn btn-ghost btn-sm" href="{{ blog.url(false, false, true, false, 'atom')|e }}"><i class="fa-solid fa-square-rss" aria-hidden="true"></i> Atom</a>
+    <a class="btn btn-ghost btn-sm" href="{{ blog.url(false, false, true, false, 'rss')|e }}"><i class="fa-solid fa-square-rss" aria-hidden="true"></i> RSS</a>
+</div>
+{% endif %}

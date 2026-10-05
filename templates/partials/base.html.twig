@@ -1,0 +1,65 @@
+{# Quark 2's page layout, with what Quark Open Publishing adds: the guide (Section List) styles and script, callout styles,
+   and embedded mode (/chromeless:true or ?embedded=true, as in Helios), which shows only the page content - hibbittsdesign.org #}
+{% extends '@quark2/partials/base.html.twig' %}
+
+{% set show_site_chrome = not embedded_mode and not theme_var('chromeless.enabled') %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% do assets.addCss('theme://css/callouts.css', 75) %}
+    {% do assets.addCss('theme://css/site.css', 75) %}
+    {% do assets.addCss('theme://css/print.css', 70) %}
+    {# multi-page content (Section List and Multi-Section pages) #}
+    {% if page.template in ['sections', 'section', 'subsection', 'section-list'] %}
+        {% do assets.addCss('theme://css/reader.css', 74) %}
+        {% do assets.addJs('theme://js/reader.js', {group:'bottom'}) %}
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% do assets.addJs('theme://js/my.js', {group:'bottom'}) %}
+{% endblock %}
+
+{% block header %}
+    {% if show_site_chrome %}{{ parent() }}{% endif %}
+{% endblock %}
+
+{# After the page content: the Git Sync link (Location of Git Sync Link: Page) and the Creative Commons license #}
+{% block content_surround %}
+    {{ parent() }}
+    {% include 'partials/page_extras.html.twig' %}
+{% endblock %}
+
+{# Footer: the text of the site's "footer" page (and the Git Sync link, when its location is the footer),
+   or Quark 2's own footer when there's no footer page #}
+{% block footer %}
+    {% if show_site_chrome %}
+        {% set footer_content = pages.find('/footer').content %}
+        {% if footer_content or theme_var('display_of_git_sync_repo_link') == 'footer' %}
+            <footer id="footer" class="section section-tight">
+                <div class="container">
+                    {% if theme_var('display_of_git_sync_repo_link') == 'footer' %}
+                        <p class="footer-git-link">{% include 'partials/git_sync_repo_link.html.twig' %}</p>
+                    {% endif %}
+                    {% if footer_content %}
+                        <div class="footer-page">{{ footer_content|raw }}</div>
+                    {% endif %}
+                </div>
+            </footer>
+        {% else %}
+            {{ parent() }}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block mobile %}
+    {% if show_site_chrome %}{{ parent() }}{% endif %}
+{% endblock %}
+
+{# Your own global scripts (partials/scripts.html.twig), and the Embedly script for the Embedly shortcodes #}
+{% block bottom %}
+    {% include 'partials/scripts.html.twig' %}
+    <script async charset="utf-8" src="//cdn.embedly.com/widgets/platform.js"></script>
+    {{ parent() }}
+{% endblock %}

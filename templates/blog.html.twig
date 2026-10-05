@@ -1,0 +1,79 @@
+{# Blog list page: Quark 2's blog, plus what Quark Open Publishing adds - posts tagged "featured" first, a notice above the
+   posts (the blog's modular content, such as _important-notice), the Git Sync note and Creative Commons license, and no hero
+   or sidebar in embedded mode. Bricklayer Layout uses Quark 2's card grid, and turning
+   it off lists the posts in a single column - hibbittsdesign.org #}
+{% extends 'partials/base.html.twig' %}
+{% set blog_image = page.media.images[page.header.hero_image] ?: page.media.images|first %}
+{% set collection = page.collection() %}
+{% set site_chrome = not embedded_mode and not theme_var('chromeless.enabled') %}
+{% set blog = page.find(header_var('blog_url')|defined(theme_var('blog-page'))) %}
+{# the same settings and defaults as Quark 2's blog (the sidebar is off unless show_sidebar is turned on) #}
+{% set show_breadcrumbs = header_var('show_breadcrumbs', [page, blog])|defined(true) %}
+{% set show_sidebar = header_var('show_sidebar', [page, blog])|defined(false) and site_chrome %}
+{% set show_pagination = header_var('show_pagination', [page, blog])|defined(true) %}
+{% set grid_layout = page.header.bricklayer_layout is not defined or page.header.bricklayer_layout %}
+
+{% block hero %}
+    {% if blog_image and site_chrome %}
+        {% include 'partials/hero.html.twig' with {id: 'blog-hero', content: page.content, hero_image: blog_image} %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <section id="body-wrapper" class="section blog-listing">
+        <div class="container">
+            {% if show_breadcrumbs and config.plugins.breadcrumbs.enabled %}
+                {% include 'partials/breadcrumbs.html.twig' %}
+            {% endif %}
+
+            {% if not blog_image and page.title %}
+                <header class="blog-page-header">
+                    <h1>{{ page.title }}</h1>
+                    {% if page.header.subtitle %}
+                        <p class="lead">{{ page.header.subtitle }}</p>
+                    {% endif %}
+                    {% if page.content|striptags|trim is not empty %}
+                        <div class="blog-page-intro">{{ page.content|raw }}</div>
+                    {% endif %}
+                </header>
+            {% endif %}
+
+            {% embed 'partials/layout.html.twig' with {blog: page, show_sidebar: show_sidebar} %}
+                {% block item %}
+                    {# a notice above the posts, from the blog's modular content (for example _important-notice) #}
+                    {% for module in page.collection('modular_content') %}
+                        {% if (module.content|striptags)|trim %}
+                            <div class="blog-notice">{{ module.content|raw }}</div>
+                        {% endif %}
+                    {% endfor %}
+
+                    <div class="blog-grid{{ grid_layout ? '' : ' blog-grid-single' }}">
+                    {# posts tagged "featured" first, then the others #}
+                    {% for child in taxonomy.findTaxonomy({'tag': 'featured'}) %}
+                        {% if child.parent.route == page.route %}
+                            {% include 'partials/blog-list-item.html.twig' with {blog: page, page: child} %}
+                        {% endif %}
+                    {% endfor %}
+                    {% for child in collection %}
+                        {% if 'featured' not in child.taxonomy['tag'] %}
+                            {% include 'partials/blog-list-item.html.twig' with {blog: page, page: child} %}
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+
+                    {% if show_pagination and config.plugins.pagination.enabled and collection.params.pagination %}
+                        <div id="listing-footer">
+                            {% include 'partials/pagination.html.twig' with {base_url: page.url, pagination: collection.params.pagination} %}
+                        </div>
+                    {% endif %}
+
+                    {% include 'partials/page_extras.html.twig' %}
+                {% endblock %}
+
+                {% block sidebar %}
+                    {% include 'partials/sidebar.html.twig' %}
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </section>
+{% endblock %}

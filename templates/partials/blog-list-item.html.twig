@@ -1,0 +1,43 @@
+{# A post's card on the blog list page: Quark 2's card, plus what Quark Open Publishing adds - hide_from_post_list,
+   header_image: false (no card image), image credit and alt text, reading time, and a Continue Reading button
+   (continue_link: true) - hibbittsdesign.org #}
+{% if page.header.hide_from_post_list != true %}
+<article class="card h-entry">
+    {% set image = page.media.images|first %}
+    {% if image and (page.header.header_image is not defined or page.header.header_image) %}
+        {% set image_alt_text = page.header.header_image_alt_text %}
+        {% set image_credit = page.header.header_image_credit %}
+        {% set image_creditlink = page.header.header_image_creditlink %}
+        <a class="card-image" href="{{ page.url }}"><img src="{{ image.fixOrientation.cropZoom(800, 420).url }}" alt="{{ image_alt_text }}"></a>
+        {% if image_credit %}
+            <p class="image-credit">Image:
+                {% if image_creditlink %}<a class="newwindow external-link" href="{{ image_creditlink }}">{{ image_credit }}</a>{% else %}{{ image_credit }}{% endif %}
+            </p>
+        {% endif %}
+    {% endif %}
+    <header class="card-header">
+        <div class="card-subtitle">
+            {% include 'partials/blog/date.html.twig' %}
+            {% if config.plugins.readingtime.enabled %}
+                <span class="blogitem__readingtime">{% include 'partials/blog/readingtime.html.twig' %}</span>
+            {% endif %}
+        </div>
+        <div class="card-title">
+            {% include 'partials/blog/title.html.twig' with {title_level: 'h3'} %}
+        </div>
+    </header>
+    <div class="card-body">
+        {% if page.summary != page.content %}
+            {{ page.summary|raw }}
+            {% if page.header.continue_link is same as(true) %}
+                <p><a href="{{ page.url }}" title="{{ page.title }}" class="btn btn-primary btn-sm">{{ 'THEME_QUARK.BLOG.ITEM.CONTINUE_READING'|t }}</a></p>
+            {% endif %}
+        {% else %}
+            {{ page.content|raw }}
+        {% endif %}
+    </div>
+    <footer class="card-footer">
+        {% include 'partials/blog/taxonomy.html.twig' %}
+    </footer>
+</article>
+{% endif %}

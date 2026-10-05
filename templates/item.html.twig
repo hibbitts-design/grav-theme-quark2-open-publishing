@@ -1,0 +1,48 @@
+{# Blog post: Quark 2's post page, plus what Quark Open Publishing adds - reading time,
+   the Git Sync note and Creative Commons license, and no hero or sidebar in embedded mode - hibbittsdesign.org #}
+{% extends 'partials/base.html.twig' %}
+{% set blog = page.find(header_var('blog_url')|defined(theme_var('blog-page')|default('/blog'))) %}
+{% set site_chrome = not embedded_mode and not theme_var('chromeless.enabled') %}
+{% set show_breadcrumbs = header_var('show_breadcrumbs', [page, blog])|defined(true) %}
+{% set show_sidebar = header_var('show_sidebar', [page, blog])|defined(true) and site_chrome %}
+{% set show_pagination = header_var('show_pagination', [page, blog])|defined(true) %}
+{# without the hero (embedded mode), the title is shown above the post instead #}
+{% set hero_image_name = site_chrome ? page.header.hero_image : null %}
+
+{% block hero %}
+    {% if hero_image_name %}
+        {% set hero_image = page.media[hero_image_name] %}
+        {% set content %}
+            <h1>{{ page.title }}</h1>
+            {% if page.header.subtitle %}<p class="lead">{{ page.header.subtitle }}</p>{% endif %}
+            {% include 'partials/blog/date.html.twig' %}
+            {% if config.plugins.readingtime.enabled %}
+                <span class="blogitem__readingtime">{% include 'partials/blog/readingtime.html.twig' %}</span>
+            {% endif %}
+            {% include 'partials/blog/taxonomy.html.twig' %}
+        {% endset %}
+        {% include 'partials/hero.html.twig' with {id: 'blog-hero'} %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<section id="body-wrapper" class="section blog-listing">
+    <div class="container">
+
+        {% if show_breadcrumbs and config.plugins.breadcrumbs.enabled and site_chrome %}
+            {% include 'partials/breadcrumbs.html.twig' %}
+        {% endif %}
+
+        {% embed 'partials/layout.html.twig' with {show_sidebar: show_sidebar, blog: blog} %}
+            {% block item %}
+                {% include 'partials/blog-item.html.twig' %}
+                {% include 'partials/page_extras.html.twig' %}
+            {% endblock %}
+            {% block sidebar %}
+                {% include 'partials/sidebar.html.twig' %}
+            {% endblock %}
+        {% endembed %}
+
+    </div>
+</section>
+{% endblock %}

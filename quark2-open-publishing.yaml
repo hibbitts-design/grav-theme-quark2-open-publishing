@@ -1,0 +1,33 @@
+enabled: true
+streams:
+  schemes:
+    theme:
+      type: ReadOnlyStream
+      prefixes:
+        '':
+          - themes://quark2-open-publishing
+          - themes://quark2
+# Quark 2's defaults (a child theme doesn't inherit its parent's settings)
+header-fixed: true
+header-animated: true
+header-transparent: false
+header-dark: false
+header-light: false
+sticky-footer: true
+theme-mode: auto
+accent-color: '#8428DF'
+blog-page: '/blog'
+fontawesome:
+  enabled: true
+  local: false
+# Quark Open Publishing's defaults
+chromeless:
+  enabled: false
+dropdown:
+  enabled: true
+displaycustommenus:
+  enabled: false
+display_of_git_sync_repo_link: menu
+type_of_git_sync_repo_link: view
+sections_prev_next_style: buttons
+phone_text_size: standard

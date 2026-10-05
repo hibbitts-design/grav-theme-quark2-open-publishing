@@ -1,0 +1,113 @@
+/*
+Search results (SimpleSearch plugin) - groups of results in a Quark 2 card, with the search words highlighted - hibbittsdesign.org
+The template is the same as in Quark Open Publishing; this file gives its Spectre "tile" rows a Quark 2 look.
+*/
+
+.search-page .search-box {
+    margin-bottom: 1rem;
+    max-width: 28rem;
+}
+
+.search-summary {
+    color: var(--q2-text-muted);
+    margin-bottom: 1.25rem;
+}
+
+.search-group {
+    margin-bottom: 1.75rem;
+}
+
+/* Small section label above each group */
+.search-group-title {
+    color: var(--q2-text-muted);
+    font-family: var(--pico-font-family-sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+/* Each group is a Quark 2 card, without the lift on hover (the rows have their own) */
+.search-results.card:hover {
+    transform: none;
+}
+
+.search-results .tile.search-result {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: inherit;
+    text-decoration: none;
+    padding: 0.875rem 1.25rem;
+    border-bottom: 1px solid var(--q2-divider);
+}
+
+.search-results .tile.search-result:last-child {
+    border-bottom: 0;
+}
+
+.search-results .tile.search-result:hover,
+.search-results .tile.search-result:focus {
+    background: var(--q2-bg-muted);
+}
+
+.search-results .tile.search-result:focus-visible {
+    outline: 2px solid var(--q2-focus-ring);
+    outline-offset: -2px;
+}
+
+.search-result .tile-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.search-result .tile-title {
+    color: var(--q2-text-strong);
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.2rem;
+}
+
+.search-result:hover .tile-title,
+.search-result:focus .tile-title {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.search-result-trail {
+    display: block;
+    color: var(--q2-text-muted);
+    font-size: 0.75rem;
+    margin-bottom: 0.2rem;
+}
+
+.search-result .tile-subtitle {
+    color: var(--q2-text);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.search-result .tile-action {
+    color: var(--q2-text-muted);
+}
+
+/* Search words, readable in Light and Dark mode */
+.search-results mark {
+    background: color-mix(in oklab, #ffb700 35%, transparent);
+    color: inherit;
+    padding: 0 0.1em;
+    border-radius: var(--q2-radius-xs);
+}
+
+.search-no-results ul {
+    margin-left: 1rem;
+}
+
+/* Note shown when a search is limited to a guide */
+.search-scope {
+    color: var(--q2-text-muted);
+    font-size: 0.875rem;
+    margin: -0.75rem 0 1.25rem;
+}

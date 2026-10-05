@@ -1,0 +1,492 @@
+/*
+Multi-page content: Section List page and its sections (the same page settings as Grav Helios Open Reader), in Quark 2's
+style - hibbittsdesign.org
+The guide templates are the same as in Quark Open Publishing, so the first part of this file gives the few Spectre classes
+they use (grid columns, progress bar, side list, hidden text) a Quark 2 look. Buttons (btn btn-primary) are Quark 2's own,
+filled with the accent colour. Colours, radii and shadows all come from
+Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
+*/
+
+/* ---------- Classes from Quark Open Publishing's templates ---------- */
+
+/* Text for screen readers only */
+.text-assistive {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Section pages: the page and its side list, side by side on wider screens */
+.columns:has(> #sections-nav) {
+    gap: clamp(2rem, 4vw, 3rem);
+}
+
+@media (min-width: 960px) {
+    .columns:has(> #sections-nav) {
+        grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+    }
+}
+
+/* Section cards: 1, 2 or 3 per row (the template gives each card col-12, col-6 or col-4), one per row on phones */
+.section-cards {
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.section-cards > .column {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+.section-cards > .col-12 { grid-column: span 12; }
+.section-cards > .col-6 { grid-column: span 6; }
+.section-cards > .col-4 { grid-column: span 4; }
+
+@media (max-width: 840px) {
+    .section-cards > .col-md-6 { grid-column: span 6; }
+}
+
+@media (max-width: 600px) {
+    .section-cards > .col-sm-12 { grid-column: span 12; }
+}
+
+/* ---------- Titles and labels ---------- */
+
+.sections-page-title-template {
+    margin: 0 0 0.75rem;
+}
+
+/* Small label above a section's title, for example "Unit 2" */
+.reader-section-label {
+    color: var(--q2-text-muted);
+    font-family: var(--pico-font-family-sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 0.25rem;
+}
+
+/* ---------- Section List page header: cover image and details ---------- */
+
+.reader-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--q2-divider);
+}
+
+.reader-cover {
+    flex: 0 0 auto;
+    width: 10rem;
+    border-radius: var(--q2-radius);
+    box-shadow: var(--q2-shadow-card);
+}
+
+/* Section List page with a small cover: a 4:3 cover, cropped to fill it, with the title beside it */
+.section-list-page .reader-cover {
+    width: 12rem;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.reader-details p {
+    margin: 0 0 0.3rem;
+}
+
+.reader-details .sections-page-title-template {
+    margin-top: 0;
+}
+
+/* the subtitle in Quark 2's "lead" style, as under a blog page's title */
+.reader-subtitle {
+    color: var(--q2-text-muted);
+    font-size: 1.125rem;
+    font-weight: 300;
+    letter-spacing: -0.2px;
+    line-height: 1.55;
+}
+
+.reader-edition {
+    color: var(--q2-text-muted);
+    font-size: 0.875rem;
+}
+
+.reader-license.label {
+    margin-top: 0.25rem;
+}
+
+/* Large cover: full width of the content area, at the top */
+.reader-cover-large {
+    display: block;
+    width: 100%;
+    max-height: 36rem;
+    object-fit: cover;
+    border-radius: var(--q2-radius-md);
+    box-shadow: var(--q2-shadow-card);
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 600px) {
+    .reader-header {
+        flex-direction: column;
+    }
+
+    .section-list-page .reader-cover {
+        width: 100%;
+    }
+}
+
+/* ---------- Section List page: Start button, search box, parts and cards ---------- */
+
+.section-list-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin: 1.5rem 0 2rem;
+}
+
+.section-list-start {
+    margin: 0;
+}
+
+.section-list-actions .reader-search {
+    flex: 1 1 14rem;
+    max-width: 22rem;
+}
+
+/* Part headings, and headings in the text below the cards, with Quark 2's divider line */
+.reader-part-heading,
+.section-list-below h2,
+.section-list-below h3,
+.section-list-below h4 {
+    font-size: 1.1rem;
+    padding-bottom: 0.5rem;
+    margin: 2rem 0 1.25rem;
+    border-bottom: 1px solid var(--q2-divider);
+}
+
+/* Section cards use Quark 2's card; the title link covers the whole card */
+.section-card {
+    position: relative;
+    width: 100%;
+}
+
+.section-card .card-title {
+    margin: 0;
+}
+
+.section-card-link {
+    color: var(--q2-text-strong);
+    text-decoration: none;
+}
+
+.section-card-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.section-card:hover .section-card-link {
+    text-decoration: underline;
+}
+
+.section-card:focus-within {
+    outline: 2px solid var(--q2-focus-ring);
+    outline-offset: 2px;
+}
+
+.section-card-description {
+    color: var(--q2-text-muted);
+    font-size: 0.9375rem;
+    margin: 0;
+}
+
+.section-list-below {
+    margin-top: 1rem;
+}
+
+/* ---------- Section pages: back link, Previous/Next at the top, side list ---------- */
+
+.reader-top-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0 1.25rem;
+}
+
+/* the back link and top Previous/Next links look like Quark 2's breadcrumbs: small, muted, no underline */
+.reader-back-link,
+.reader-prev-next-top {
+    font-family: var(--pico-font-family-sans-serif);
+    font-size: 0.875rem;
+    margin: 0 0 1rem;
+    color: var(--q2-text-muted);
+}
+
+.reader-back-link a,
+.reader-prev-next-top a {
+    color: var(--q2-text-muted);
+    text-decoration: none;
+}
+
+.reader-back-link a:hover,
+.reader-prev-next-top a:hover {
+    color: var(--q2-text-strong);
+}
+
+.reader-prev-next-top {
+    white-space: nowrap;
+}
+
+.reader-back-link .fa,
+.reader-prev-next-top .fa {
+    font-size: 0.7em;
+}
+
+.reader-prev-next-top-divider {
+    color: var(--q2-text-muted);
+    margin: 0 0.4rem;
+}
+
+/* The search box and side list of sections sit in Quark 2's sidebar cards, as in the blog's sidebar
+   ("ul.nav" so the card's padding wins over the plain list rule below) */
+#sections-nav .reader-search,
+#sections-nav > ul.nav {
+    background: var(--q2-bg-elev);
+    border-radius: var(--q2-radius-md);
+    box-shadow:
+        rgba(19, 19, 22, 0.04) 0 1px 2px,
+        rgba(19, 19, 22, 0.06) 0 8px 24px -8px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+:root[data-theme="dark"] #sections-nav .reader-search,
+:root[data-theme="dark"] #sections-nav > ul.nav {
+    box-shadow:
+        rgba(0, 0, 0, 0.4) 0 1px 2px,
+        rgba(0, 0, 0, 0.55) 0 10px 28px -8px;
+}
+
+/* Side list of sections (and the current section's subsections): rounded rows, with the current page highlighted */
+#sections-nav .nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--pico-font-family-sans-serif);
+    font-size: 0.9375rem;
+}
+
+#sections-nav .nav .nav {
+    margin: 0.125rem 0 0.375rem 0.75rem;
+    padding: 0 0 0 0.5rem;
+    border-left: 1px solid var(--q2-divider);
+    font-size: 0.875rem;
+}
+
+#sections-nav .nav-item {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#sections-nav .nav-item a {
+    display: block;
+    padding: 0.375rem 0.625rem;
+    border-radius: var(--q2-radius-sm);
+    color: var(--q2-text);
+    text-decoration: none;
+    line-height: 1.4;
+}
+
+#sections-nav .nav-item a:hover {
+    background: var(--q2-bg-muted);
+    color: var(--q2-text-strong);
+}
+
+#sections-nav .nav-item.active > a {
+    background: var(--q2-bg-muted);
+    color: var(--q2-text-strong);
+    font-weight: 600;
+}
+
+/* Part labels in the side list, styled like the section labels */
+/* Part labels in the side list, like the headings in Quark 2's sidebar cards */
+#sections-nav .reader-part-label {
+    list-style: none;
+    color: var(--q2-text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 1rem 0 0.375rem;
+    padding: 0 0.625rem;
+}
+
+#sections-nav .reader-part-label:first-child {
+    margin-top: 0;
+}
+
+
+/* ---------- Reading progress and Previous/Next tiles ---------- */
+
+.reader-nav-block {
+    margin-top: 2.5rem;
+}
+
+.reader-progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+}
+
+.reader-progress .bar {
+    width: min(100%, 22rem);
+    height: 6px;
+    border-radius: var(--q2-radius-pill);
+    background: var(--q2-bg-muted);
+    overflow: hidden;
+}
+
+.reader-progress .bar-item {
+    height: 100%;
+    background: var(--q2-accent);
+    border-radius: var(--q2-radius-pill);
+}
+
+.reader-progress-text {
+    color: var(--q2-text-muted);
+    font-family: var(--pico-font-family-sans-serif);
+    font-size: 0.8125rem;
+    margin: 0;
+}
+
+.reader-prev-next {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    border-top: 1px solid var(--q2-divider);
+    padding-top: 1.75rem;
+}
+
+.reader-nav-tile {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 1rem 1.25rem;
+    background: var(--q2-bg-elev);
+    border-radius: var(--q2-radius-md);
+    box-shadow: var(--q2-shadow-card);
+    color: var(--q2-text);
+    text-decoration: none;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.reader-nav-tile:hover {
+    box-shadow: var(--q2-shadow-raised);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.reader-nav-tile:hover .reader-nav-title {
+    text-decoration: underline;
+}
+
+.reader-nav-tile:focus-visible {
+    outline: 2px solid var(--q2-focus-ring);
+    outline-offset: 2px;
+}
+
+.reader-nav-next {
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.reader-nav-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.reader-nav-label {
+    color: var(--q2-text-muted);
+    font-family: var(--pico-font-family-sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.reader-nav-title {
+    color: var(--q2-link);
+    font-weight: 600;
+}
+
+.reader-nav-tile .fa {
+    color: var(--q2-text-muted);
+}
+
+@media (max-width: 600px) {
+    .reader-prev-next {
+        grid-template-columns: 1fr;
+    }
+
+    .reader-nav-next {
+        order: -1;
+    }
+
+    .reader-nav-empty {
+        display: none;
+    }
+}
+
+/* Classic Next/Prev buttons on Multi-Section pages */
+.prev-next {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+}
+
+.prev-next .btn {
+    width: auto;
+}
+
+/* ---------- OER attribution ---------- */
+
+.reader-attribution {
+    color: var(--q2-text-muted);
+    font-size: 0.875rem;
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.reader-attribution p {
+    margin: 0 0 0.3rem;
+}

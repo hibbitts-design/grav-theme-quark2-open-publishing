@@ -1,0 +1,124 @@
+/*
+Callouts: GitHub-style alerts (> [!NOTE] etc., with the GitHub Markdown Alerts plugin) and the callout shortcodes
+([objectives], [key-takeaways] and more), in Quark 2's own alert style - hibbittsdesign.org
+Both use the md-alert markup, the same as in Quark Open Publishing and Helios, so content looks right in either theme.
+*/
+
+.md-alert {
+    --alert-accent: var(--q2-text);
+    border-left: 4px solid var(--alert-accent);
+    background: color-mix(in oklab, var(--alert-accent) 6%, var(--q2-bg-elev));
+    border-radius: var(--q2-radius-sm);
+    padding: 0.875rem 1.125rem;
+    margin: 1.5rem 0;
+    font-family: var(--pico-font-family-sans-serif);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--q2-text);
+}
+
+.md-alert-title {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0 0 0.375rem;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    line-height: 1.2;
+    color: var(--alert-accent);
+}
+
+.md-alert-title svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    flex: 0 0 auto;
+}
+
+.md-alert-title .fa {
+    color: inherit;
+}
+
+.md-alert p,
+.md-alert ul,
+.md-alert ol {
+    margin-bottom: 0.375rem;
+}
+
+.md-alert > :last-child,
+.md-alert-body > :last-child {
+    margin-bottom: 0;
+}
+
+/* Accent per type, as in Quark 2's alerts (GitHub's palette) */
+.md-alert--note {
+    --alert-accent: #0969da;
+}
+
+.md-alert--tip {
+    --alert-accent: #1a7f37;
+}
+
+.md-alert--important {
+    --alert-accent: #8250df;
+}
+
+.md-alert--warning {
+    --alert-accent: #9a6700;
+}
+
+.md-alert--caution {
+    --alert-accent: #cf222e;
+}
+
+:root[data-theme="dark"] .md-alert--note {
+    --alert-accent: #539bf5;
+}
+
+:root[data-theme="dark"] .md-alert--tip {
+    --alert-accent: #57ab5a;
+}
+
+:root[data-theme="dark"] .md-alert--important {
+    --alert-accent: #b083f0;
+}
+
+:root[data-theme="dark"] .md-alert--warning {
+    --alert-accent: #c69026;
+}
+
+:root[data-theme="dark"] .md-alert--caution {
+    --alert-accent: #e5534b;
+}
+
+/* [references] shortcode - a list of sources under a small heading */
+.course-references {
+    border-top: 1px solid var(--q2-divider);
+    padding-top: 0.6rem;
+    margin: 1.5rem 0;
+    font-size: 0.9em;
+}
+
+.course-references-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--q2-text-muted);
+    margin-bottom: 0.4rem;
+}
+
+.course-references-body > :last-child {
+    margin-bottom: 0;
+}
+
+/* [excerpt] shortcode - a quoted passage */
+blockquote.excerpt {
+    border-left: 3px solid var(--q2-border-strong);
+    padding: 0.2rem 0 0.2rem 1rem;
+    font-size: 1.05em;
+}
+
+blockquote.excerpt > :last-child {
+    margin-bottom: 0;
+}

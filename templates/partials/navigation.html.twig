@@ -1,0 +1,42 @@
+{# Site menu: Quark 2's menu, plus what Quark Open Publishing adds - the Display Dropdowns in Menu setting, custom menu items,
+   the Git Sync link (when its location is the menu), and page icons set with either "icon" (Quark Open Publishing)
+   or "menu_icon" (Quark 2) - hibbittsdesign.org #}
+{% macro nav_loop(page) %}
+  {% import _self as macros %}
+  {% for p in page.children.visible %}
+    {% set active_page = (p.active or p.activeChild) ? 'active' : '' %}
+    {% set has_children = theme_var('dropdown.enabled') and p.children.visible.count > 0 %}
+    {% set page_icon = p.header.menu_icon ?: p.header.icon %}
+    <li{% if has_children %} class="has-children"{% endif %}>
+      <a href="{{ p.url }}" class="{{ active_page }}">
+        {% if page_icon %}<i class="{{ page_icon|fa_icon }}" aria-hidden="true"></i>{% endif %}
+        {{ p.menu }}
+      </a>
+      {% if has_children %}
+      <ul>
+        {{ macros.nav_loop(p) }}
+      </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+{% endmacro %}
+{% import _self as macros %}
+
+<ul {{ tree ? 'class="tree navigation"' : 'class="navigation"' }}>
+    {{ macros.nav_loop(pages) }}
+    {# custom menu items #}
+    {% if theme_var('displaycustommenus.enabled') %}
+        {% for mitem in theme_var('menu') %}
+            <li>
+                <a href="{{ mitem.url }}" target="{{ mitem.target }}">
+                    {% if mitem.icon %}<i class="{{ mitem.icon|fa_icon }}" aria-hidden="true"></i>{% endif %}
+                    {{ mitem.text }}
+                </a>
+            </li>
+        {% endfor %}
+    {% endif %}
+    {# the Git Sync link, when its location is the menu (the default) #}
+    {% if theme_var('display_of_git_sync_repo_link') == 'menu' or theme_var('display_of_git_sync_repo_link') is empty %}
+        <li>{% include 'partials/git_sync_repo_link.html.twig' %}</li>
+    {% endif %}
+</ul>
