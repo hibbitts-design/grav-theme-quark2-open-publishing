@@ -20,6 +20,7 @@ Quark 2 Open Publishing brings Quark Open Publishing to Quark 2's modern design 
 
 - **The same content as Quark Open Publishing** – pages, page settings, shortcodes, theme options and page URL parameters are the same, so a site can move between the two themes without changing its content
 - **Guides that carry over to Grav Helios Open Reader** – the Section List page type, with section cards, parts, reading progress, Previous/Next navigation, Keep My Place, a last updated date, and OER attribution, using the same page settings as [Grav Helios Open Reader](https://github.com/hibbitts-design/grav-skeleton-helios-open-reader)
+- **Comfortable reading** – section pages keep lines to a comfortable length with slightly larger text and no words broken across lines; wide tables scroll sideways, footnotes sit as small notes below the text, and on phones a Contents link jumps to the list of sections
 - **Built on Quark 2** – its design, blog, hero images, modular pages, and Light, Dark and Auto modes with a theme toggle, used as they are wherever possible
 - **Blog extras** – featured posts, a notice above the posts, Continue Reading buttons, reading time, image credits, and a Markdown sidebar page
 - **Chromeless display for embedding** – add `/chromeless:true` or `?embedded=true` to any page URL to show only its content, or hide the site menu, sidebar, and footer site-wide
