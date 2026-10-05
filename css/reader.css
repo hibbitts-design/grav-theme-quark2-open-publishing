@@ -103,9 +103,9 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     box-shadow: var(--q2-shadow-card);
 }
 
-/* Section List page with a small cover: a 4:3 cover, cropped to fill it, with the title beside it */
+/* Section List page with a small cover: a 4:3 cover (about as tall as the title and details beside it), cropped to fill it */
 .section-list-page .reader-cover {
-    width: 12rem;
+    width: 16rem;
     aspect-ratio: 4 / 3;
     object-fit: cover;
 }
