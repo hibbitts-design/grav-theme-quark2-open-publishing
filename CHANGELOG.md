@@ -1,10 +1,12 @@
 # v0.9.2
 ## XX/XX/2026
 
+1. [](#new)
+    * Section Label (Plural) setting, for the Sections link on phones
 1. [](#improved)
     * Larger links above section pages, with spacing to match
     * Part headings stand out more from the section cards, and the OER attribution's links are muted
-    * Section pages are easier to read: a comfortable line length, slightly larger text without hyphenation, a Contents link on phones, and the page title as the largest heading
+    * Section pages are easier to read: a comfortable line length, slightly larger text without hyphenation, a Sections link on phones, and the page title as the largest heading
     * Wide tables scroll sideways on section pages, footnotes are smaller, and quotations use the reading font
     * The list of sections stays in view beside section pages on wider screens
 1. [](#bugfix)
