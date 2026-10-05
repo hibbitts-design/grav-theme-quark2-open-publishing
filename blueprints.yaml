@@ -1,7 +1,7 @@
 name: Quark 2 Open Publishing
 type: theme
 slug: quark2-open-publishing
-version: 0.9.2
+version: 0.9.3
 description: "A Quark 2 version of Quark Open Publishing, for open guides and blogs: guides with section cards, parts and reading progress, alongside a full blog. Uses the same pages and settings as Quark Open Publishing."
 icon: unlock
 author:
