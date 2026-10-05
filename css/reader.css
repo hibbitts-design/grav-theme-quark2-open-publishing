@@ -299,6 +299,12 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     border-bottom: 1px solid var(--q2-divider);
 }
 
+/* part headings (and h2 below the cards) a step larger than the card titles, so the groups stand out */
+.reader-part-heading,
+.section-list-below h2 {
+    font-size: 1.25rem;
+}
+
 /* Section cards use Quark 2's card; the title link covers the whole card */
 .section-card {
     position: relative;
@@ -619,8 +625,21 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     margin-top: 2.5rem;
 }
 
+/* (Quark 2 gives paragraphs their own colour and size, so these take the attribution's instead) */
 .reader-attribution p {
     margin: 0 0 0.3rem;
+    color: inherit;
+    font-size: inherit;
+}
+
+/* its links stay muted, like the text, so the line reads as fine print (underlined, so they still look like links) */
+.reader-attribution a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.reader-attribution a:hover {
+    color: var(--q2-text-strong);
 }
 
 /* ---------- Reduced motion ---------- */
