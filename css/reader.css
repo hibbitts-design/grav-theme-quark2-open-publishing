@@ -332,6 +332,12 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     inset: 0;
 }
 
+/* Quark 2 positions card titles, which would keep the link's cover to the title alone; this lets it cover the whole
+   card, image included, like the blog's cards */
+.section-card .card-title {
+    position: static;
+}
+
 .section-card:hover .section-card-link {
     text-decoration: underline;
 }
