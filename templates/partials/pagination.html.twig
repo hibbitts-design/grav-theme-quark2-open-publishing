@@ -1,0 +1,33 @@
+{# Blog pagination: Quark 2's pagination, with names for the previous and next arrows and the current page marked for
+   screen readers - hibbittsdesign.org #}
+{% set pagination = pagination|default(page.collection.params.pagination) %}
+{% set base_url = base_url|default(page.url) %}
+
+{% if pagination|length > 1 %}
+<ul class="pagination" role="navigation" aria-label="{{ 'THEME_QUARK2.ARIA.PAGINATION'|t|e('html_attr') }}">
+    {% if pagination.hasPrev %}
+        {% set url = (base_url ~ pagination.params ~ pagination.prevUrl)|replace({'//':'/'}) %}
+        <li><a href="{{ url }}" rel="prev" aria-label="{{ 'THEME_QUARK_OPEN_PUBLISHING.PAGINATION_PREVIOUS'|t|e('html_attr') }}"><i class="fa-solid fa-angle-left" aria-hidden="true"></i></a></li>
+    {% else %}
+        <li class="disabled"><span><i class="fa-solid fa-angle-left" aria-hidden="true"></i></span></li>
+    {% endif %}
+
+    {% for paginate in pagination %}
+        {% if paginate.isCurrent %}
+            <li class="active"><span aria-current="page">{{ paginate.number }}</span></li>
+        {% elseif paginate.isInDelta %}
+            {% set url = (base_url ~ pagination.params ~ paginate.url)|replace({'//':'/'}) %}
+            <li><a href="{{ url }}" aria-label="{{ 'THEME_QUARK_OPEN_PUBLISHING.PAGINATION_PAGE'|t(paginate.number)|e('html_attr') }}">{{ paginate.number }}</a></li>
+        {% elseif paginate.isDeltaBorder %}
+            <li class="disabled"><span>&hellip;</span></li>
+        {% endif %}
+    {% endfor %}
+
+    {% if pagination.hasNext %}
+        {% set url = (base_url ~ pagination.params ~ pagination.nextUrl)|replace({'//':'/'}) %}
+        <li><a href="{{ url }}" rel="next" aria-label="{{ 'THEME_QUARK_OPEN_PUBLISHING.PAGINATION_NEXT'|t|e('html_attr') }}"><i class="fa-solid fa-angle-right" aria-hidden="true"></i></a></li>
+    {% else %}
+        <li class="disabled"><span><i class="fa-solid fa-angle-right" aria-hidden="true"></i></span></li>
+    {% endif %}
+</ul>
+{% endif %}

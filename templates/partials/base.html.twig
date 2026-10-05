@@ -21,7 +21,9 @@
     {% do assets.addJs('theme://js/my.js', {group:'bottom'}) %}
 {% endblock %}
 
+{# A "Skip to content" link first on the page, shown when it gets keyboard focus #}
 {% block header %}
+    <a class="skip-link" href="#start">{{ 'THEME_QUARK_OPEN_PUBLISHING.SKIP_TO_CONTENT'|t }}</a>
     {% if show_site_chrome %}{{ parent() }}{% endif %}
 {% endblock %}
 

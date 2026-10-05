@@ -27,7 +27,7 @@
     {% endif %}
 
     {% if show_title and not title_beside_cover %}
-      <h3 class="sections-page-title-template">{{ page.title }}</h3>
+      <h1 class="sections-page-title-template h3">{{ page.title }}</h1>
     {% endif %}
 
     {% include 'partials/reader_header.html.twig' with { hide_cover: large_cover, show_title: show_title and title_beside_cover } %}
@@ -114,7 +114,7 @@
 
     {% for part_group in part_groups %}
       {% if part_group.title %}
-        <h4 class="reader-part-heading">{{ part_group.title }}</h4>
+        <h2 class="reader-part-heading">{{ part_group.title }}</h2>
       {% endif %}
       <ul class="section-cards columns">
         {% for section_item in part_group.sections %}
@@ -133,8 +133,9 @@
                 {% if label|length > 0 %}
                   <p class="reader-section-label">{{ label }}</p>
                 {% endif %}
-                {# the link covers the whole card (see css/reader.css); below a part's heading, the card title is one heading level lower #}
-                {% set card_heading = part_group.title ? 'h5' : 'h4' %}
+                {# the link covers the whole card (see css/reader.css). Heading levels: the page title is h1, part headings h2,
+                   and card titles h2, or h3 below a part's heading (the h5 class keeps their size the same) #}
+                {% set card_heading = part_group.title ? 'h3' : 'h2' %}
                 <{{ card_heading }} class="card-title h5"><a class="section-card-link" href="{{ section_item.url ~ filter_suffix }}">{{ section_item.title }}</a></{{ card_heading }}>
               </div>
               {% if section_item.header.description %}

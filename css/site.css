@@ -3,6 +3,34 @@ Site-wide extras from Quark Open Publishing, in Quark 2's style - hibbittsdesign
 The templates are the same as in Quark Open Publishing; colours and spacing come from Quark 2's --q2-* tokens.
 */
 
+/* ---------- Accessibility ---------- */
+/* Quark 2's muted grey (#898989) is 3.5:1 on its light background, below the 4.5:1 small text needs (WCAG AA).
+   In light mode it's a little darker here (about 5:1); Dark mode keeps Quark 2's own grey, which already passes. */
+:root,
+:root[data-theme="light"] {
+    --q2-text-muted: #6b6b70;
+}
+
+/* "Skip to content": hidden until it gets keyboard focus, then shown at the top left */
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -10rem;
+    z-index: 1000;
+    padding: 0.5rem 1rem;
+    border-radius: var(--q2-radius);
+    background: var(--q2-bg-elev);
+    color: var(--q2-text-strong);
+    box-shadow: var(--q2-shadow-raised);
+    font-family: var(--pico-font-family-sans-serif);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
 /* ---------- Icons ---------- */
 .fa.fa-github,
 .fa.fa-gitlab,
