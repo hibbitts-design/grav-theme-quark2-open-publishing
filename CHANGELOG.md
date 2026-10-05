@@ -1,3 +1,9 @@
+# v0.9.2
+## XX/XX/2026
+
+1. [](#improved)
+    * Larger links above section pages, with spacing to match
+
 # v0.9.1
 ## 10/05/2026
 
