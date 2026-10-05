@@ -44,6 +44,11 @@ Based on the Grav Helios Open Reader print stylesheet. To leave something out of
         display: block !important;
     }
 
+    /* wide tables print in full, rather than inside their sideways scrolling box */
+    .reader-table-scroll {
+        overflow: visible !important;
+    }
+
     #item,
     #sections-content {
         flex: 0 0 100% !important;

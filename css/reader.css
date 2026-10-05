@@ -454,6 +454,54 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     hyphens: manual;
 }
 
+/* the section's title is the largest heading on the page, as in a book's chapter title */
+#sections-content .sections-page-title-template {
+    font-size: clamp(1.5rem, 2vw + 0.75rem, 1.875rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+}
+
+/* headings in the page's text keep Quark 2's styles (and h2's accent dash), a step below the title */
+.reader-content h2 {
+    font-size: clamp(1.25rem, 1vw + 0.875rem, 1.5rem);
+    margin-top: 2.5rem;
+}
+
+.reader-content h3 {
+    font-size: clamp(1.125rem, 0.5vw + 1rem, 1.25rem);
+    margin-top: 2rem;
+}
+
+.reader-content h4 {
+    font-size: 1.0625rem;
+}
+
+/* wide tables scroll sideways inside the text column (js/reader.js puts each table in this box) */
+.reader-table-scroll {
+    overflow-x: auto;
+    margin-bottom: 1rem;
+}
+
+.reader-table-scroll table {
+    margin-bottom: 0;
+}
+
+/* quotations in the reading font, keeping Quark 2's left border (its display font suits short pull quotes,
+   but is heavy for the longer quoted passages common in textbooks) */
+.reader-content blockquote {
+    font-family: var(--pico-font-family-sans-serif);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+}
+
+/* footnotes (with Markdown Extra) as smaller, muted notes below the text */
+.reader-content .footnotes p,
+.reader-content .footnotes li {
+    font-size: 0.875rem;
+    color: var(--q2-text-muted);
+}
+
 /* The search box and side list of sections sit in Quark 2's sidebar cards, as in the blog's sidebar
    ("ul.nav" so the card's padding wins over the plain list rule below) */
 #sections-nav .reader-search,
