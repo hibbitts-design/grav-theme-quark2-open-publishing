@@ -1,3 +1,14 @@
+# v0.9.1
+## 10/05/2026
+
+1. [](#new)
+    * Continue reading bar for returning readers on Section List pages, as in Helios Open Reader, replacing Continue Reading on the Start button
+1. [](#improved)
+    * Start button now sits below the guide's title and details, with a larger small cover image
+    * Search box now shares a row with the Continue reading bar
+1. [](#bugfix)
+    * Skip to content link no longer shows in some mobile browsers
+
 # v0.9.0
 ## 10/04/2026
 
