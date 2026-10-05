@@ -3,6 +3,8 @@
 
 1. [](#improved)
     * Larger links above section pages, with spacing to match
+1. [](#bugfix)
+    * Section card images now open their section, like the blog's cards
 
 # v0.9.1
 ## 10/05/2026
