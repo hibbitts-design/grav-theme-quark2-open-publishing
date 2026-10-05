@@ -6,6 +6,7 @@
     * Part headings stand out more from the section cards, and the OER attribution's links are muted
     * Section pages are easier to read: a comfortable line length, slightly larger text without hyphenation, a Contents link on phones, and the page title as the largest heading
     * Wide tables scroll sideways on section pages, footnotes are smaller, and quotations use the reading font
+    * The list of sections stays in view beside section pages on wider screens
 1. [](#bugfix)
     * Section card images now open their section, like the blog's cards
 
