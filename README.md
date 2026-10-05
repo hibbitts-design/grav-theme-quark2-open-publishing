@@ -10,7 +10,7 @@
 
 <p>A free, open-source child theme of <a href="https://github.com/getgrav/grav-theme-quark2">Quark 2</a>, the default theme of <a href="https://getgrav.org">Grav CMS</a> 2, with Markdown file-based content, a built-in Admin panel, and no database required. It uses the same pages, page settings, shortcodes and theme options as <a href="https://github.com/hibbitts-design/grav-theme-quark-open-publishing">Quark Open Publishing</a>, so the same <a href="https://github.com/hibbitts-design/grav-skeleton-open-publishing-space">Open Publishing Space</a> content works with either theme.</p>
 
-<img alt="An open education guide home page with a small cover image beside its title and details, a Start Reading button and search box, and section cards grouped into parts" src="screenshot.jpg" width="60%">
+<img alt="An open education guide home page with a cover image beside its title, details and Start Reading button, a search box, and section cards grouped into parts" src="screenshot.jpg" width="60%">
 
 </div>
 

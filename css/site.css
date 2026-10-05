@@ -51,6 +51,12 @@ The templates are the same as in Quark Open Publishing; colours and spacing come
     --fa-style: 400;
 }
 
+/* Font Awesome 4's bookmark-o (Continue reading) is the regular "bookmark" in Font Awesome 5 and later */
+.fa.fa-bookmark-o {
+    --fa: "\f02e";
+    --fa-style: 400;
+}
+
 /* Font Awesome 4's clock-o (reading time) is "clock" in Font Awesome 5 and later */
 .fa.fa-clock-o {
     --fa: "\f017";

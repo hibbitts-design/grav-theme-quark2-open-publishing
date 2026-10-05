@@ -108,9 +108,10 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     box-shadow: var(--q2-shadow-card);
 }
 
-/* Section List page with a small cover: a 4:3 cover (about as tall as the title and details beside it), cropped to fill it */
+/* Section List page with a small cover: a 4:3 cover (about as tall as the title, details and Start button beside it),
+   cropped to fill it */
 .section-list-page .reader-cover {
-    width: 16rem;
+    width: 18rem;
     aspect-ratio: 4 / 3;
     object-fit: cover;
 }
@@ -141,6 +142,11 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     margin-top: 0.25rem;
 }
 
+/* the Start button at the end of the details */
+.reader-details .section-list-start {
+    margin: 0.75rem 0 0;
+}
+
 /* Large cover: full width of the content area, at the top */
 .reader-cover-large {
     display: block;
@@ -162,40 +168,111 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     }
 }
 
-/* ---------- Section List page: Start button, search box, parts and cards ---------- */
+/* ---------- Section List page: search box, parts and cards ---------- */
 
+/* the row above the section cards: the "Continue reading" bar on the left and the guide's search box on the right
+   (stacked and full width on phones). The row is hidden when it has nothing to show. */
 .section-list-actions {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    gap: 0.75rem 1.25rem;
+    gap: 1rem;
     margin: 1.5rem 0 2rem;
 }
 
-.section-list-start {
-    margin: 0;
+.section-list-actions:not(:has(> :not([hidden]))) {
+    display: none;
 }
 
-/* the search box on the right, the same side as the search box on section pages */
 .section-list-actions .reader-search {
-    flex: 1 1 14rem;
-    max-width: 22rem;
+    flex: 0 1 22rem;
     margin-left: auto;
 }
 
-/* the same height as the Start button beside it (Quark 2's fields are taller than its buttons) */
-.section-list-actions .reader-search input[type="search"] {
-    height: 2.1875rem;
-    padding-block: 0;
-    line-height: normal;
+@media (max-width: 600px) {
+    .section-list-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .section-list-actions .reader-search {
+        flex-basis: auto;
+        margin-left: 0;
+    }
 }
 
-/* on phones it goes below the button, at full width */
-@media (max-width: 600px) {
-    .section-list-actions .reader-search {
-        margin-left: 0;
-        max-width: none;
-    }
+/* Keep My Place: the "Continue reading" bar above the section cards, as in Helios Open Reader. It uses Quark 2's
+   alert recipe (a light tint of the accent colour over the card surface), and its close button follows Quark 2's
+   round icon button (the light/dark toggle) */
+.reader-resume {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    gap: 0.625rem;
+    padding: 0.625rem 0.75rem 0.625rem 1rem;
+    background: color-mix(in oklab, var(--q2-accent) 6%, var(--q2-bg-elev));
+    border-radius: var(--q2-radius);
+    font-family: var(--pico-font-family-sans-serif);
+    font-size: 0.9375rem;
+    color: var(--q2-text);
+}
+
+.reader-resume[hidden] {
+    display: none;
+}
+
+.reader-resume > .fa {
+    color: var(--q2-accent);
+    flex: 0 0 auto;
+}
+
+.reader-resume-link {
+    flex: 1;
+    min-width: 0;
+    color: var(--q2-text);
+    text-decoration: none;
+}
+
+.reader-resume-title {
+    color: var(--q2-link);
+    font-weight: 600;
+}
+
+.reader-resume-link:hover .reader-resume-title {
+    text-decoration: underline;
+}
+
+.reader-resume-dismiss {
+    flex: 0 0 auto;
+    width: 2rem;
+    height: 2rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: var(--q2-radius-pill);
+    background: transparent;
+    box-shadow: none;
+    color: var(--q2-text-muted);
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.reader-resume-dismiss:hover {
+    background: var(--q2-bg-muted);
+    color: var(--q2-text-strong);
+}
+
+/* a solid ring in the link colour, as Quark 2's lighter focus ring is too faint on the tinted bar in Dark mode */
+.reader-resume-dismiss:focus-visible {
+    outline: 2px solid var(--q2-link);
+    outline-offset: 2px;
+}
+
+/* in Dark mode, the title a little lighter than Quark 2's link colour, for enough contrast on the tinted bar */
+:root[data-theme="dark"] .reader-resume-title {
+    color: color-mix(in oklab, var(--q2-link) 90%, white);
 }
 
 /* Part headings, and headings in the text below the cards, with Quark 2's divider line */
