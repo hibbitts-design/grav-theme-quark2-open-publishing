@@ -1,3 +1,13 @@
+# v0.9.4
+## 10/06/2026
+
+1. [](#improved)
+    * Portrait cover images, such as book covers, are shown whole with either Cover Image Layout
+    * Section cards with only a title have balanced spacing
+1. [](#bugfix)
+    * Exercise boxes keep their content, with only a link on its own shown as the activity button
+    * Previous/Next and the reading progress skip sections that only redirect to their first page
+
 # v0.9.3
 ## 10/06/2026
 
