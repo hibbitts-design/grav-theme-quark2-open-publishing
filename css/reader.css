@@ -150,6 +150,16 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     object-fit: cover;
 }
 
+/* A portrait cover (such as a book cover) is shown whole, at its own shape and a narrower width, also on phones
+   (both class names are needed so this also replaces the full-width cover on phones). An unusually tall image
+   is kept to 18rem high, and narrows to keep its shape. */
+.section-list-page .reader-cover.reader-cover-portrait {
+    width: auto;
+    max-width: 11rem;
+    max-height: 18rem;
+    aspect-ratio: auto;
+}
+
 .reader-details p {
     margin: 0 0 0.3rem;
 }
@@ -190,6 +200,14 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     border-radius: var(--q2-radius-md);
     box-shadow: var(--q2-shadow-card);
     margin-bottom: 1.5rem;
+}
+
+/* A portrait cover (such as a book cover): shown whole, at its own width up to the full width and at most
+   36rem high, instead of trimmed to fill the width */
+.reader-cover-large-portrait {
+    width: auto;
+    max-width: 100%;
+    height: auto;
 }
 
 @media (max-width: 600px) {
@@ -333,6 +351,12 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
 .section-card {
     position: relative;
     width: 100%;
+}
+
+/* A card with just a label and title: the same space below the title as above it
+   (Quark 2's card header leaves less space below, for a description that would follow) */
+.section-card-title-only .card-header {
+    padding-bottom: 1.25rem;
 }
 
 /* Card titles are h2 or h3, shown at Quark 2's h5 size */
