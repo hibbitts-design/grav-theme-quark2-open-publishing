@@ -3,6 +3,8 @@
 
 1. [](#improved)
     * The Embedly script now loads only on pages with an Embedly card
+1. [](#bugfix)
+    * The Git Sync Link options display correctly in Admin 2
 
 # v0.9.2
 ## 10/05/2026
