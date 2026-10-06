@@ -19,7 +19,7 @@ Quark 2 Open Publishing brings Quark Open Publishing to Quark 2's modern design 
 ## What Sets It Apart
 
 - **The same content as Quark Open Publishing** – pages, page settings, shortcodes, theme options and page URL parameters are the same, so a site can move between the two themes without changing its content
-- **Guides that carry over to Grav Helios Open Reader** – the Section List page type, with section cards, parts, reading progress, Previous/Next navigation, Keep My Place, a last updated date, and OER attribution, using the same page settings as [Grav Helios Open Reader](https://github.com/hibbitts-design/grav-skeleton-helios-open-reader)
+- **Guides that carry over to Grav Helios Open Reader** – the Section List page type, with section cards, parts, reading progress, Previous/Next navigation, Keep My Place, a last updated date, and OER attribution, using the same page types and settings as [Grav Helios Open Reader](https://github.com/hibbitts-design/grav-skeleton-helios-open-reader), so an Open Reader publication can be copied in as it is
 - **Comfortable reading** – section pages keep lines to a comfortable length with slightly larger text and no words broken across lines; wide tables scroll sideways, footnotes sit as small notes below the text, and on phones a Sections link jumps to the list of sections
 - **Built on Quark 2** – its design, blog, hero images, modular pages, and Light, Dark and Auto modes with a theme toggle, used as they are wherever possible
 - **Blog extras** – featured posts, a notice above the posts, Continue Reading buttons, reading time, image credits, and a Markdown sidebar page
@@ -81,6 +81,7 @@ These work the same as in Quark Open Publishing – see its README:
 - [Multi-Page Content](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#multi-page-content) – the Section List page type, its settings, and [moving a guide to Grav Helios Open Reader](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#moving-to-grav-helios-open-reader)
 - [Page URL Parameters](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#page-url-parameters) – `?embedded=true`, `/chromeless:true`, `?edit_link=false`, and more
 - [Search](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#search) – SimpleSearch, or the optional TNTSearch plugin
+- **Markdown of any page** – add `.md` to a page's address (for example `/open-education-essentials.md`, or `/index.md` for the home page) to get that page as Markdown, ready to reuse. This is Grav 2.1's Markdown output, which can be turned off in **Configuration → System → Content**
 
 ## Requirements
 
