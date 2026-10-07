@@ -168,6 +168,14 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     margin-top: 0;
 }
 
+/* the guide's title, as large as its section pages' titles */
+.section-list-page .sections-page-title-template {
+    font-size: clamp(1.5rem, 2vw + 0.75rem, 1.875rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+}
+
 /* the subtitle in Quark 2's "lead" style, as under a blog page's title */
 .reader-subtitle {
     color: var(--q2-text-muted);
@@ -189,6 +197,17 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
 /* the Start button at the end of the details */
 .reader-details .section-list-start {
     margin: 0.75rem 0 0;
+}
+
+/* the Start Reading link after the section cards */
+.section-list-start-below {
+    margin: 1.5rem 0 0;
+    font-weight: 600;
+}
+
+.section-list-start-below .fa {
+    margin-left: 0.25rem;
+    font-size: 0.85em;
 }
 
 /* Large cover: full width of the content area, at the top */
@@ -231,6 +250,7 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     margin: 1.5rem 0 2rem;
 }
 
+/* hide the row when everything in it is hidden (:has() checks the row's contents) */
 .section-list-actions:not(:has(> :not([hidden]))) {
     display: none;
 }
@@ -238,6 +258,13 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
 .section-list-actions .reader-search {
     flex: 0 1 22rem;
     margin-left: auto;
+}
+
+/* With no "Continue reading" bar, the search box moves to the left
+   ([hidden] matches the hidden bar; + means the element right after it) */
+.section-list-actions .reader-resume[hidden] + .reader-search,
+.section-list-actions > .reader-search:first-child {
+    margin-left: 0;
 }
 
 @media (max-width: 600px) {
@@ -466,14 +493,15 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     }
 }
 
-/* the title and its arrow on one line, the arrow at the far right */
-.section-card-image-side .card-title {
+/* the title and its arrow on one line, the arrow at the far right (a long title wraps beside it) */
+.section-card .card-title {
     display: flex;
     align-items: baseline;
     gap: 0.75rem;
 }
 
 .section-card-arrow {
+    flex-shrink: 0; /* keeps its size beside a long title */
     margin-left: auto;
     font-size: 0.8em;
     opacity: 0.5;
