@@ -42,7 +42,10 @@
             <footer id="footer" class="section section-tight">
                 <div class="container">
                     {% if theme_var('display_of_git_sync_repo_link') == 'footer' %}
-                        <p class="footer-git-link">{% include 'partials/git_sync_repo_link.html.twig' %}</p>
+                        {% set git_sync_link = include('partials/git_sync_repo_link.html.twig') %}
+                        {% if git_sync_link|trim %}
+                            <p class="footer-git-link">{{ git_sync_link|raw }}</p>
+                        {% endif %}
                     {% endif %}
                     {% if footer_content %}
                         <div class="footer-page">{{ footer_content|raw }}</div>
