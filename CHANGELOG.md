@@ -1,6 +1,8 @@
 # v0.9.43
 ## 10/07/2026
 
+1. [](#new)
+    * Heading Weight option: lighter headings across the site, using Cal Sans as designed (the default), or Quark 2's bolder default
 1. [](#improved)
     * An arrow on every section card, as in Helios Open Reader, to show they open parts of the guide
     * With 1 section card per row, card images are shown beside the text by default, as in Helios Open Reader
