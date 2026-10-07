@@ -4,7 +4,7 @@
 
 ### A Quark 2 version of Quark Open Publishing
 
-<p><em>A Grav theme for open guides and blogs – embeddable anywhere, with Git-based open editing built in.</em></p>
+<p><em>A Grav theme for open guides and books, with a blog and almost any other Grav page alongside them – embeddable anywhere, with Git-based open editing built in.</em></p>
 
 [![Grav Discord Chat](https://img.shields.io/discord/501836936584101899.svg?logo=discord&colorB=728ADA&label=Grav%20Discord%20Chat)](https://chat.getgrav.org) [![Latest Release](https://img.shields.io/github/v/release/hibbitts-design/grav-theme-quark2-open-publishing?style=flat-square&label=Release)](https://github.com/hibbitts-design/grav-theme-quark2-open-publishing/releases/latest) [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE) [![PHP](https://img.shields.io/badge/PHP-%3E%3D8.3-8892BF?style=flat-square&logo=php&logoColor=white)](https://learn.getgrav.org/17/basics/requirements)
 
@@ -14,7 +14,7 @@
 
 </div>
 
-Quark 2 Open Publishing brings Quark Open Publishing to Quark 2's modern design – its fonts, cards, Light, Dark and Auto modes, accent colour and theme toggle – and adds what open, collaborative guides and blogs need on top: guides with section cards and reading progress, pages that embed cleanly in other systems, and links that open each page's source in your Git repository.
+Quark 2 Open Publishing brings Quark Open Publishing to Quark 2's modern design – its fonts, cards, Light, Dark and Auto modes, accent colour and theme toggle – and adds what open guides and books need on top, while keeping everything else Quark 2 can do, such as a blog and modular pages: guides with section cards and reading progress, pages that embed cleanly in other systems, and links that open each page's source in your Git repository.
 
 ## What Sets It Apart
 
