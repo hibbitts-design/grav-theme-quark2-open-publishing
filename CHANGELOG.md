@@ -1,3 +1,9 @@
+# v0.9.42
+## 10/06/2026
+
+1. [](#bugfix)
+    * The Setup Git Sync link is no longer shown when the Git Sync plugin is turned off
+
 # v0.9.41
 ## 10/06/2026
 
