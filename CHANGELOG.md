@@ -1,3 +1,13 @@
+# v0.9.43
+## 10/07/2026
+
+1. [](#improved)
+    * An arrow on every section card, as in Helios Open Reader, to show they open parts of the guide
+    * With 1 section card per row, card images are shown beside the text by default, as in Helios Open Reader
+    * A Start Reading link after the section cards, as in Helios Open Reader
+    * The search box on a Section List page starts on the left when there's no Continue reading bar
+    * The Section List page's title is as large as its section pages' titles
+
 # v0.9.42
 ## 10/06/2026
 
