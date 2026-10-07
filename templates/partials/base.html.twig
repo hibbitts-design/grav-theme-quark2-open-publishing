@@ -4,6 +4,9 @@
 
 {% set show_site_chrome = not embedded_mode and not theme_var('chromeless.enabled') %}
 
+{# Heading Weight option: lighter headings (see css/site.css) unless set to Quark 2's default #}
+{% block body_classes %}{{ parent() }}{% if theme_var('heading_weight') != 'quark2' %} headings-light{% endif %}{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     {% do assets.addCss('theme://css/callouts.css', 75) %}

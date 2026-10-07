@@ -119,6 +119,18 @@ form:
                 '1': Enabled
               validate:
                 type: bool
+            typographyoptions:
+              type: section
+              title: 'Typography'
+              underline: true
+            heading_weight:
+              type: select
+              label: 'Heading Weight'
+              default: lighter
+              options:
+                lighter: 'Lighter (as the font is designed)'
+                quark2: 'Quark 2 default (bolder)'
+              help: 'Headings across the site. Quark 2''s heading font has one weight; its bolder default is drawn by the browser.'
         quark2_info:
           type: tab
           title: 'Quark 2 Options'

@@ -66,7 +66,7 @@ Your pages and settings stay as they are:
 
 All options are available in the Admin Panel under **Themes → Quark 2 Open Publishing**.
 
-- **Open Publishing Options** – chromeless site, H5P setup, Creative Commons license display, and menu dropdowns
+- **Open Publishing Options** – chromeless site, H5P setup, Creative Commons license display, menu dropdowns, and Heading Weight (lighter headings using the heading font as designed, the default, or Quark 2's bolder default)
 - **Quark 2 Options** – Light, Dark or Auto mode by default, accent colour, logos and favicon, header and footer, blog page, and Font Awesome
 - **Custom Menu Items** – text, icon, URL, and target for extra menu links
 - **Git Sync Link** – location, link type (view or edit), icon and text, and a custom Git repository URL

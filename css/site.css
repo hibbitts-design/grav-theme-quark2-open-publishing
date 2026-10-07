@@ -215,3 +215,16 @@ a:has(> .fa) {
     height: 100%;
     border: 0;
 }
+
+/* Heading Weight option "Lighter" (the default; templates/partials/base.html.twig adds the class):
+   the browser doesn't fake bold, so Cal Sans headings show their one real weight. Inter has real
+   bold weights, so body text is unchanged; faked italic is still allowed. */
+.headings-light {
+    font-synthesis: style;
+}
+
+/* the site menu (#header) and phone menu (#overlay) keep Quark 2's usual bolder look */
+.headings-light #header,
+.headings-light #overlay {
+    font-synthesis: weight style;
+}
