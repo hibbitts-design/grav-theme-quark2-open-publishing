@@ -1,3 +1,9 @@
+# v0.9.46
+## XX/XX/2026
+
+1. [](#bugfix)
+    * The "This page as Markdown" and Git Sync link notes below the content use the same small, muted text as the attribution
+
 # v0.9.45
 ## 10/09/2026
 
