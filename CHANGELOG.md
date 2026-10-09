@@ -1,6 +1,8 @@
 # v0.9.46
 ## XX/XX/2026
 
+1. [](#improved)
+    * Demo content: the home page introduces Grav Open Publishing Space and its theme, and the Read Me page describes the "This page as Markdown" link
 1. [](#bugfix)
     * The "This page as Markdown" and Git Sync link notes below the content use the same small, muted text as the attribution
 
