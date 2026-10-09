@@ -28,5 +28,13 @@ dropdown:
 displaycustommenus:
   enabled: false
 display_of_git_sync_repo_link: menu
+markdown_link:
+  enabled: false
+  location: page
+  hide_templates:
+    - blog
+    - section-list
+    - search
+    - simplesearch_results
 type_of_git_sync_repo_link: view
 sections_prev_next_style: buttons

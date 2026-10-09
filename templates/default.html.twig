@@ -1,0 +1,10 @@
+{# Quark 2's standard page, with the page extras (the Git Sync and "This page as Markdown" links, and the Creative
+   Commons license) inside the white content card, after the content - hibbittsdesign.org #}
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+    <article class="content-item">
+        {{ page.content|raw }}
+        {% include 'partials/page_extras.html.twig' with { inline: true } %}
+    </article>
+{% endblock %}

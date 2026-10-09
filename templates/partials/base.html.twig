@@ -30,10 +30,15 @@
     {% if show_site_chrome %}{{ parent() }}{% endif %}
 {% endblock %}
 
-{# After the page content: the Git Sync link (Location of Git Sync Link: Page) and the Creative Commons license #}
+{# After the page content: the Git Sync and "This page as Markdown" links, and the Creative Commons license #}
 {% block content_surround %}
-    {{ parent() }}
-    {% include 'partials/page_extras.html.twig' %}
+    {# pages that place the extras themselves, inside their content (class "page-extras"), don't get them again here.
+       {% set name %}...{% endset %} saves the page content as text first, so it can be checked before it's shown #}
+    {% set main_content %}{{ parent() }}{% endset %}
+    {{ main_content|raw }}
+    {% if 'class="page-extras"' not in main_content %}
+        {% include 'partials/page_extras.html.twig' %}
+    {% endif %}
 {% endblock %}
 
 {# Footer: the text of the site's "footer" page (and the Git Sync link, when its location is the footer),
@@ -41,7 +46,13 @@
 {% block footer %}
     {% if show_site_chrome %}
         {% set footer_content = pages.find('/footer').content %}
-        {% if footer_content or theme_var('display_of_git_sync_repo_link') == 'footer' %}
+        {# include() gets the "This page as Markdown" link first, so the footer only adds it when there is one #}
+        {# (its location is Page when none has been saved yet, so only a saved 'footer' puts it here) #}
+        {% set footer_markdown_link = '' %}
+        {% if theme_var('markdown_link.location') == 'footer' %}
+            {% set footer_markdown_link = include('partials/markdown_link.html.twig')|trim %}
+        {% endif %}
+        {% if footer_content or footer_markdown_link or theme_var('display_of_git_sync_repo_link') == 'footer' %}
             <footer id="footer" class="section section-tight">
                 <div class="container">
                     {% if theme_var('display_of_git_sync_repo_link') == 'footer' %}
@@ -50,6 +61,9 @@
                         {% if git_sync_link|trim %}
                             <p class="footer-git-link">{{ git_sync_link|raw }}</p>
                         {% endif %}
+                    {% endif %}
+                    {% if footer_markdown_link %}
+                        <p class="footer-git-link">{{ footer_markdown_link|raw }}</p>
                     {% endif %}
                     {% if footer_content %}
                         <div class="footer-page">{{ footer_content|raw }}</div>

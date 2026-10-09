@@ -1,0 +1,59 @@
+{# Reuse Pages as Markdown: a link to the Markdown of the page being viewed. Grav 2.1 and later serve any page as
+   Markdown when ".md" is added to its address, so this needs no Git Sync - hibbittsdesign.org #}
+
+{# grav.page is the page being viewed (inside a modular page, "page" can be one of its modules) #}
+{% set viewed_page = grav.page %}
+
+{# Step 1: decide whether this page gets the link #}
+{% set show_link = true %}
+
+{# the setting is off, or Grav's Markdown output is turned off (Configuration → System) #}
+{% if not theme_var('markdown_link.enabled') or not config.system.pages.markdown_output.enabled %}
+    {% set show_link = false %}
+{% endif %}
+
+{# embedded pages (for example in an LMS) are mostly read by students, so the link is left out there
+   (embedded_mode comes from the page address; chromeless.enabled embeds the whole site) #}
+{% if embedded_mode or theme_var('chromeless.enabled') %}
+    {% set show_link = false %}
+{% endif %}
+
+{# an error page ("page not found") has no route, and no Markdown #}
+{% if not viewed_page.route %}
+    {% set show_link = false %}
+{% endif %}
+
+{# the page's template is in Hide on Page Templates. Until that setting is saved it has no value,
+   so these defaults apply (a saved empty list is kept, and hides the link on no templates) #}
+{% set hidden_templates = theme_var('markdown_link.hide_templates') %}
+{% if hidden_templates is null %}
+    {% set hidden_templates = ['blog', 'section-list', 'search', 'simplesearch_results'] %}
+{% endif %}
+{% if viewed_page.template in hidden_templates %}
+    {% set show_link = false %}
+{% endif %}
+
+{# the page itself hides it, with hide_markdown_link: true in its settings #}
+{% if viewed_page.header.hide_markdown_link %}
+    {% set show_link = false %}
+{% endif %}
+
+{# Step 2: the link #}
+{% if show_link %}
+    {# the home page's address is just the site's address, so its Markdown is at /index.md #}
+    {% if viewed_page.home %}
+        {% set markdown_url = base_url_relative ~ '/index.md' %}
+    {% else %}
+        {% set markdown_url = viewed_page.url ~ '.md' %}
+    {% endif %}
+
+    {# the Markdown Link Text setting, or the default text when it's empty #}
+    {% set markdown_link_text = theme_var('markdown_link.text') %}
+    {% if not markdown_link_text %}
+        {% set markdown_link_text = 'This page as Markdown (.md)' %}
+    {% endif %}
+
+    {# the hover text shares a tip: any page's Markdown is at its address with .md added #}
+    <a href="{{ markdown_url }}" title="Add .md to any page's address to get its Markdown">
+        <i class="fa-brands fa-markdown" aria-hidden="true"></i> {{ markdown_link_text }}</a>
+{% endif %}

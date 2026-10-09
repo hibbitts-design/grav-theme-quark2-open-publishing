@@ -84,8 +84,9 @@ a:has(> .fa) {
     padding-inline-start: 0.75rem;
 }
 
-/* ---------- The Git Sync link on pages (Location of Git Sync Link: Page) ---------- */
-.gitrepo-link-note {
+/* ---------- The Git Sync and "This page as Markdown" links on pages (their location: Page) ---------- */
+.gitrepo-link-note,
+.markdown-link-note {
     margin-top: 2.5rem;
     padding-top: 1rem;
     border-top: 1px solid var(--q2-divider);
@@ -94,8 +95,59 @@ a:has(> .fa) {
     font-size: 0.875rem;
 }
 
-.gitrepo-link-note p {
+.gitrepo-link-note p,
+.markdown-link-note p {
     margin: 0;
+}
+
+/* the links themselves are quiet, like the attribution, so they don't compete with the page content:
+   muted, underlined only on hover, with a clear outline for keyboard focus */
+.gitrepo-link-note a,
+.markdown-link-note a {
+    color: var(--q2-text-muted);
+    text-decoration: none;
+}
+
+.gitrepo-link-note a:hover,
+.markdown-link-note a:hover {
+    text-decoration: underline;
+}
+
+.gitrepo-link-note a:focus-visible,
+.markdown-link-note a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* on standard, blog and guide pages these links sit inside the content, centred, without a line */
+.page-extras .gitrepo-link-note,
+.page-extras .markdown-link-note {
+    margin-top: 1rem;
+    padding-top: 0;
+    border-top: 0;
+    text-align: center;
+}
+
+/* on a blog post, right after the Previous/Next Post buttons, more space above them */
+#item .prev-next + .page-extras {
+    padding-top: 2rem; /* padding, as margins here would merge with the link's own and add less */
+}
+
+/* on a guide page, right after its Previous/Next buttons or tiles (no attribution between them), the same space */
+#sections-content p.prev-next + .page-extras {
+    padding-top: 1rem; /* the classic buttons' own bottom margin adds the rest */
+}
+
+#sections-content .reader-nav-block + .page-extras {
+    padding-top: 2rem;
+}
+
+/* when both links are on the page, the Markdown link sits just below the Git Sync link, without a second line */
+.gitrepo-link-note + .markdown-link-note {
+    margin-top: 0.5rem;
+    padding-top: 0;
+    border-top: 0;
 }
 
 /* ---------- Creative Commons license, below the page content ---------- */

@@ -67,7 +67,7 @@
                         </div>
                     {% endif %}
 
-                    {% include 'partials/page_extras.html.twig' %}
+                    {% include 'partials/page_extras.html.twig' with { inline: true } %}
                 {% endblock %}
 
                 {% block sidebar %}

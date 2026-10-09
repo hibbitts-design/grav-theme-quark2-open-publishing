@@ -1,7 +1,7 @@
 name: Quark 2 Open Publishing
 type: theme
 slug: quark2-open-publishing
-version: 0.9.44
+version: 0.9.45
 description: "A Quark 2 version of Quark Open Publishing, for open guides and books, with a blog and almost any other Grav page alongside them: guides with section cards, parts and reading progress. Uses the same pages and settings as Quark Open Publishing."
 icon: unlock
 author:
@@ -32,33 +32,6 @@ form:
           type: tab
           title: 'Open Publishing Options'
           fields:
-            chromelessoptions:
-              type: section
-              title: 'Chromeless Site (i.e. Embedded)'
-              underline: true
-            chromeless.enabled:
-              type: toggle
-              label: 'Hide Site Menu, Sidebar and Footer'
-              highlight: 1
-              default: 0
-              options:
-                '0': No
-                '1': Yes
-              validate:
-                type: bool
-            h5psetup:
-              type: section
-              title: 'H5P Setup'
-              underline: true
-            h5pembedrootpath:
-              type: text
-              size: long
-              label: 'H5P Embed Source URL'
-              default: 'https://h5p.org/h5p/embed/'
-              help: 'Enter the embed source URL path up to, but not including, the H5P Content ID.'
-              description: 'H5P embed source URL path up to, but not including, the Content ID. For example, ''https://h5p.org/h5p/embed/'' or ''https://[organization].h5p.com/content/''.'
-              validate:
-                type: URL
             displaycclicense:
               type: section
               title: 'Creative Commons License'
@@ -104,6 +77,69 @@ form:
                   label: 'Additional CC License Text'
                   validate:
                     type: text
+            markdownlinkoptions:
+              type: section
+              title: 'Reuse Pages as Markdown'
+              underline: true
+            markdown_link.enabled:
+              type: toggle
+              label: 'Display This Page as Markdown Link'
+              help: 'Get any page as Markdown, ready to reuse. Needs Grav''s Serve Pages as Markdown setting.'
+              highlight: 1
+              default: 0
+              options:
+                '0': No
+                '1': Yes
+              validate:
+                type: bool
+            markdown_link.location:
+              type: select
+              size: medium
+              label: 'Location of Markdown Link'
+              default: page
+              options:
+                page: 'Page (below the content)'
+                footer: Footer
+                menu: Menu
+            markdown_link.hide_templates:
+              type: select
+              multiple: true
+              size: large
+              classes: fancy
+              label: 'Hide on Page Templates'
+              help: 'Page templates that never show the link.'
+              data-options@: '\Grav\Common\Page\Pages::pageTypes'
+              default:
+                - blog
+                - section-list
+                - search
+                - simplesearch_results
+              validate:
+                type: array
+            markdown_link.text:
+              type: text
+              size: medium
+              label: 'Markdown Link Text'
+              placeholder: 'This page as Markdown (.md)'
+            markdown_link.note_text:
+              type: text
+              size: medium
+              label: 'Text before Page Link'
+              description: 'e.g. ''Want to reuse this open content?'''
+            chromelessoptions:
+              type: section
+              title: 'Chromeless Site (i.e. Embedded)'
+              underline: true
+            chromeless.enabled:
+              type: toggle
+              label: 'Hide Site Menu, Sidebar and Footer'
+              highlight: 1
+              default: 0
+              options:
+                '0': No
+                '1': Yes
+              validate:
+                type: bool
             menuoptions:
               type: section
               title: Menu
@@ -131,6 +167,19 @@ form:
                 lighter: 'Lighter (as the font is designed)'
                 quark2: 'Quark 2 default (bolder)'
               help: 'Headings across the site. Quark 2''s heading font has one weight; its bolder default is drawn by the browser.'
+            h5psetup:
+              type: section
+              title: 'H5P Setup'
+              underline: true
+            h5pembedrootpath:
+              type: text
+              size: long
+              label: 'H5P Embed Source URL'
+              default: 'https://h5p.org/h5p/embed/'
+              help: 'Enter the embed source URL path up to, but not including, the H5P Content ID.'
+              description: 'H5P embed source URL path up to, but not including, the Content ID. For example, ''https://h5p.org/h5p/embed/'' or ''https://[organization].h5p.com/content/''.'
+              validate:
+                type: URL
         quark2_info:
           type: tab
           title: 'Quark 2 Options'
@@ -389,7 +438,7 @@ form:
               type: text
               size: long
               label: 'Custom Link Text'
-              description: 'Link text, e.g. ''View Page in GitHub'' or ''View Page as Markdown''.'
+              description: 'Link text, e.g. ''View Page in GitHub'' or ''View Page Source''.'
               validate:
                 type: text
             git_sync_edit_note_text:

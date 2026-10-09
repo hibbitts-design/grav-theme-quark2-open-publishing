@@ -1,0 +1,22 @@
+{# The "This page as Markdown" link below the page content (its location: Page), with the text set before it.
+   Used by page_extras.html.twig - hibbittsdesign.org #}
+{# where the link goes: the Location of Markdown Link setting, or Page when none has been saved yet #}
+{% set markdown_link_location = theme_var('markdown_link.location') %}
+{% if not markdown_link_location %}
+    {% set markdown_link_location = 'page' %}
+{% endif %}
+{% if markdown_link_location == 'page' %}
+    {# include() gets the link first, so the note only shows when there is one #}
+    {% set markdown_link = include('partials/markdown_link.html.twig') %}
+    {% if markdown_link|trim %}
+    {# the aside's label for screen readers: the link text setting, or the default text #}
+    {% set note_label = theme_var('markdown_link.text') %}
+    {% if not note_label %}
+        {% set note_label = 'This page as Markdown (.md)' %}
+    {% endif %}
+    {# an aside, so the link isn't part of the page's own Markdown (Grav's Markdown output leaves asides out) #}
+    <aside class="markdown-link-note" aria-label="{{ note_label }}">
+        <p>{{ theme_var('markdown_link.note_text') }} {{ markdown_link|raw }}</p>
+    </aside>
+    {% endif %}
+{% endif %}

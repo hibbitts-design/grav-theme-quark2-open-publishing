@@ -43,4 +43,12 @@
             <li>{{ git_sync_link|raw }}</li>
         {% endif %}
     {% endif %}
+    {# the "This page as Markdown" link, when its location is the menu (Page when none has been saved yet) #}
+    {% set markdown_link_location = theme_var('markdown_link.location') %}
+    {% if markdown_link_location == 'menu' %}
+        {% set markdown_link = include('partials/markdown_link.html.twig') %}
+        {% if markdown_link|trim %}
+            <li>{{ markdown_link|raw }}</li>
+        {% endif %}
+    {% endif %}
 </ul>

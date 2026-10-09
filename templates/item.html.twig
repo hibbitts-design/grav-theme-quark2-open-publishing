@@ -36,7 +36,7 @@
         {% embed 'partials/layout.html.twig' with {show_sidebar: show_sidebar, blog: blog} %}
             {% block item %}
                 {% include 'partials/blog-item.html.twig' %}
-                {% include 'partials/page_extras.html.twig' %}
+                {% include 'partials/page_extras.html.twig' with { inline: true } %}
             {% endblock %}
             {% block sidebar %}
                 {% include 'partials/sidebar.html.twig' %}

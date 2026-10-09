@@ -29,6 +29,7 @@ Based on the Grav Helios Open Reader print stylesheet. To leave something out of
     .section-list-start,
     .reader-search,
     .gitrepo-link-note,
+    .markdown-link-note,
     .no-print {
         display: none !important;
     }

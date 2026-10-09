@@ -928,6 +928,11 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     margin-top: 2.5rem;
 }
 
+/* after the page links, the attribution sits close below them, as one block (as in Grav Helios Open Reader) */
+.page-extras + .reader-attribution {
+    margin-top: 1rem;
+}
+
 /* (Quark 2 gives paragraphs their own colour and size, so these take the attribution's instead) */
 .reader-attribution p {
     margin: 0 0 0.3rem;
