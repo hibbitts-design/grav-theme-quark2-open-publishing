@@ -15,6 +15,10 @@ By adding the URL parameter (i.e. flag) `chromeless:true` to any Open Publishing
 
 For example, the URL [https://demo.hibbittsdesign.org/grav-open-publishing-quark2/](https://demo.hibbittsdesign.org/grav-open-publishing-quark2/) displays the Open Education Essentials guide with the full site around it, but the URL [https://demo.hibbittsdesign.org/grav-open-publishing-quark2/chromeless:true](https://demo.hibbittsdesign.org/grav-open-publishing-quark2/chromeless:true) will only display that page's content. Any links between Open Publishing Space pages will result in pages being displayed in the same manner.
 
+### Get Any Page as Markdown (Grav 2 Version)
+
+On Grav 2.1 and newer, the "This page as Markdown (.md)" link below a page's content gets that page as Markdown, ready to reuse – the same as adding `.md` to the page's address, for example `/blog/hero-classes.md`, or `/index.md` for the home page. The link's settings are under **Reuse Pages as Markdown** in **Themes → My Theme**, and Grav's Markdown output can be turned off in **Configuration → System → Content**.
+
 ### What Else Can the Open Publishing Space do for You? ##
 Learn more about the capabilities of the Open Publishing Space project in its [README on GitHub](https://github.com/hibbitts-design/grav-skeleton-open-publishing-space#readme).
 
