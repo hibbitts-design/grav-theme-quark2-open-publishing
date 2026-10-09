@@ -1,3 +1,13 @@
+# v0.9.45
+## 10/09/2026
+
+1. [](#new)
+    * Reuse Pages as Markdown: an optional "This page as Markdown (.md)" link, using Grav 2's Markdown output
+1. [](#improved)
+    * The Git Sync link (Page location) and Creative Commons license now sit inside the content, centred, on standard, blog and guide pages
+    * Open Publishing Options reordered: Creative Commons License first, H5P Setup last
+    * Quieter page links (muted, underlined on hover), and the guide's top links and page links are left out of each page's Markdown
+
 # v0.9.44
 ## 10/08/2026
 
