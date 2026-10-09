@@ -2,7 +2,9 @@
 ## XX/XX/2026
 
 1. [](#improved)
+    * No "Setup Git Sync" link is shown before Git Sync is connected to a repository, so visitors don't see an unfinished setup step; set it up in the Admin Panel (Plugins → Git Sync)
     * Demo content: the home page introduces Grav Open Publishing Space and its theme, and the Read Me page describes the "This page as Markdown" link
+    * Demo content: the Custom Page Types example is removed, and Read Me is now 20.readme, leaving 08–19 free for new pages (a converted Pressbooks book uses 10.)
 1. [](#bugfix)
     * The "This page as Markdown" and Git Sync link notes below the content use the same small, muted text as the attribution
 
