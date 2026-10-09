@@ -98,6 +98,9 @@ a:has(> .fa) {
 .gitrepo-link-note p,
 .markdown-link-note p {
     margin: 0;
+    /* the note's small, muted text (Quark 2 sets every paragraph to 1rem in its main text colour) */
+    font-size: inherit;
+    color: inherit;
 }
 
 /* the links themselves are quiet, like the attribution, so they don't compete with the page content:
