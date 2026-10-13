@@ -35,29 +35,39 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        // only links to this site carry the display options forward (not other sites, mailto: or tel:)
+        var target = new URL(href, window.location.href);
+        if (target.origin !== window.location.origin) {
+            return;
+        }
+
         var currentUrl = window.location.href;
-        var newUrl = href;
         var changed = false;
 
-        // Grav parameters (/name:true) on this page are added to the link
-        ['chromeless', 'embedded', 'standalone', 'hidepagetitle'].forEach(function (name) {
-            if (currentUrl.indexOf(name + ':true') >= 0) {
-                newUrl = newUrl + '/' + name + ':true';
-                changed = true;
-            }
-        });
+        // Grav parameters (/name:true) on this page are added to the link's page path (before any ? or #),
+        // but not to links to files such as PDFs
+        var lastPart = target.pathname.split('/').pop();
+        var isFile = lastPart.indexOf('.') >= 0;
+        if (!isFile) {
+            ['chromeless', 'embedded', 'standalone', 'hidepagetitle'].forEach(function (name) {
+                var param = name + ':true';
+                if (currentUrl.indexOf(param) >= 0 && target.pathname.indexOf(param) < 0) {
+                    if (target.pathname.slice(-1) !== '/') {
+                        target.pathname = target.pathname + '/';
+                    }
+                    target.pathname = target.pathname + param;
+                    changed = true;
+                }
+            });
+        }
 
         // ?embedded=true, ?chromeless=true or ?standalone=true (as in Helios) are carried to links on this site
         var params = new URLSearchParams(window.location.search);
         ['embedded', 'chromeless', 'standalone'].forEach(function (name) {
             var value = params.get(name);
             if (value && value !== 'false' && value !== '0') {
-                var target = new URL(newUrl, window.location.href);
-                if (target.origin === window.location.origin) {
-                    target.searchParams.set(name, value);
-                    newUrl = target.pathname + target.search + target.hash;
-                    changed = true;
-                }
+                target.searchParams.set(name, value);
+                changed = true;
             }
         });
 
@@ -65,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        var newUrl = target.pathname + target.search + target.hash;
         e.preventDefault();
         if (e.ctrlKey || e.metaKey) {
             window.open(newUrl, '_blank');
