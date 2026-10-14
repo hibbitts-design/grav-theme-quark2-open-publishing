@@ -1,3 +1,9 @@
+# v0.9.51
+## 10/14/2026
+
+1. [](#bugfix)
+    * Embedded blog posts show their title as plain text, not as a link, and leave out their tags
+
 # v0.9.50
 ## 10/14/2026
 
