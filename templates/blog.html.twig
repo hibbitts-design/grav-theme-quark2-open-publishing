@@ -22,7 +22,8 @@
 {% block body %}
     <section id="body-wrapper" class="section blog-listing">
         <div class="container">
-            {% if show_breadcrumbs and config.plugins.breadcrumbs.enabled %}
+            {# no breadcrumbs when embedded (for example in an LMS), as on blog posts #}
+            {% if show_breadcrumbs and config.plugins.breadcrumbs.enabled and site_chrome %}
                 {% include 'partials/breadcrumbs.html.twig' %}
             {% endif %}
 
