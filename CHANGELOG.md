@@ -1,3 +1,16 @@
+# v0.9.49
+## 10/14/2026
+
+1. [](#new)
+    * Optional full text link on each guide's home page: the whole guide as one Markdown file (llms-full.txt), as in Grav Helios Open Reader
+1. [](#improved)
+    * README: every callout shortcode is listed, and the full text link is described
+1. [](#bugfix)
+    * Printed guide pages are one full-width column, not two narrow ones
+    * Printed blog posts start on the first page, with their title, subtitle and date
+    * The blog's title prints at the top of the blog list
+    * The Copy as Markdown button is left out of print
+
 # v0.9.48
 ## 10/13/2026
 
