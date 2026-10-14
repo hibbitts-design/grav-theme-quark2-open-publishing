@@ -12,6 +12,7 @@
 {% endif %}
 {% if not summary_only %}
     {% include 'partials/markdown_link_note.html.twig' %}
+    {% include 'partials/full_text_link_note.html.twig' %}
 {% endif %}
 {% if not embedded_mode and not theme_var('chromeless.enabled') and theme_var('cc_license.enabled') and not page.header.hide_cc_license and not summary_only %}
     {% include 'partials/creative_commons_license.html.twig' %}

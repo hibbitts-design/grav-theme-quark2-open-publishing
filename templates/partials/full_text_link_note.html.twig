@@ -1,0 +1,41 @@
+{# The "Full text (llms-full.txt)" link on a guide's home page: the whole guide as one Markdown file, as in
+   Grav Helios Open Reader. Used by page_extras.html.twig - hibbittsdesign.org #}
+
+{# grav.page is the page being viewed #}
+{% set viewed_page = grav.page %}
+
+{# Step 1: decide whether this page gets the link #}
+{% set show_link = true %}
+
+{# the setting is off, or Grav's Markdown output is turned off (Configuration → System) #}
+{% if not theme_var('full_text_link.enabled') or not config.system.pages.markdown_output.enabled %}
+    {% set show_link = false %}
+{% endif %}
+
+{# only on a guide's home page (the Section List page type) #}
+{% if viewed_page.template != 'section-list' %}
+    {% set show_link = false %}
+{% endif %}
+
+{# embedded pages (for example in an LMS) leave it out, as with the "This page as Markdown" link #}
+{% if embedded_mode or theme_var('chromeless.enabled') %}
+    {% set show_link = false %}
+{% endif %}
+
+{# Step 2: the link #}
+{% if show_link %}
+    {# the guide's own address, even when it is the site's home page (whose address is just the site's) #}
+    {% set full_text_url = base_url_relative ~ viewed_page.rawRoute ~ '/llms-full.txt' %}
+
+    {# the Full Text Link Text setting, or the default text when it's empty #}
+    {% set full_text_link_text = theme_var('full_text_link.text') %}
+    {% if not full_text_link_text %}
+        {% set full_text_link_text = 'Full text (llms-full.txt)' %}
+    {% endif %}
+
+    {# an aside, so the link isn't part of the page's own Markdown (Grav's Markdown output leaves asides out) #}
+    <aside class="markdown-link-note full-text-link-note" aria-label="{{ full_text_link_text }}">
+        <p><a href="{{ full_text_url }}" title="The whole guide as one Markdown file">
+            <i class="fa-solid fa-book" aria-hidden="true"></i> {{ full_text_link_text }}</a></p>
+    </aside>
+{% endif %}

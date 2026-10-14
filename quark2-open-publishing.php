@@ -23,7 +23,10 @@ class Quark2OpenPublishing extends Quark2
             'onShortcodeHandlers' => ['onShortcodeHandlers', -10],
             'onTwigSiteVariables' => ['onTwigSiteVariables', 0],
             'onTwigInitialized' => ['onTwigInitialized', 0],
-            'onPagesInitialized' => ['onSearchPagesInitialized', 10],
+            'onPagesInitialized' => [
+                ['onSearchPagesInitialized', 10],
+                ['onGuideFullTextRoute', 0]
+            ],
             'onSimpleSearchCollection' => ['onSimpleSearchCollection', 0]
         ];
     }
@@ -110,6 +113,96 @@ class Quark2OpenPublishing extends Quark2
     private function isTrueParam($value)
     {
         return $value !== null && $value !== false && $value !== '' && $value !== 'false' && $value !== '0';
+    }
+
+    /*
+     * ------------------------------------------------------------------------------------------------
+     * Full text of a guide: /<guide>/llms-full.txt gives the whole guide as one Markdown file, as in
+     * Grav Helios Open Reader. Only the guide's own pages are included, not the blog or other pages.
+     * Needs Grav 2.1 or later, which can output any page as Markdown - hibbittsdesign.org
+     * ------------------------------------------------------------------------------------------------
+     */
+
+    /**
+     * Answer /<guide>/llms-full.txt when the Display Full Text Link on Guides setting is on
+     */
+    public function onGuideFullTextRoute()
+    {
+        if ($this->isAdmin() || !$this->config->get('theme.full_text_link.enabled')) {
+            return;
+        }
+
+        // Grav leaves the .txt off the route, so /open-education-essentials/llms-full.txt is .../llms-full
+        $route = $this->grav['uri']->route();
+        if (!str_ends_with($route, '/llms-full')) {
+            return;
+        }
+
+        // the guide's own address; the site root is left alone (it isn't a guide)
+        $guideRoute = substr($route, 0, -strlen('/llms-full'));
+        if ($guideRoute === '') {
+            return;
+        }
+
+        // only a guide's home page (the Section List page type)
+        $guide = $this->grav['pages']->find($guideRoute);
+        if (!$guide || $guide->template() !== 'section-list') {
+            return;
+        }
+
+        $this->outputGuideFullText($guide);
+    }
+
+    /**
+     * Send the guide's pages, in reading order, as one plain text Markdown file
+     */
+    private function outputGuideFullText($guide)
+    {
+        // Grav's Markdown output (Grav 2.1 and later); without it, Grav shows its usual "page not found"
+        if (!isset($this->grav['markdown_output'])) {
+            return;
+        }
+
+        // kept in Grav's cache, and rebuilt whenever a page or the site settings change
+        $cache = $this->grav['cache'];
+        $cacheId = md5('q2op-full-text-' . $this->grav['pages']->getPagesCacheId() . $guide->route() . $this->grav['config']->checksum());
+        $content = $cache->fetch($cacheId);
+
+        if (!is_string($content)) {
+            $pages = [];
+            $this->collectGuidePages($guide, $pages);
+
+            $output = $this->grav['markdown_output'];
+            $documents = [];
+            foreach ($pages as $page) {
+                $documents[] = rtrim($output->render($page));
+            }
+
+            $content = implode("\n\n", $documents) . "\n";
+            $cache->save($cacheId, $content);
+        }
+
+        header('Content-Type: text/plain; charset=utf-8');
+        echo $content;
+        exit();
+    }
+
+    /**
+     * Add a page and then its visible child pages, in order, so the file follows the guide's reading order
+     * (pages that are hidden, can't be visited, or only redirect elsewhere are left out)
+     */
+    private function collectGuidePages($page, array &$pages)
+    {
+        $redirect = false;
+        if (isset($page->header()->redirect)) {
+            $redirect = $page->header()->redirect;
+        }
+        if ($page->visible() && $page->routable() && !$redirect) {
+            $pages[] = $page;
+        }
+        foreach ($page->children()->visible() as $child) {
+            $this->collectGuidePages($child, $pages);
+        }
     }
 
     /*

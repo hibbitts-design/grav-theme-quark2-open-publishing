@@ -1,7 +1,7 @@
 name: Quark 2 Open Publishing
 type: theme
 slug: quark2-open-publishing
-version: 0.9.48
+version: 0.9.49
 description: "A Quark 2 version of Quark Open Publishing, for open guides and books, with a blog and almost any other Grav page alongside them: guides with section cards, parts and reading progress. Uses the same pages and settings as Quark Open Publishing."
 icon: unlock
 author:
@@ -126,6 +126,22 @@ form:
               size: medium
               label: 'Text before Page Link'
               description: 'e.g. ''Want to reuse this open content?'''
+            full_text_link.enabled:
+              type: toggle
+              label: 'Display Full Text Link on Guides'
+              help: 'A link on each guide''s home page to the whole guide as one Markdown file (llms-full.txt). Needs Grav 2.1 or later.'
+              highlight: 1
+              default: 0
+              options:
+                '0': 'No'
+                '1': 'Yes'
+              validate:
+                type: bool
+            full_text_link.text:
+              type: text
+              size: medium
+              label: 'Full Text Link Text'
+              placeholder: 'Full text (llms-full.txt)'
             chromelessoptions:
               type: section
               title: 'Chromeless Site (i.e. Embedded)'

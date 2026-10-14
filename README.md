@@ -25,8 +25,8 @@ Quark 2 Open Publishing brings Quark Open Publishing to Quark 2's modern design 
 - **Blog extras** – featured posts, a notice above the posts, Continue Reading buttons, reading time, image credits, and a Markdown sidebar page
 - **Chromeless display for embedding** – add `/chromeless:true` or `?embedded=true` to any page URL to show only its content, or hide the site menu, sidebar, and footer site-wide
 - **Open authoring with Git Sync** – a "View Git Repository" or "View/Edit Page in Git Repository" link in the menu, footer, or page
-- **Reuse pages as Markdown** – an optional "This page as Markdown (.md)" link below a page's content (or in the footer or menu), using Grav 2's Markdown output, so anyone can get a page's Markdown to adapt and reuse, with no Git Sync needed (the same link as in Grav Helios Open Reader)
-- **Shortcodes and callouts** – Embedly, Google Slides, H5P, iFrame, Link Preview Card, Markdown File, PDF, SpeakerDeck, and the callout shortcodes (`[objectives]`, `[key-takeaways]` and more), plus GitHub-style alerts
+- **Reuse pages as Markdown** – an optional "This page as Markdown (.md)" link below a page's content (or in the footer or menu), using Grav 2's Markdown output, so anyone can get a page's Markdown to adapt and reuse, with no Git Sync needed (the same link as in Grav Helios Open Reader), plus an optional full text link on each guide's home page to the whole guide as one Markdown file (llms-full.txt)
+- **Shortcodes and callouts** – Embedly, Google Slides, H5P, iFrame, Link Preview Card, Markdown File, PDF, SpeakerDeck, and the callout shortcodes (`[objectives]`, `[key-takeaways]`, `[example]`, `[exercise]`, `[definition]`, `[reflection]`, `[case-study]`, `[announcement]`, `[project-brief]`, `[feedback-requested]`, `[process-note]`, `[references]` and `[excerpt]`), plus GitHub-style alerts
 - **Search** – with the SimpleSearch plugin, results grouped by section with the search words highlighted, and a search box on each guide that searches just that guide
 - **Open licensing and printing** – Creative Commons license display, OER attribution for guides, and print-friendly pages
 
@@ -73,6 +73,8 @@ All options are available in the Admin Panel under **Themes → Quark 2 Open Pub
 - **Git Sync Link** – location, link type (view or edit), icon and text, and a custom Git repository URL
 
 **Reuse Pages as Markdown** adds a "This page as Markdown (.md)" link, below the content by default, or in the footer or menu, with optional text before it (such as "Want to reuse this open content?"). It links to the page's address with `.md` added, which Grav 2.1 and later serve as Markdown when **Serve Pages as Markdown** is on (**Configuration → System → Content**, under Markdown Output, on by default). **Hide on Page Templates** keeps it off pages where it isn't useful: the blog list, guide home pages (Section List) and search, by default. It's also left out of embedded pages (for example in an LMS), which are mostly read by students. To hide it on a single page, add `hide_markdown_link: true` to the page's settings.
+
+**Display Full Text Link on Guides** (off by default) adds a "Full text (llms-full.txt)" link on each guide's home page, with its own **Full Text Link Text**. The link gives the whole guide – only its own pages, in reading order – as one Markdown file, at the guide's address with `/llms-full.txt` added (for example `/open-education-essentials/llms-full.txt`), as in Grav Helios Open Reader. Like the page link, it uses Grav 2.1's Markdown output and is left out of embedded pages.
 
 > [!TIP]
 > On a site with guides, consider turning off **Display Dropdowns in Menu**. Otherwise a guide's sections also appear as a dropdown under its menu item, although readers already move between them with the guide's side list and Previous/Next links. The Open Publishing Space skeleton has dropdowns turned off.
