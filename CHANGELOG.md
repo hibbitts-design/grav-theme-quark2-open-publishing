@@ -1,3 +1,9 @@
+# v0.9.56
+## 10/16/2026
+
+1. [](#bugfix)
+    * Dark mode: links and filled buttons (such as Start Reading and Continue Reading) have enough contrast with any Accent Color, including links on the lighter card behind standard pages
+
 # v0.9.55
 ## 10/16/2026
 
