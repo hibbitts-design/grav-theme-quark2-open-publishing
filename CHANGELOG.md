@@ -5,6 +5,11 @@
     * Captions for images in guide pages: an italic line right after an image on its own line (such as `*Photo by …*`) shows as a caption – small, centred and just below the image – so photo credits and captions need no HTML
     * Image captions written in HTML (`<figure>` and `<figcaption>`, as from the Pressbooks Converter) are shown the same way, as in Grav Helios Open Reader
     * Cover Image Alt Text setting on a guide's home page, to describe the cover for screen readers (without it, the alt text is still "<title> cover")
+1. [](#improved)
+    * On a guide's first page, the left arrow key goes back to the guide's home page, so presenting with the arrow keys works both ways
+    * README: the left arrow key on a guide's first page
+1. [](#bugfix)
+    * The back, Sections and top Previous/Next links on guide pages line up on one row (Previous/Next sat slightly higher, most noticeably on phones)
 
 # v0.9.54
 ## 10/16/2026
