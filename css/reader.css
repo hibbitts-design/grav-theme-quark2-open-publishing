@@ -587,7 +587,9 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: baseline;
+    /* centred, not lined up by text baseline: the back and Sections links are paragraphs (taller line height)
+       and the top Previous/Next links aren't, so baseline alignment left Previous/Next slightly higher */
+    align-items: center;
     gap: 0 1.25rem;
 }
 
