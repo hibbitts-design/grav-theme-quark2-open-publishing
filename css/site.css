@@ -345,3 +345,28 @@ h2.topics-letter {
     font-size: 1.25rem;
     text-align: center;
 }
+
+/* Dark mode links a little lighter than Quark 2 makes them (about 65% accent colour instead of 75%), so normal-sized
+   links pass the 4.5:1 contrast minimum on the lighter card behind standard pages too, with any Accent Color.
+   Quark 2's dark accent is already 80% accent colour, so 81% of it gives about 65%. This stylesheet loads after
+   Quark 2's own accent settings, so it takes their place - hibbittsdesign.org */
+:root[data-theme='dark'] {
+    --q2-link: color-mix(in oklab, var(--q2-accent) 81%, white);
+}
+
+/* Dark mode buttons a little deeper than Quark 2's lightened accent, so their white text passes the 4.5:1 contrast
+   minimum with any Accent Color, while the button still stands out from the dark page (3:1 or more). This covers
+   Quark 2's buttons (such as Start Reading and Continue Reading), form submit buttons and the chosen option in
+   a switch; outline, ghost and reset buttons keep their own lighter look - hibbittsdesign.org */
+:root[data-theme='dark'] {
+    --q2op-accent-fill: color-mix(in oklab, var(--q2-accent) 85%, black);
+}
+
+:root[data-theme='dark'] .btn:not(.btn-ghost):not(.btn-outline),
+:root[data-theme='dark'] .form-wrapper .buttons button:not([type="reset"]),
+:root[data-theme='dark'] .form-wrapper .buttons input[type="submit"],
+:root[data-theme='dark'] .form-wrapper .button-wrapper button:not([type="reset"]),
+:root[data-theme='dark'] .form-wrapper .button-wrapper input[type="submit"],
+:root[data-theme='dark'] .switch-toggle.switch-grav input[type="radio"]:checked + label {
+    background: var(--q2op-accent-fill);
+}
