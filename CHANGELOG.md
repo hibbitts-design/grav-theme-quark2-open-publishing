@@ -1,3 +1,13 @@
+# v0.9.54
+## 10/16/2026
+
+1. [](#new)
+    * On guide pages, the left and right arrow keys go to the previous and next page, and on a guide's home page the right arrow key follows Start Reading – handy when presenting by screen sharing (not while typing or scrolling a wide table)
+    * [topics]...[/topics] shortcode: an A–Z topics index made from ## A, ## B, ... headings, the same as in Bootstrap4 Open Matter (Open Course Hub) and Grav Helios Course Hub, with large, keyboard-friendly letter links
+1. [](#improved)
+    * Images in a guide page's text are no taller than a little over half the screen, so an image and its text fit on screen together; an image on its own line is centred
+    * README: the arrow keys and the Topics shortcode
+
 # v0.9.53
 ## 10/14/2026
 
