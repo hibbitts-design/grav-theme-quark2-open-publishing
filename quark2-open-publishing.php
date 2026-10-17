@@ -1,7 +1,7 @@
 <?php
 
 // Developed with the assistance of Claude Code (claude.ai)
-// Quark 2 version of Quark Open Publishing: the same pages, settings and search, on the Quark 2 theme - hibbittsdesign.org
+// Quark 2 version of Quark Open Publishing: the same pages, settings and search, on the Quark 2 theme
 
 namespace Grav\Theme;
 
