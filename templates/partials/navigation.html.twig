@@ -1,9 +1,11 @@
 {# Site menu: Quark 2's menu, plus what Quark Open Publishing adds - the Display Dropdowns in Menu setting, custom menu items,
    the Git Sync link (when its location is the menu), and page icons set with either "icon" (Quark Open Publishing)
-   or "menu_icon" (Quark 2) - hibbittsdesign.org #}
+   or "menu_icon" (Quark 2). A page with hide_from_menu: true is left out of the menu but stays visible, so (unlike
+   visible: false) a guide can still have its card on a Guides List page, as in Grav Helios Open Reader - hibbittsdesign.org #}
 {% macro nav_loop(page) %}
   {% import _self as macros %}
   {% for p in page.children.visible %}
+    {% if not p.header.hide_from_menu %}
     {% set active_page = (p.active or p.activeChild) ? 'active' : '' %}
     {% set has_children = theme_var('dropdown.enabled') and p.children.visible.count > 0 %}
     {% set page_icon = p.header.menu_icon ?: p.header.icon %}
@@ -18,6 +20,7 @@
       </ul>
       {% endif %}
     </li>
+    {% endif %}
   {% endfor %}
 {% endmacro %}
 {% import _self as macros %}
