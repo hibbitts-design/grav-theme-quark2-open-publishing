@@ -370,3 +370,49 @@ h2.topics-letter {
 :root[data-theme='dark'] .switch-toggle.switch-grav input[type="radio"]:checked + label {
     background: var(--q2op-accent-fill);
 }
+
+/* [showifembedded] content is hidden on the site; embedded pages show it, and hide [hideifembedded] content
+   instead (those two rules are added in templates/partials/base.html.twig) - hibbittsdesign.org */
+.chromeless-show {
+    display: none;
+}
+
+/* [badge] shortcode: a small label in the text, such as "Draft" or "New", in the same colours as the section card
+   badges (css/reader.css), here on any page - hibbittsdesign.org */
+.content-badge {
+    --badge-color: var(--q2-accent);
+    display: inline-block;
+    padding: 0.1em 0.55em;
+    border-radius: 999px;
+    font-size: 0.8em;
+    font-weight: 600;
+    line-height: 1.4;
+    vertical-align: 0.1em;
+    color: var(--badge-color);
+    background: color-mix(in oklab, var(--badge-color) 14%, transparent);
+}
+
+.content-badge-blue { --badge-color: #1d4ed8; }
+.content-badge-green { --badge-color: #166534; }
+.content-badge-yellow { --badge-color: #854d0e; }
+.content-badge-red { --badge-color: #b91c1c; }
+.content-badge-purple { --badge-color: #7e22ce; }
+
+.content-badge-plain {
+    color: var(--q2-text-muted);
+    background: transparent;
+    box-shadow: inset 0 0 0 1px var(--q2-divider);
+}
+
+/* a badge that is a link keeps the badge look (no underline) */
+a.content-badge-link {
+    text-decoration: none;
+}
+
+/* lighter colours in Dark mode, so the badges stay easy to read */
+:root[data-theme="dark"] .content-badge { --badge-color: color-mix(in oklab, var(--q2-link) 75%, white); }
+:root[data-theme="dark"] .content-badge-blue { --badge-color: #93c5fd; }
+:root[data-theme="dark"] .content-badge-green { --badge-color: #86efac; }
+:root[data-theme="dark"] .content-badge-yellow { --badge-color: #fde047; }
+:root[data-theme="dark"] .content-badge-red { --badge-color: #fca5a5; }
+:root[data-theme="dark"] .content-badge-purple { --badge-color: #d8b4fe; }

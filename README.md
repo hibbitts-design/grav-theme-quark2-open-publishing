@@ -19,15 +19,15 @@ Quark 2 Open Publishing brings Quark Open Publishing to Quark 2's modern design 
 ## What Sets It Apart
 
 - **The same content as Quark Open Publishing** – pages, page settings, shortcodes, theme options and page URL parameters are the same (Reuse Pages as Markdown needs Grav 2, so it's only in this theme), so a site can move between the two themes without changing its content
-- **Guides that carry over to Grav Helios Open Reader** – the Section List page type, with section cards, parts, reading progress, Previous/Next navigation, Keep My Place, a last updated date, and OER attribution, using the same page types and settings as [Grav Helios Open Reader](https://github.com/hibbitts-design/grav-skeleton-helios-open-reader), so an Open Reader publication can be copied in as it is
-- **Comfortable reading** – section pages keep lines to a comfortable length with slightly larger text and no words broken across lines; wide tables scroll sideways, footnotes sit as small notes below the text, and on phones a Sections link jumps to the list of sections
+- **Guides that carry over to Grav Helios Open Reader** – the Section List page type, with section cards, parts, reading progress, Previous/Next navigation, Keep My Place, a last updated date and OER attribution, plus a Guides List page with a card for each guide, using the same page types and settings as [Grav Helios Open Reader](https://github.com/hibbitts-design/grav-skeleton-helios-open-reader), so an Open Reader publication can be copied in as it is
+- **Comfortable reading** – section pages keep lines to a comfortable length with slightly larger text and no words broken across lines; wide tables scroll sideways, footnotes sit as small notes below the text, and on phones a Sections link jumps to the list of sections; with the [Page TOC plugin](https://github.com/trilbymedia/grav-plugin-page-toc), the side list also shows the current page's sections (its headings), with an "On this page" box above the text on phones, as on Grav Open Course Hub's module pages
 - **Arrow keys** – on guide pages, ← and → go to the previous and next page (→ on a guide's home page starts reading, and ← on its first page goes back to the home page), handy when presenting a guide by screen sharing
 - **Built on Quark 2** – its design, blog, hero images, modular pages, and Light, Dark and Auto modes with a theme toggle, used as they are wherever possible
 - **Blog extras** – featured posts, a notice above the posts, Continue Reading buttons, reading time, image credits, and a Markdown sidebar page
 - **Chromeless display for embedding** – add `/chromeless:true` or `?embedded=true` to any page URL to show only its content, or hide the site menu, sidebar, and footer site-wide
 - **Open authoring with Git Sync** – a "View Git Repository" or "View/Edit Page in Git Repository" link in the menu, footer, or page
 - **Reuse pages as Markdown** – an optional "This page as Markdown (.md)" link below a page's content (or in the footer or menu), using Grav 2's Markdown output, so anyone can get a page's Markdown to adapt and reuse, with no Git Sync needed (the same link as in Grav Helios Open Reader), plus an optional full text link on each guide's home page to the whole guide as one Markdown file (llms-full.txt)
-- **Shortcodes and callouts** – Embedly, Google Slides, H5P, iFrame, Link Preview Card, Markdown File, PDF, SpeakerDeck, Topics (an A–Z topics index, as in Open Course Hub), and the callout shortcodes (`[objectives]`, `[key-takeaways]`, `[example]`, `[exercise]`, `[definition]`, `[reflection]`, `[case-study]`, `[announcement]`, `[project-brief]`, `[feedback-requested]`, `[process-note]`, `[references]` and `[excerpt]`), plus GitHub-style alerts
+- **Shortcodes and callouts** – Badge (a small label such as "Draft"), Embedly, Google Slides, H5P, iFrame, Link Preview Card, Markdown File, PDF, SpeakerDeck, Topics (an A–Z topics index, as in Open Course Hub), Show/Hide If Embedded (content shown only on the site, or only when embedded), and the callout shortcodes (`[objectives]`, `[key-takeaways]`, `[example]`, `[exercise]`, `[definition]`, `[reflection]`, `[case-study]`, `[announcement]`, `[project-brief]`, `[feedback-requested]`, `[process-note]`, `[references]` and `[excerpt]`), plus GitHub-style alerts
 - **Search** – with the SimpleSearch plugin, results grouped by section with the search words highlighted, and a search box on each guide that searches just that guide
 - **Open licensing and printing** – Creative Commons license display, OER attribution for guides, and print-friendly pages
 
@@ -84,7 +84,7 @@ All options are available in the Admin Panel under **Themes → Quark 2 Open Pub
 
 These work the same as in Quark Open Publishing – see its README:
 
-- [Multi-Page Content](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#multi-page-content) – the Section List page type, its settings, and [moving a guide to Grav Helios Open Reader](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#moving-to-grav-helios-open-reader)
+- [Multi-Page Content](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#multi-page-content) – the Section List page type, its settings, the [Guides List](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#guides-list) page, and [moving a guide to Grav Helios Open Reader](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#moving-to-grav-helios-open-reader)
 - [Page URL Parameters](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#page-url-parameters) – `?embedded=true`, `/chromeless:true`, `?edit_link=false`, and more
 - [Search](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#search) – SimpleSearch, or the optional TNTSearch plugin
 - **Markdown of any page** – add `.md` to a page's address (for example `/open-education-essentials.md`, or `/index.md` for the home page) to get that page as Markdown, ready to reuse. This is Grav 2.1's Markdown output, which can be turned off in **Configuration → System → Content**
@@ -94,7 +94,7 @@ These work the same as in Quark Open Publishing – see its README:
 - PHP >= 8.3
 - Grav CMS 2.1 or newer
 - The [Quark 2](https://github.com/getgrav/grav-theme-quark2) theme
-- Optional: the [SimpleSearch plugin](https://github.com/getgrav/grav-plugin-simplesearch) for search, and the [GitHub Markdown Alerts plugin](https://github.com/trilbymedia/grav-plugin-github-markdown-alerts) for GitHub-style alerts
+- Optional: the [Page TOC plugin](https://github.com/trilbymedia/grav-plugin-page-toc) for a page's sections in the side list (version 4 on Grav 2), the [SimpleSearch plugin](https://github.com/getgrav/grav-plugin-simplesearch) for search, and the [GitHub Markdown Alerts plugin](https://github.com/trilbymedia/grav-plugin-github-markdown-alerts) for GitHub-style alerts
 
 ## Support
 

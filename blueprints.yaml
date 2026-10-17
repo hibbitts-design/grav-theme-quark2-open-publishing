@@ -112,6 +112,7 @@ form:
               default:
                 - blog
                 - section-list
+                - reader-list
                 - search
                 - simplesearch_results
               validate:

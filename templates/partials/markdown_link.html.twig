@@ -27,7 +27,7 @@
    so these defaults apply (a saved empty list is kept, and hides the link on no templates) #}
 {% set hidden_templates = theme_var('markdown_link.hide_templates') %}
 {% if hidden_templates is null %}
-    {% set hidden_templates = ['blog', 'section-list', 'search', 'simplesearch_results'] %}
+    {% set hidden_templates = ['blog', 'section-list', 'reader-list', 'search', 'simplesearch_results'] %}
 {% endif %}
 {% if viewed_page.template in hidden_templates %}
     {% set show_link = false %}

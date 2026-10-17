@@ -12,8 +12,12 @@
     {% do assets.addCss('theme://css/callouts.css', 75) %}
     {% do assets.addCss('theme://css/site.css', 75) %}
     {% do assets.addCss('theme://css/print.css', 70) %}
+    {# on embedded pages (no site chrome): show [showifembedded] content and hide [hideifembedded] content (see css/site.css) #}
+    {% if not show_site_chrome %}
+        {% do assets.addInlineCss('.chromeless-show{display:block}.chromeless-hide{display:none}') %}
+    {% endif %}
     {# multi-page content (Section List and Multi-Section pages) #}
-    {% if page.template in ['sections', 'section', 'subsection', 'section-page', 'section-list'] %}
+    {% if page.template in ['sections', 'section', 'subsection', 'section-page', 'section-list', 'reader-list'] %}
         {% do assets.addCss('theme://css/reader.css', 74) %}
         {% do assets.addJs('theme://js/reader.js', {group:'bottom'}) %}
     {% endif %}
