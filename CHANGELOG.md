@@ -1,3 +1,12 @@
+# v0.9.59
+## 10/17/2026
+
+1. [](#new)
+    * Hide Header While Scrolling (phones), on by default: on guide pages on phones and narrow windows, with Quark 2's Header Fixed on, the header and menu button slide away while scrolling down and come back when scrolling up, giving the text the whole screen (Themes → Quark 2 Open Publishing → Quark 2 Options → Header)
+1. [](#improved)
+    * Guides show Previous/Next at the top and bottom of their pages, and the reading progress, unless their home page sets otherwise, as in Grav Helios Open Reader (the Prev/Next Page Controls Position and Show Reading Progress settings); to keep the earlier look, set Prev/Next Page Controls Position to Bottom and turn off Show Reading Progress. Multi-Section pages are unchanged
+    * README: Hide Header While Scrolling
+
 # v0.9.58
 ## 10/17/2026
 
