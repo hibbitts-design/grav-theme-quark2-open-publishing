@@ -1096,3 +1096,35 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
         display: none;
     }
 }
+
+/* On phones and narrow windows, the site header and Quark 2's menu button slide out of view while scrolling down a guide
+   page, and back when scrolling up (js/reader.js adds and removes reader-header-away). Only with Quark 2's Header Fixed
+   setting on (body.header-fixed) and the theme's Hide Header While Scrolling setting on (body.header-hide-on-scroll);
+   with Header Fixed off, the header already scrolls away with the page. Without animation for
+   anyone whose device asks for reduced motion */
+@media (max-width: 959px) {
+    /* the slide, plus the transitions Quark 2 already gives each one (a transition setting replaces any earlier one) */
+    body.header-fixed.header-hide-on-scroll #header {
+        transition: transform 0.2s ease, padding 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    body.header-fixed.header-hide-on-scroll .mobile-menu {
+        transition: transform 0.2s ease, top 0.2s ease;
+    }
+
+    body.header-fixed.header-hide-on-scroll.reader-header-away #header {
+        transform: translateY(-100%);
+    }
+
+    /* the button sits 10px down from the top and is 44px tall, so it moves a little further than its own height */
+    body.header-fixed.header-hide-on-scroll.reader-header-away .mobile-menu {
+        transform: translateY(-60px);
+    }
+}
+
+@media (max-width: 959px) and (prefers-reduced-motion: reduce) {
+    body.header-fixed.header-hide-on-scroll #header,
+    body.header-fixed.header-hide-on-scroll .mobile-menu {
+        transition: none;
+    }
+}

@@ -127,3 +127,68 @@ Also, on section pages, wide tables scroll sideways inside the text column inste
     });
 
 })();
+
+/*
+On phones and narrow windows, guide pages give the whole screen to the text while reading: the site header (and the
+menu button, which Quark 2 places separately) slides away while scrolling down, and comes back as soon as the reader
+scrolls up a little - as phone browsers do with their own toolbars. It always shows near the top of the page, while the
+menu is open, and when something in it has keyboard focus. Wider screens keep the header in place - hibbittsdesign.org
+*/
+(function () {
+    var header = document.getElementById('header');
+    // only when Quark 2's Header Fixed setting is on (with it off, the header already scrolls away with the page),
+    // and the theme's Hide Header While Scrolling setting is on (it adds the header-hide-on-scroll class)
+    if (!header || !document.body.classList.contains('header-fixed') || !document.body.classList.contains('header-hide-on-scroll')) {
+        return;
+    }
+    var menuButton = document.querySelector('.mobile-menu');
+    // the same width where the side list moves below the page (see css/reader.css)
+    var narrowScreen = window.matchMedia('(max-width: 959px)');
+    // how far the page has to move before the header reacts, so small wobbles while reading don't make it flicker
+    var threshold = 8;
+    var lastY = window.scrollY;
+
+    function showHeader() {
+        document.body.classList.remove('reader-header-away');
+    }
+
+    function hideHeader() {
+        document.body.classList.add('reader-header-away');
+    }
+
+    function headerHasFocus() {
+        var focused = document.activeElement;
+        return header.contains(focused) || (menuButton && menuButton.contains(focused));
+    }
+
+    function update() {
+        var y = window.scrollY;
+        var moved = y - lastY;
+
+        if (!narrowScreen.matches || y < header.offsetHeight || document.body.classList.contains('overlay-open') || headerHasFocus()) {
+            showHeader();
+            lastY = y;
+            return;
+        }
+        if (moved > threshold) {
+            hideHeader();
+            lastY = y;
+        } else if (moved < -threshold) {
+            showHeader();
+            lastY = y;
+        }
+    }
+
+    // checked on every scroll - a quick check, so it doesn't slow scrolling down ("passive" tells the browser this
+    // listener never stops the page from scrolling)
+    window.addEventListener('scroll', update, { passive: true });
+
+    // keyboard users reaching the header (or the menu button) always see it
+    header.addEventListener('focusin', showHeader);
+    if (menuButton) {
+        menuButton.addEventListener('focusin', showHeader);
+    }
+
+    // turning a phone sideways (or widening a window) brings the header back
+    narrowScreen.addEventListener('change', showHeader);
+})();
