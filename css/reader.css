@@ -1040,11 +1040,10 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     margin: 0;
 }
 
+/* the same colour as the page names (no lighter shade, so the contrast stays as high as theirs in Light and Dark modes) */
 .reader-page-sections a {
     font-size: 0.875em;
     line-height: 1.3;
-    /* a little lighter than the page names, while keeping enough contrast */
-    opacity: 0.85;
 }
 
 /* the side list's nested lists (a section's own pages) have a thin rule beside them; the page's sections don't, so they
@@ -1054,12 +1053,6 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     padding-left: 0;
     border-left: 0;
     font-size: inherit;
-}
-
-/* full strength on hover or focus, so the section being pointed at stands out */
-.reader-page-sections a:hover,
-.reader-page-sections a:focus {
-    opacity: 1;
 }
 
 .reader-page-sections-above {
