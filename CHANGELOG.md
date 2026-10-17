@@ -1,3 +1,9 @@
+# v0.9.60
+## 10/17/2026
+
+1. [](#bugfix)
+    * "On this page" sections in the side list use the same colour as the page names, rather than a lighter shade, so their contrast matches in Light and Dark modes
+
 # v0.9.59
 ## 10/17/2026
 
