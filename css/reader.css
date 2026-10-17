@@ -1090,6 +1090,14 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     }
 }
 
+/* On phones, when the page's text starts with a heading right after the "On this page" box, the heading doesn't add its
+   own large space above (the box's margin is enough), so the gap below the box matches the gap above it */
+@media (max-width: 959px) {
+    .reader-page-sections-above + .reader-content > :is(h2, h3, h4):first-child {
+        margin-top: 0;
+    }
+}
+
 /* On phones and narrow windows, the site header and Quark 2's menu button slide out of view while scrolling down a guide
    page, and back when scrolling up (js/reader.js adds and removes reader-header-away). Only with Quark 2's Header Fixed
    setting on (body.header-fixed) and the theme's Hide Header While Scrolling setting on (body.header-hide-on-scroll);
