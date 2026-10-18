@@ -1046,6 +1046,14 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     line-height: 1.3;
 }
 
+/* the section being read (marked by js/reader.js as you scroll): bold, in the link colour, so it stands out without
+   relying on colour alone - and without a bar beside it, which would look like the thin rule that marks a section's own
+   pages in the side list */
+#sections-nav .reader-page-sections a.is-current {
+    color: var(--q2-link);
+    font-weight: 600;
+}
+
 /* the side list's nested lists (a section's own pages) have a thin rule beside them; the page's sections don't, so they
    read as part of the current page rather than more pages ("#sections-nav .nav" outranks that nested-list rule) */
 #sections-nav .nav .reader-page-sections {
