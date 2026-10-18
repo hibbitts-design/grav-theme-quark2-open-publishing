@@ -84,6 +84,23 @@ a:has(> .fa) {
     padding-inline-start: 0.75rem;
 }
 
+/* Rounded on all four corners. Blades treats a search form as a group of fields and squares off the right corners of
+   any field that isn't last – and the hidden field that limits search to a guide comes after this one. (The longer
+   selector outranks that Blades rule.) */
+form.search-box[role="search"] input[type="search"] {
+    border-radius: var(--q2-radius);
+}
+
+/* A clearer edge than Quark 2's very light form border, so the search box is easy to see – at least 3:1 against the
+   page or card behind it in Light and Dark modes. With keyboard focus, Quark 2's own focus ring takes over. */
+form.search-box[role="search"] input[type="search"]:not(:focus) {
+    border-color: rgba(34, 42, 53, 0.5);
+}
+
+:root[data-theme="dark"] form.search-box[role="search"] input[type="search"]:not(:focus) {
+    border-color: rgba(255, 255, 255, 0.42);
+}
+
 /* ---------- The Git Sync and "This page as Markdown" links on pages (their location: Page) ---------- */
 .gitrepo-link-note,
 .markdown-link-note {
