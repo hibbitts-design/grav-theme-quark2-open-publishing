@@ -96,6 +96,10 @@ These work the same as in Quark Open Publishing – see its README:
 - The [Quark 2](https://github.com/getgrav/grav-theme-quark2) theme
 - Optional: the [Page TOC plugin](https://github.com/trilbymedia/grav-plugin-page-toc) for a page's sections in the side list (version 4 on Grav 2), the [SimpleSearch plugin](https://github.com/getgrav/grav-plugin-simplesearch) for search, and the [GitHub Markdown Alerts plugin](https://github.com/trilbymedia/grav-plugin-github-markdown-alerts) for GitHub-style alerts
 
+## Languages
+
+English, French and German are complete. The theme's other languages (Spanish, Italian, Romanian, Russian, Ukrainian, Croatian, Dutch and Japanese) are partial, with any missing text shown in English – translations are welcome, in `languages.yaml`.
+
 ## Support
 
 ### Contact and Support
