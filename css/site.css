@@ -101,6 +101,14 @@ form.search-box[role="search"] input[type="search"]:not(:focus) {
     border-color: rgba(255, 255, 255, 0.42);
 }
 
+/* On phones, the search box's text is at least 16px, as iPhones zoom the whole page in when a box with smaller text is
+   tapped (and leave it zoomed) */
+@media (max-width: 959px) {
+    form.search-box[role="search"] input[type="search"] {
+        font-size: 16px;
+    }
+}
+
 /* ---------- The Git Sync and "This page as Markdown" links on pages (their location: Page) ---------- */
 .gitrepo-link-note,
 .markdown-link-note {

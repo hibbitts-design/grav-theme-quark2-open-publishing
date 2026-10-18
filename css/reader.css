@@ -906,6 +906,17 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
         grid-template-columns: 1fr;
     }
 
+    /* on phones the tiles are a little more compact, with less padding and a slightly smaller title, so more titles fit
+       on one line and the pair takes less of the screen at the end of the page */
+    .reader-nav-tile {
+        gap: 0.625rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .reader-nav-title {
+        font-size: 1rem;
+    }
+
     .reader-nav-next {
         order: -1;
     }
@@ -1143,4 +1154,117 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     body.header-fixed.header-hide-on-scroll .mobile-menu {
         transition: none;
     }
+}
+
+/* The Previous/Next bar fixed to the bottom of the screen, on phones and narrow windows (the same width where the side
+   list moves below the page), as in Grav Helios Open Reader: Previous on the left and Next on the right, each with its
+   page title on one line. There it takes the place of the Previous/Next links at the top of the page and the tiles at
+   its end, which are hidden; wider screens hide the bar. Very short screens (phones turned sideways, under 500px tall)
+   keep the links and tiles instead, as the bar would take too much of the screen there. (Quark 2's phone menu covers
+   the whole screen, bar included.) */
+.reader-prev-next-bar {
+    display: none;
+}
+
+@media (max-width: 959px) and (min-height: 500px) {
+    .reader-prev-next-bar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        /* below the site header and the phone menu */
+        z-index: 45;
+        background: var(--q2-bg-elev);
+        border-top: 1px solid var(--q2-divider);
+        /* room for the iPhone's home bar, when the browser leaves it to the page */
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    /* the other Previous/Next navigation, while the bar is there (:has matches a page that has the bar) */
+    body:has(.reader-prev-next-bar) .reader-prev-next-top,
+    body:has(.reader-prev-next-bar) .reader-prev-next {
+        display: none;
+    }
+
+    /* room below the page for the bar, so it never covers the end of the page */
+    body:has(.reader-prev-next-bar) {
+        padding-bottom: calc(3.75rem + env(safe-area-inset-bottom));
+    }
+
+    /* links and buttons reached with the Tab key, and places jumped to, are kept above the bar rather than behind it
+       (the browser leaves this much room at the bottom of the screen when it scrolls to them) */
+    html:has(.reader-prev-next-bar) {
+        scroll-padding-bottom: calc(3.75rem + env(safe-area-inset-bottom));
+    }
+
+    /* while typing in a box, such as the search box (whose on-screen keyboard some phones place the bar above), the bar
+       steps aside so it doesn't cover the box. (input:not(...) matches text boxes, leaving out checkboxes and buttons) */
+    body:has(input:not([type="checkbox"], [type="radio"], [type="button"], [type="submit"], [type="reset"]):focus, textarea:focus) .reader-prev-next-bar {
+        display: none;
+    }
+}
+
+/* each half of the bar: an arrow and a small label above the page title */
+.reader-bar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+    min-height: 3.5rem;
+    padding: 0.5rem 1rem;
+    color: var(--q2-text);
+    text-decoration: none;
+}
+
+.reader-bar-link:hover .reader-bar-title {
+    text-decoration: underline;
+}
+
+.reader-bar-link:focus-visible {
+    outline: 2px solid var(--q2-focus-ring);
+    outline-offset: -2px;
+}
+
+/* a thin line between Previous and Next */
+.reader-bar-prev {
+    border-right: 1px solid var(--q2-divider);
+}
+
+.reader-bar-next {
+    grid-column: 2;
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.reader-bar-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.reader-bar-label {
+    color: var(--q2-text-muted);
+    font-family: var(--pico-font-family-sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* the page title on one line, cut with "…" when it's too long (as in Grav Helios Open Reader; "Previous" and "Next"
+   say where each goes, and the full title is on the page itself) */
+.reader-bar-title {
+    overflow: hidden;
+    color: var(--q2-link);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.reader-bar-link .fa {
+    flex-shrink: 0;
+    color: var(--q2-text-muted);
 }
