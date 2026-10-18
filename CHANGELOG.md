@@ -1,3 +1,11 @@
+# v0.9.62
+## XX/XX/2026
+
+1. [](#bugfix)
+    * Search finds the pages of the site's home page even when it's set to visible: false to keep it out of the menu (for example a guide that is the home page); other top-level pages set to visible: false are still left out
+    * The search box on a guide's home page and in its side list is rounded on all four corners, not just the left side
+    * Search boxes have a clearer border (at least 3:1 contrast), and the guide's search box says "Search these pages…" instead of "Search this content..." (screen readers hear the same words without the "…"), in translatable texts
+
 # v0.9.61
 ## 10/17/2026
 
