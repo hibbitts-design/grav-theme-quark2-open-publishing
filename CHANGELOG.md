@@ -1,3 +1,12 @@
+# v0.9.64
+## 10/18/2026
+
+1. [](#new)
+    * On guide pages, tap or click an image shown smaller than its full size to see it larger, filling the screen (handy for diagrams and screenshots on phones); Escape, the Close button or a tap closes it
+1. [](#improved)
+    * Demo content: a Creative Commons license chart, with its attribution as a caption, on the Creative Commons Licenses page (it can be tapped to see it larger)
+    * README: seeing an image larger
+
 # v0.9.63
 ## 10/18/2026
 
