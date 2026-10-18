@@ -1268,3 +1268,83 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     flex-shrink: 0;
     color: var(--q2-text-muted);
 }
+
+/* ---------- Seeing an image larger ---------- */
+
+/* An image in the page's text that's shown smaller than its full size can be tapped or clicked to see it larger
+   (js/reader.js adds reader-image-zoom to it): a zoom-in pointer, and a visible focus ring for keyboard users */
+.reader-content img.reader-image-zoom {
+    cursor: zoom-in;
+}
+
+/* (Quark 2 styles anything with role="button" as a purple button, with padding, a border and rounded corners - the
+   image keeps its own look instead, also while hovered, focused or pressed) */
+.reader-content img.reader-image-zoom[role="button"],
+.reader-content img.reader-image-zoom[role="button"]:is(:hover, :focus, :active) {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    transition: none;
+}
+
+.reader-content img.reader-image-zoom:focus-visible {
+    outline: 2px solid var(--q2-focus-ring);
+    outline-offset: 0.2rem;
+}
+
+/* the larger view: the image as large as fits the screen, on a dark background, with a Close button at the top right */
+.reader-image-dialog {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 3.5rem 1rem 1rem;
+    border: 0;
+    background: rgba(0, 0, 0, 0.92);
+    cursor: zoom-out;
+}
+
+.reader-image-dialog[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reader-image-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.92);
+}
+
+.reader-image-dialog img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* the Close button: white on the dark background, 44px so it's easy to tap */
+.reader-image-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.reader-image-close:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
