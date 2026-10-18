@@ -34,10 +34,12 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
 }
 
 /* the page takes its full reading width first (see below), and the side list the rest (at most 22rem, on the right),
-   so the side list sits close beside the page rather than at the far edge */
+   so the side list sits close beside the page rather than at the far edge. The side list is at least 17rem wide, so
+   longer page titles wrap less on laptop screens (the page then gives up a little of its width, still a comfortable
+   line length) */
 @media (min-width: 960px) {
     .columns:has(> #sections-nav) {
-        grid-template-columns: minmax(0, 42rem) minmax(15rem, 1fr);
+        grid-template-columns: minmax(0, 42rem) minmax(17rem, 1fr);
     }
 
     #sections-nav {
@@ -714,24 +716,29 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     color: var(--q2-text-muted);
 }
 
-/* The search box and side list of sections sit in Quark 2's sidebar cards, as in the blog's sidebar
-   ("ul.nav" so the card's padding wins over the plain list rule below) */
-#sections-nav .reader-search,
-#sections-nav > ul.nav {
+/* The search box and side list of sections share one of Quark 2's sidebar cards (as in the blog's sidebar), so they
+   read as one place to find your way around the guide. The padding is a little less at the sides than in the blog's
+   cards, leaving more room for page titles. */
+#sections-nav {
     background: var(--q2-bg-elev);
     border-radius: var(--q2-radius-md);
     box-shadow:
         rgba(19, 19, 22, 0.04) 0 1px 2px,
         rgba(19, 19, 22, 0.06) 0 8px 24px -8px;
-    padding: 1.25rem;
-    margin-bottom: 1.5rem;
+    padding: 1.25rem 1rem;
 }
 
-:root[data-theme="dark"] #sections-nav .reader-search,
-:root[data-theme="dark"] #sections-nav > ul.nav {
+:root[data-theme="dark"] #sections-nav {
     box-shadow:
         rgba(0, 0, 0, 0.4) 0 1px 2px,
         rgba(0, 0, 0, 0.55) 0 10px 28px -8px;
+}
+
+/* the search box at the top of the card, with a thin line between it and the list of sections */
+#sections-nav .reader-search {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--q2-divider);
 }
 
 /* Side list of sections (and the current section's subsections): rounded rows, with the current page highlighted */
