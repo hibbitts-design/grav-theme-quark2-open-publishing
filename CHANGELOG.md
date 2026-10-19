@@ -4,6 +4,7 @@
 1. [](#improved)
     * French and German translations are complete, for every text the theme shows readers (search, guide pages, Previous/Next, Keep My Place, error pages and more), using the same words as Grav Helios Open Reader where they overlap
     * README: which languages are complete
+    * Demo content: the Open Education Essentials guide's section pages' headings no longer repeat the names of their own pages, so the side list doesn't show a page's heading and a page with the same name (for example LMS Embedding) one under the other
 
 # v0.9.64
 ## 10/18/2026
