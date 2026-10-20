@@ -1,3 +1,9 @@
+# v0.9.67
+## 10/XX/2026
+
+1. [](#improved)
+    * README: updating from an earlier version, and what looks different on guide pages after updating from before 0.9.63
+
 # v0.9.66
 ## 10/20/2026
 
