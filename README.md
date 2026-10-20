@@ -64,6 +64,17 @@ Your pages and settings stay as they are:
 2. If your site uses a child theme of Quark Open Publishing (such as `mytheme` in the Open Publishing Space skeleton), change it to inherit from Quark 2 Open Publishing: in its PHP file, `extends QuarkOpenPublishing` becomes `extends Quark2OpenPublishing`, and in its `streams` setting, `user/themes/quark-open-publishing` and `user/themes/quark` become `user/themes/quark2-open-publishing` and `user/themes/quark2`. Otherwise, make Quark 2 Open Publishing the default theme
 3. Clear the Grav cache (`bin/grav clearcache`)
 
+### Updating from an Earlier Version
+1. Update Quark 2 Open Publishing in the Admin Panel (**Themes**), or with `bin/gpm update quark2-open-publishing`
+2. Clear the Grav cache (`bin/grav clearcache`)
+
+Your pages, settings and child theme (such as `mytheme`) stay as they are. Newer defaults do change how guide pages look, if you're updating from a version before 0.9.63:
+
+- **Previous/Next at the top and bottom, with the reading progress** (such as "Page 4 of 12") – since 0.9.59. To keep the earlier look, set **Prev/Next Page Controls Position** to Bottom and turn off **Show Reading Progress** on the guide's home page
+- **On phones, Previous/Next in a compact bar** fixed to the bottom of the screen – since 0.9.63 (**Show Sticky Prev/Next Bar**, on the guide's home page)
+- **On phones, the header slides away while scrolling down**, when Quark 2's Header Fixed is on – since 0.9.59 (**Hide Header While Scrolling**, in Quark 2 Options)
+- **Page badges** beside the section label, for pages that already have a Badge Label – since 0.9.57
+
 ## Theme Options
 
 All options are available in the Admin Panel under **Themes → Quark 2 Open Publishing**.
