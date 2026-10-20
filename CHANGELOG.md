@@ -1,3 +1,9 @@
+# v0.9.66
+## 10/20/2026
+
+1. [](#improved)
+    * The back link, Sections link and top Previous/Next links are in the link colour rather than grey, so they look tappable, as in Quark Open Publishing and Grav Open Course Hub
+
 # v0.9.65
 ## 10/18/2026
 
