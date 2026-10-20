@@ -595,7 +595,9 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     gap: 0 1.25rem;
 }
 
-/* the back link and top Previous/Next links look like Quark 2's breadcrumbs (muted, no underline), at body text size */
+/* the back link, Sections link and top Previous/Next links, at body text size and without an underline; the links are
+   in the link colour, so they look tappable (on phones there's no hover to show it), as in Grav Open Course Hub and
+   Quark Open Publishing */
 .reader-back-link,
 .reader-sections-link,
 .reader-prev-next-top {
@@ -609,7 +611,7 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
 .reader-sections-link a,
 .reader-prev-next-top a {
     padding: 0.25rem 0; /* a little taller, for easier tapping */
-    color: var(--q2-text-muted);
+    color: var(--q2-link);
     text-decoration: none;
 }
 
