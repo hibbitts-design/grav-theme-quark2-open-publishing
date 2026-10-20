@@ -1,6 +1,8 @@
-# v0.9.67
+# v1.0.0
 ## 10/XX/2026
 
+1. [](#new)
+    * Version 1.0: the first stable release, after the 0.9 series. Updating from any 0.9 version works like any other update, with pages, settings and child themes kept as they are
 1. [](#improved)
     * README: updating from an earlier version, and what looks different on guide pages after updating from before 0.9.63
 
