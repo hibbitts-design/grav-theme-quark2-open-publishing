@@ -441,3 +441,26 @@ a.content-badge-link {
 :root[data-theme="dark"] .content-badge-yellow { --badge-color: #fde047; }
 :root[data-theme="dark"] .content-badge-red { --badge-color: #fca5a5; }
 :root[data-theme="dark"] .content-badge-purple { --badge-color: #d8b4fe; }
+
+/* Code blocks in dark mode: the Prism Highlight plugin uses one colour theme in both modes (One Light by default),
+   so these switch code blocks to the matching One Dark colours (with comments a little lighter, to be easier to read) */
+:root[data-theme="dark"] code[class*="language-"],
+:root[data-theme="dark"] pre[class*="language-"] {
+    background: hsl(220, 13%, 18%);
+    color: hsl(220, 14%, 71%);
+    text-shadow: none;
+}
+
+:root[data-theme="dark"] .token.comment, :root[data-theme="dark"] .token.prolog, :root[data-theme="dark"] .token.cdata { color: hsl(220, 10%, 60%); }
+:root[data-theme="dark"] .token.doctype, :root[data-theme="dark"] .token.punctuation, :root[data-theme="dark"] .token.entity { color: hsl(220, 14%, 71%); }
+:root[data-theme="dark"] .token.attr-name, :root[data-theme="dark"] .token.class-name, :root[data-theme="dark"] .token.boolean, :root[data-theme="dark"] .token.constant, :root[data-theme="dark"] .token.number, :root[data-theme="dark"] .token.atrule { color: hsl(29, 54%, 61%); }
+:root[data-theme="dark"] .token.keyword { color: hsl(286, 60%, 67%); }
+:root[data-theme="dark"] .token.property, :root[data-theme="dark"] .token.tag, :root[data-theme="dark"] .token.symbol, :root[data-theme="dark"] .token.deleted, :root[data-theme="dark"] .token.important { color: hsl(355, 65%, 65%); }
+:root[data-theme="dark"] .token.selector, :root[data-theme="dark"] .token.string, :root[data-theme="dark"] .token.char, :root[data-theme="dark"] .token.builtin, :root[data-theme="dark"] .token.inserted, :root[data-theme="dark"] .token.regex, :root[data-theme="dark"] .token.attr-value { color: hsl(95, 38%, 62%); }
+:root[data-theme="dark"] .token.variable, :root[data-theme="dark"] .token.operator, :root[data-theme="dark"] .token.function { color: hsl(207, 82%, 66%); }
+:root[data-theme="dark"] .token.url { color: hsl(187, 47%, 55%); }
+
+:root[data-theme="dark"] div.code-toolbar > .toolbar .toolbar-item > button {
+    background: hsl(220, 13%, 26%);
+    color: hsl(220, 14%, 71%);
+}
