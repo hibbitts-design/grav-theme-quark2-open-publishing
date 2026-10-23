@@ -1,3 +1,9 @@
+# v1.0.2
+## 10/XX/2026
+
+1. [](#improved)
+    * Dark mode: code blocks switch to the One Dark colours that match the Prism Highlight plugin's default One Light theme, instead of staying light
+
 # v1.0.1
 ## 10/23/2026
 
