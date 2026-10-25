@@ -63,6 +63,49 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
         min-height: 0;
         overflow-y: auto;
     }
+
+    /* with a Side Box, the side list and the box simply follow each other and scroll with the page (no sticky list
+       scrolling on its own), so the whole list shows and the box comes into view as the reader scrolls - unless they
+       fit in the window together, when js/reader.js adds the reader-side-box-fits class and the side list stays in view */
+    #sections-nav:has(> .reader-side-box):not(.reader-side-box-fits) {
+        position: static;
+        max-height: none;
+    }
+
+    #sections-nav:has(> .reader-side-box):not(.reader-side-box-fits) > ul.nav {
+        overflow-y: visible;
+    }
+}
+
+/* Side Box: the author's Markdown under the side list, as the last part of the side list's card - a thin line above
+   it (like the one under the search box) and no fill, so it never looks like a callout on the page or competes with
+   the highlighted current section */
+.reader-side-box {
+    /* the same 1rem space on each side of the line as under the search box (less the last row's own 6px below it),
+       and text lined up with the side list's 10px inset */
+    margin-top: calc(1rem - 6px);
+    padding: 1rem 10px 0;
+    border-top: 1px solid var(--q2-divider);
+    color: var(--q2-text);
+}
+
+.reader-side-box > :first-child {
+    margin-top: 0;
+}
+
+.reader-side-box > :last-child {
+    margin-bottom: 0;
+}
+
+.reader-side-box img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* lists use less of the card's narrow width */
+.reader-side-box :is(ul, ol) {
+    margin: 0.5rem 0;
+    padding-left: 1.1rem;
 }
 
 /* Section cards: 1, 2 or 3 per row (the template gives each card col-12, col-6 or col-4), one per row on phones */

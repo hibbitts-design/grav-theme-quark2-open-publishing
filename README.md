@@ -98,6 +98,7 @@ These work the same as in Quark Open Publishing – see its README:
 - [Multi-Page Content](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#multi-page-content) – the Section List page type, its settings, the [Guides List](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#guides-list) page, and [moving a guide to Grav Helios Open Reader](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#moving-to-grav-helios-open-reader)
 - [Page URL Parameters](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#page-url-parameters) – `?embedded=true`, `/chromeless:true`, `?edit_link=false`, and more
 - [Search](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#search) – SimpleSearch, or the optional TNTSearch plugin
+- **Side Box** – Markdown under a guide's side list, such as a call to action: set it in the guide's Section List page settings for every page, change it on any page, or enter `false` to hide it on a page (or a section and its pages). It's the same `side_box` setting as in Grav Helios Open Reader, so it moves with a guide
 - **Markdown of any page** – add `.md` to a page's address (for example `/open-education-essentials.md`, or `/index.md` for the home page) to get that page as Markdown, ready to reuse. This is Grav 2.1's Markdown output, which can be turned off in **Configuration → System → Content**
 
 ## Requirements
