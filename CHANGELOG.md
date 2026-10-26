@@ -1,3 +1,9 @@
+# v1.0.5
+## 10/26/2026
+
+1. [](#improved)
+    * Guide pages: the link back to the guide at the top of each page uses the guide's menu label when it has one, so a long guide title (such as a book converted from Pressbooks) no longer fills several lines, especially on phones
+
 # v1.0.4
 ## 10/26/2026
 
