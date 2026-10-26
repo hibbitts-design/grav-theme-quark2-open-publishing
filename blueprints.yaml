@@ -1,7 +1,7 @@
 name: Quark 2 Open Publishing
 type: theme
 slug: quark2-open-publishing
-version: 1.0.3
+version: 1.0.4
 description: "A Quark 2 version of Quark Open Publishing, for open guides and books, with a blog and almost any other Grav page alongside them: guides with section cards, parts and reading progress. Uses the same pages and settings as Quark Open Publishing."
 icon: unlock
 author:
@@ -165,6 +165,21 @@ form:
               type: toggle
               label: 'Display Dropdowns in Menu'
               help: "On sites with guides, consider turning this off, so a guide's sections don't also appear in the menu."
+              highlight: 1
+              default: 1
+              options:
+                '0': Disabled
+                '1': Enabled
+              validate:
+                type: bool
+            guidesoptions:
+              type: section
+              title: 'Guides'
+              underline: true
+            sidebar_hide_button:
+              type: toggle
+              label: 'Hide Sidebar Button'
+              help: "Let readers hide a guide's sidebar on wider screens to focus on the page."
               highlight: 1
               default: 1
               options:

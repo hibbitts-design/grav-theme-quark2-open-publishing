@@ -79,7 +79,7 @@ Your pages, settings and child theme (such as `mytheme`) stay as they are. Newer
 
 All options are available in the Admin Panel under **Themes → Quark 2 Open Publishing**.
 
-- **Open Publishing Options** – Creative Commons license display, Reuse Pages as Markdown, chromeless site, menu dropdowns, Heading Weight (lighter headings using the heading font as designed, the default, or Quark 2's bolder default), and H5P setup
+- **Open Publishing Options** – Creative Commons license display, Reuse Pages as Markdown, chromeless site, menu dropdowns, **Hide Sidebar Button** (on by default: readers can hide a guide's sidebar on wider screens), Heading Weight (lighter headings using the heading font as designed, the default, or Quark 2's bolder default), and H5P setup
 - **Quark 2 Options** – Light, Dark or Auto mode by default, accent colour, logos and favicon, header and footer (including **Hide Header While Scrolling**, on by default: on guide pages on phones, a fixed header slides away while scrolling down and returns when scrolling up), blog page, and Font Awesome
 - **Custom Menu Items** – text, icon, URL, and target for extra menu links
 - **Git Sync Link** – location, link type (view or edit), icon and text, and a custom Git repository URL
@@ -99,6 +99,7 @@ These work the same as in Quark Open Publishing – see its README:
 - [Page URL Parameters](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#page-url-parameters) – `?embedded=true`, `/chromeless:true`, `?edit_link=false`, and more
 - [Search](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#search) – SimpleSearch, or the optional TNTSearch plugin
 - **Side Box** – Markdown under a guide's side list, such as a call to action: set it in the guide's Section List page settings for every page, change it on any page, or enter `false` to hide it on a page (or a section and its pages). It's the same `side_box` setting as in Grav Helios Open Reader, so it moves with a guide
+- **Hide sidebar** – on wider screens, readers can hide a guide's sidebar to focus on the page, with the button in the same top corner to show it again; their choice is remembered. Turn it off with the **Hide Sidebar Button** theme option
 - **Markdown of any page** – add `.md` to a page's address (for example `/open-education-essentials.md`, or `/index.md` for the home page) to get that page as Markdown, ready to reuse. This is Grav 2.1's Markdown output, which can be turned off in **Configuration → System → Content**
 
 ## Requirements
