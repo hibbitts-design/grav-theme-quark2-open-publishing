@@ -79,7 +79,7 @@ Your pages, settings and child theme (such as `mytheme`) stay as they are. Newer
 
 All options are available in the Admin Panel under **Themes → Quark 2 Open Publishing**.
 
-- **Open Publishing Options** – Creative Commons license display, Reuse Pages as Markdown, chromeless site, menu dropdowns, **Hide Sidebar Button** (on by default: readers can hide a guide's sidebar on wider screens), **Sections Link on Phones** (off by default: a link at the top of guide pages that jumps to the section list), Heading Weight (lighter headings using the heading font as designed, the default, or Quark 2's bolder default), and H5P setup
+- **Open Publishing Options** – Creative Commons license display, Reuse Pages as Markdown, chromeless site, menu dropdowns, **Hide Sidebar Button** (on by default: readers can hide a guide's sidebar on wider screens), **Sections Link on Phones** (off by default: a link at the top of guide pages that jumps to the section list, useful for long guides with many sections), Heading Weight (lighter headings using the heading font as designed, the default, or Quark 2's bolder default), and H5P setup
 - **Quark 2 Options** – Light, Dark or Auto mode by default, accent colour, logos and favicon, header and footer (including **Hide Header While Scrolling**, on by default: on guide pages on phones, a fixed header slides away while scrolling down and returns when scrolling up), blog page, and Font Awesome
 - **Custom Menu Items** – text, icon, URL, and target for extra menu links
 - **Git Sync Link** – location, link type (view or edit), icon and text, and a custom Git repository URL
