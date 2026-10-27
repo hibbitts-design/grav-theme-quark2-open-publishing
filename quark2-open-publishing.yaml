@@ -40,5 +40,6 @@ full_text_link:
   enabled: false
 header_hide_on_scroll: true
 sidebar_hide_button: true
+phone_sections_link: false
 type_of_git_sync_repo_link: view
 sections_prev_next_style: buttons
