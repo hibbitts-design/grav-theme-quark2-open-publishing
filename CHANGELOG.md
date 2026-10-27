@@ -1,3 +1,12 @@
+# v1.0.8
+## 10/27/2026
+
+1. [](#new)
+    * Guides: a guide's own pages outside its reading order, such as Topics or Resources – pages in a folder without a number inside the guide's folder – appear in the site menu while reading that guide, after a thin divider, ordered by a new Menu Order setting, with a link back to the guide at the top of the page. Pages like these that a guide already has now appear in the menu too; Hide from Menu leaves one out
+2. [](#improved)
+    * Admin Panel: Hide from Menu on standard pages and the Guides List page (on the Advanced tab)
+    * Accessibility: the site menu tells screen readers which item is the current page
+
 # v1.0.7
 ## 10/27/2026
 
