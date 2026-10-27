@@ -1,0 +1,44 @@
+title: Default
+'@extends':
+    type: default
+    context: blueprints://pages
+
+# Standard pages: Quark 2's body classes hint, plus two menu settings on Grav's own Advanced tab, right after its
+# Visible setting (ordering@ places them there)
+form:
+  fields:
+    tabs:
+      fields:
+        advanced:
+          fields:
+            columns:
+              fields:
+                column1:
+                   fields:
+                     header.body_classes:
+                       markdown: true
+                       description: 'Available classes in Quark 2 (space separated):<br />`header-fixed`, `header-animated`, `header-transparent`, `sticky-footer`'
+            overrides:
+              fields:
+                header.hide_from_menu:
+                  ordering@: header.visible
+                  type: toggle
+                  toggleable: true
+                  label: Hide from Menu
+                  help: 'Leaves this page out of the site menu.'
+                  highlight: 1
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool
+                header.menu_order:
+                  ordering@: header.hide_from_menu
+                  type: number
+                  toggleable: true
+                  label: Menu Order
+                  size: x-small
+                  min: 1
+                  help: 'For a page in a guide''s folder without a number (such as Topics): its place in the menu while reading the guide, lowest first.'
+                  validate:
+                    type: int
