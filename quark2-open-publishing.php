@@ -42,6 +42,14 @@ class Quark2OpenPublishing extends Quark2
         if ($this->config->get('plugins.github-markdown-alerts.wrapper_class', 'md-alert md-alert--') === 'md-alert md-alert--') {
             $this->config->set('plugins.github-markdown-alerts.include_css', false);
         }
+
+        // A page's .md address (Grav 2) keeps its callouts as > [!TIP] and so on (see classes/CalloutsMarkdownOutput.php)
+        if (class_exists('Grav\Common\Page\Markdown\MarkdownOutput')) {
+            if (!class_exists('HibbittsDesign\CalloutsMarkdownOutput')) {
+                require_once __DIR__ . '/classes/CalloutsMarkdownOutput.php';
+            }
+            \HibbittsDesign\CalloutsMarkdownOutput::useForMarkdownVersions($this->grav);
+        }
     }
 
     // Quark 2 adds the images folder; this also makes Quark 2's own templates available as @quark2/...,
