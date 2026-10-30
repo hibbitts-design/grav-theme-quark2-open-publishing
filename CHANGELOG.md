@@ -1,3 +1,9 @@
+# v1.0.13
+## XX/XX/2026
+
+1. [](#bugfix)
+    * Cards stay in order in lists that mix side-image cards with cards without an image
+
 # v1.0.12
 ## 10/30/2026
 
