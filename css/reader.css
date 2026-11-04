@@ -770,6 +770,12 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     display: none;
 }
 
+/* until js/reader.js shows the button, its row keeps the button's height (the class is added in
+   templates/sections.html.twig), so the search box below it doesn't jump down as each page loads */
+.reader-sidebar-js .reader-sidebar-toggle-row {
+    min-height: 2.5rem;
+}
+
 .reader-sidebar-toggle:hover {
     background: var(--q2-bg-muted);
     color: var(--q2-text-strong);
