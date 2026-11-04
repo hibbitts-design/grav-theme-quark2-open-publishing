@@ -1,3 +1,9 @@
+# v1.0.15
+## 11/04/2026
+
+1. [](#improved)
+    * Tables of three or four columns fit a phone screen, with less cell padding and slightly smaller text
+
 # v1.0.14
 ## 11/03/2026
 
