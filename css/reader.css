@@ -903,6 +903,16 @@ html:not(.reader-sections-hidden) .reader-sidebar-toggle-show,
     margin-bottom: 0;
 }
 
+/* on phones, table cells get less padding and slightly smaller text, so tables of three or four columns fit the
+   screen instead of scrolling sideways (wider tables still scroll) */
+@media (max-width: 600px) {
+    .reader-content table th,
+    .reader-content table td {
+        padding: 0.5rem 0.4rem;
+        font-size: 0.875rem;
+    }
+}
+
 /* quotations in the reading font, keeping Quark 2's left border (its display font suits short pull quotes,
    but is heavy for the longer quoted passages common in textbooks) */
 .reader-content blockquote {
