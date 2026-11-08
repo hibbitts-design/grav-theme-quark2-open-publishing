@@ -1,3 +1,9 @@
+# v1.0.19
+## 11/08/2026
+
+1. [](#improved)
+    * The Guides List search box is as wide as one guide card with 2 or 3 cards per row
+
 # v1.0.18
 ## 11/08/2026
 
