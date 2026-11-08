@@ -1,3 +1,9 @@
+# v1.0.17
+## 11/08/2026
+
+1. [](#bugfix)
+    * Hide from Menu on guide and Guides List pages shows one Enabled/Disabled choice in Admin, instead of two
+
 # v1.0.16
 ## 11/08/2026
 
