@@ -1,3 +1,9 @@
+# v1.0.16
+## 11/08/2026
+
+1. [](#improved)
+    * The sidebar's hover shade is lighter than the current page's, so the page being read stays clearly highlighted
+
 # v1.0.15
 ## 11/04/2026
 
