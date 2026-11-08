@@ -979,8 +979,10 @@ html:not(.reader-sections-hidden) .reader-sidebar-toggle-show,
     line-height: 1.4;
 }
 
+/* hover is a lighter shade than the current page's (half of it, mixed with transparent so it suits Light and Dark modes),
+   so the page being read stays the one clearly highlighted row */
 #sections-nav .nav-item a:hover {
-    background: var(--q2-bg-muted);
+    background: color-mix(in srgb, var(--q2-bg-muted) 50%, transparent);
     color: var(--q2-text-strong);
 }
 
