@@ -28,9 +28,10 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // links that keep their usual behaviour: other windows, in-page anchors, lightbox images, links without an address
+        // links that keep their usual behaviour: other windows, in-page anchors, lightbox images, links without an
+        // address, and glossary terms (glossary.js opens their definition box)
         var href = link.getAttribute('href');
-        if (href === null || link.classList.contains('external-link') || href.charAt(0) === '#'
+        if (href === null || link.classList.contains('external-link') || link.classList.contains('glossary-term') || href.charAt(0) === '#'
             || (link.className && String(link.className).indexOf('glightbox') === 0) || link.getAttribute('rel') === 'lightbox') {
             return;
         }
