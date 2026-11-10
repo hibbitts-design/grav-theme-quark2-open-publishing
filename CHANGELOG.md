@@ -1,3 +1,9 @@
+# v1.1.2
+## 11/10/2026
+
+1. [](#improved)
+    * No automatic hyphenation (words split across lines) on the Guides page's own text, standard pages such as About, Topics and Resources, and blog posts – only on cards, as on guide pages
+
 # v1.1.1
 ## 11/09/2026
 
