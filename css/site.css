@@ -487,3 +487,10 @@ a.content-badge-link {
     background: currentColor;
     opacity: 0.3;
 }
+
+/* No automatic hyphenation on standard pages and blog posts (About, Topics, Resources): Quark 2 hyphenates by
+   default, which suits cards but interrupts reading – as on guide pages (reader.css) */
+.content-item p,
+.content-item li {
+    hyphens: manual;
+}

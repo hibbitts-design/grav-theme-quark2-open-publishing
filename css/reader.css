@@ -895,6 +895,12 @@ html:not(.reader-sections-hidden) .reader-sidebar-toggle-show,
     hyphens: manual;
 }
 
+/* the same for the Guides page's own text, but not its cards */
+.reader-list-page > p,
+.reader-list-page > ul:not(.section-cards) li {
+    hyphens: manual;
+}
+
 /* the section's title is the largest heading on the page, as in a book's chapter title */
 #sections-content .sections-page-title-template {
     font-size: clamp(1.5rem, 2vw + 0.75rem, 1.875rem);
