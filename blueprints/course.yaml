@@ -118,7 +118,7 @@ form:
               type: colorpicker
               label: Course Color
               toggleable: true
-              help: 'Colours links and focus rings on the course''s pages.'
+              help: 'Tints the course navbar and colours links on the course''s pages.'
 
             header.hide_header_image:
               type: toggle

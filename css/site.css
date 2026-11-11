@@ -630,7 +630,8 @@ body.header-light:not(.scrolled) #header .navbar-guide-name {
     position: sticky;
     top: var(--course-navbar-top, var(--q2-header-height, 72px));
     z-index: 40;
-    background: var(--q2-nav-bg);
+    /* tinted with the course's Course Color when it has one (see partials/base.html.twig) */
+    background: var(--course-navbar-bg, var(--q2-nav-bg));
     -webkit-backdrop-filter: saturate(180%) blur(12px);
     backdrop-filter: saturate(180%) blur(12px);
     border-top: 1px solid var(--q2-divider);
@@ -715,14 +716,15 @@ body.header-light:not(.scrolled) #header .navbar-guide-name {
 }
 
 .course-navbar-menu a:hover {
-    background: var(--q2-bg-muted);
+    /* (a course with a Course Color uses shades of it instead - see partials/base.html.twig) */
+    background: var(--course-navbar-hover, var(--q2-bg-muted));
     color: var(--q2-text-strong);
     text-decoration: none;
 }
 
 .course-navbar-menu a.active,
 .course-navbar-menu a.active:hover {
-    background: color-mix(in srgb, var(--q2-text) 11%, transparent);
+    background: var(--course-navbar-active, color-mix(in srgb, var(--q2-text) 11%, transparent));
     color: var(--q2-text-strong);
     font-weight: 600;
 }
@@ -730,7 +732,7 @@ body.header-light:not(.scrolled) #header .navbar-guide-name {
 /* in dark mode Quark 2's hover shade is already light, so the current page needs a stronger one to stay distinct */
 :root[data-theme=dark] .course-navbar-menu a.active,
 :root[data-theme=dark] .course-navbar-menu a.active:hover {
-    background: color-mix(in srgb, var(--q2-text) 28%, transparent);
+    background: var(--course-navbar-active, color-mix(in srgb, var(--q2-text) 28%, transparent));
 }
 
 .course-navbar a:focus-visible {

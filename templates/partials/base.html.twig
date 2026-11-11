@@ -42,12 +42,19 @@
         {% set guide_color = course_page.header.navbar_bg_color %}
     {% endif %}
     {% if guide_color and guide_color matches '/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/' %}
-        {# guides also tint the header; courses don't, as the course navbar below it shows the course #}
-        {% set light_extra = '' %}
-        {% set dark_extra = '' %}
         {% if guide_home %}
+            {# guides: a light tint behind the header #}
             {% set light_extra = '--q2-nav-bg:color-mix(in oklab,' ~ guide_color ~ ' 16%,rgb(255 255 255 / 0.9))' %}
             {% set dark_extra = '--q2-nav-bg:color-mix(in oklab,' ~ guide_color ~ ' 24%,rgb(11 11 12 / 0.9))' %}
+        {% else %}
+            {# courses: a light tint behind the course navbar (not the header), and its hover and current tab in
+               deeper shades of the colour, the current one deepest #}
+            {% set light_extra = '--course-navbar-bg:color-mix(in oklab,' ~ guide_color ~ ' 16%,rgb(255 255 255 / 0.9));'
+                ~ '--course-navbar-hover:color-mix(in oklab,' ~ guide_color ~ ' 12%,transparent);'
+                ~ '--course-navbar-active:color-mix(in oklab,' ~ guide_color ~ ' 24%,transparent)' %}
+            {% set dark_extra = '--course-navbar-bg:color-mix(in oklab,' ~ guide_color ~ ' 24%,rgb(11 11 12 / 0.9));'
+                ~ '--course-navbar-hover:color-mix(in oklab,' ~ guide_color ~ ' 22%,rgb(255 255 255 / 0.08));'
+                ~ '--course-navbar-active:color-mix(in oklab,' ~ guide_color ~ ' 45%,rgb(255 255 255 / 0.12))' %}
         {% endif %}
         {% do assets.addInlineCss(
             'html:root:not([data-theme=dark]){--q2-accent:color-mix(in oklab,' ~ guide_color ~ ' 70%,#111);--q2-link:color-mix(in oklab,' ~ guide_color ~ ' 70%,#111);--q2-focus-ring:color-mix(in oklab,' ~ guide_color ~ ' 45%,transparent);' ~ light_extra ~ '}'
