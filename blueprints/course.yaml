@@ -118,7 +118,7 @@ form:
               type: colorpicker
               label: Course Color
               toggleable: true
-              help: 'Tints the course navbar and colours links on the course''s pages.'
+              help: 'Tints the course navbar, as in Open Course Hub.'
 
             header.hide_header_image:
               type: toggle
