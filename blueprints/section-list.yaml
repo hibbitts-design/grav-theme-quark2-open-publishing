@@ -136,7 +136,7 @@ form:
               type: colorpicker
               label: Guide Color
               toggleable: true
-              help: 'Tints the header and links on this guide''s pages. Leave it off for the site''s own colours.'
+              help: 'Tints the header on this guide''s pages. Leave it off for the site''s own colours.'
 
         sections:
           type: tab

@@ -2,7 +2,7 @@
 ## XX/XX/2026
 
 1. [](#new)
-    * Guide Color (guide home, Details tab): a guide's own colour on all its pages – a light tint behind the header, and links, focus rings and the current page in the side list in it; readable in light and dark modes
+    * Guide Color (guide home, Details tab): a light tint of the guide's own colour behind the header on all its pages, readable in light and dark modes
     * On sites with more than one guide, the guide's name shows after the logo on its pages, linking to the guide home (hidden on narrow phones)
     * Cover Image Layout "Hero": the cover across the full width behind the guide's title and subtitle, using Quark 2's hero
     * Course page types (in progress, for a future course skeleton)
