@@ -3,6 +3,8 @@
    show_title puts the page title at the top of the details, beside a small cover (Section List pages);
    start_url and start_text add the Start button at the end of the details (Section List pages) #}
 {% set hide_cover = hide_cover ?? false %}
+{# hide_subtitle leaves the subtitle out here, when the Section List page's hero shows it with the title #}
+{% set hide_subtitle = hide_subtitle ?? false %}
 {% set show_title = show_title ?? false %}
 {% set start_url = start_url ?? '' %}
 {% set cover = (page.header.cover_image and not hide_cover) ? page.media[page.header.cover_image] : null %}
@@ -23,7 +25,7 @@
             {% if show_title %}
                 <h1 class="sections-page-title-template h3">{{ page.title }}</h1>
             {% endif %}
-            {% if page.header.subtitle %}
+            {% if page.header.subtitle and not hide_subtitle %}
                 <p class="reader-subtitle">{{ page.header.subtitle }}</p>
             {% endif %}
             {% if page.header.authors %}

@@ -155,6 +155,11 @@ class Quark2OpenPublishing extends Quark2
         // The Multi-Page Content (Section List) page that search is limited to, if any (see getSearchScopePage)
         $twig->twig_vars['search_scope_page'] = $this->getSearchScopePage();
 
+        // The guide the current page belongs to (its Section List page, or null), and how many guides the site has –
+        // for the guide's name and colour in the header (see templates/partials/logo.html.twig and base.html.twig)
+        $twig->twig_vars['guide_home'] = $this->guideHomeOf($this->grav['page']);
+        $twig->twig_vars['guide_count'] = count($this->grav['pages']->all()->ofType('section-list')->published());
+
         if ($this->isAdmin() && ($this->grav['config']->get('plugins.shortcode-core.enabled'))) {
             $this->grav['assets']->add('theme://editor-buttons/admin/js/shortcode-pdf.js');
             $this->grav['assets']->add('theme://editor-buttons/admin/js/shortcode-h5p.js');
@@ -425,6 +430,22 @@ class Quark2OpenPublishing extends Quark2
         }
 
         return $scopePage;
+    }
+
+    /**
+     * The guide a page belongs to: the Section List page itself, or the nearest one above it – or null when the page
+     * isn't part of a guide.
+     */
+    protected function guideHomeOf($page)
+    {
+        // go up from the page through its parents, looking for a guide's home page
+        while ($page) {
+            if ($page->template() === 'section-list') {
+                return $page;
+            }
+            $page = $page->parent();
+        }
+        return null;
     }
 
     /**

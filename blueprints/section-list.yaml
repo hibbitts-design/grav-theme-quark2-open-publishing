@@ -79,7 +79,8 @@ form:
               options:
                 small: 'Small (beside the details, below the title)'
                 large: 'Large (full width, at the top)'
-              help: 'How the cover image is shown on this page: small, beside the subtitle, author(s), edition and license, or large, across the full width of the page at the top. Portrait images, such as book covers, are shown whole.'
+                hero: 'Hero (behind the title, across the page)'
+              help: 'How the cover image is shown on this page: small, beside the subtitle, author(s), edition and license; large, across the full width of the page at the top; or hero, behind the title and subtitle. Portrait images, such as book covers, are shown whole (except as a hero).'
 
             header.authors:
               type: text
@@ -130,6 +131,12 @@ form:
                 purple: Purple
                 plain: Plain
               help: 'The badge colour.'
+
+            header.navbar_bg_color:
+              type: colorpicker
+              label: Guide Color
+              toggleable: true
+              help: 'Tints the header and links on this guide''s pages. Leave it off for the site''s own colours.'
 
         sections:
           type: tab

@@ -895,10 +895,17 @@ html:not(.reader-sections-hidden) .reader-sidebar-toggle-show,
     hyphens: manual;
 }
 
-/* the same for the Guides page's own text, but not its cards */
+/* the same for the Guides page's own text and a guide home's details and intro, but not their cards */
 .reader-list-page > p,
-.reader-list-page > ul:not(.section-cards) li {
+.reader-list-page > ul:not(.section-cards) li,
+.section-list-page p,
+.section-list-page li {
     hyphens: manual;
+}
+
+.section-list-page .section-cards p,
+.section-list-page .section-cards li {
+    hyphens: auto;
 }
 
 /* the section's title is the largest heading on the page, as in a book's chapter title */

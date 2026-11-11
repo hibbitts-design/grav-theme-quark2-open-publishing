@@ -2,6 +2,20 @@
    Its sections and subsections use the same templates as the Multi-Section page - hibbittsdesign.org #}
 {% extends 'partials/base.html.twig' %}
 
+{# Cover Image Layout "hero": the cover across the full width behind the guide's title and subtitle, using Quark 2's own
+   hero (its overlay, light text and arrow down to the content; Quark 2's hero_classes and hero_align settings also
+   work). Not on embedded pages, which show only the content, with the title as usual - hibbittsdesign.org #}
+{% block hero %}
+  {% set hero_cover = page.header.cover_image ? page.media[page.header.cover_image] : null %}
+  {% if hero_cover and page.header.cover_image_layout == 'hero' and show_site_chrome %}
+    {% set hero_text %}
+      <h1>{{ page.title }}</h1>
+      {% if page.header.subtitle %}<p class="lead">{{ page.header.subtitle }}</p>{% endif %}
+    {% endset %}
+    {% include 'partials/hero.html.twig' with { id: 'guide-hero', hero_image: hero_cover, content: hero_text } %}
+  {% endif %}
+{% endblock %}
+
 {% block content %}
   {% import 'macros/reader.html.twig' as reader %}
 
@@ -26,9 +40,11 @@
      beside it; "large" shows it across the full width of the content area at the top, with the title below it #}
   {% set cover = page.header.cover_image ? page.media[page.header.cover_image] : null %}
   {% set large_cover = cover and page.header.cover_image_layout == 'large' %}
-  {% set show_title = not(page.header.hide_page_title) and not(grav.uri.param('hidepagetitle')) %}
+  {# "hero": the title and subtitle are in the hero above (see the hero block), so they and the cover are left out here #}
+  {% set hero_cover = cover and page.header.cover_image_layout == 'hero' and show_site_chrome %}
+  {% set show_title = not(page.header.hide_page_title) and not(grav.uri.param('hidepagetitle')) and not hero_cover %}
   {# with a small cover, the title goes beside it, at the top of the details, like a publication card #}
-  {% set title_beside_cover = cover and not large_cover %}
+  {% set title_beside_cover = cover and not large_cover and not hero_cover %}
 
   <div class="section-list-page">
 
@@ -56,7 +72,7 @@
     {% set first_section = reader_sections|first %}
     {% set start_url = (start_text and first_section) ? first_section.url ~ filter_suffix : '' %}
 
-    {% include 'partials/reader_header.html.twig' with { hide_cover: large_cover, show_title: show_title and title_beside_cover, start_text: start_text, start_url: start_url } %}
+    {% include 'partials/reader_header.html.twig' with { hide_cover: large_cover or hero_cover, hide_subtitle: hero_cover, show_title: show_title and title_beside_cover, start_text: start_text, start_url: start_url } %}
 
     {# Text above and below the section cards, as in Helios Open Reader: a line with just === in the page's content
        splits it, with the text before it above the cards and the text after it below them (=== is Grav's summary

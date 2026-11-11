@@ -494,3 +494,86 @@ a.content-badge-link {
 .content-item li {
     hyphens: manual;
 }
+
+/* A guide's name in the header, after the logo (sites with more than one guide; see templates/partials/logo.html.twig) */
+#header .navbar-section.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+}
+
+#header .navbar-guide-name {
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--q2-divider);
+    color: var(--q2-text-strong);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+#header .navbar-guide-name:hover {
+    color: var(--q2-link);
+}
+
+/* over a hero image, with Quark 2's Header Transparent on: the same white or near-black text as Quark 2's own logo */
+body.header-dark:not(.scrolled) #header .navbar-guide-name {
+    color: #ffffff;
+    border-left-color: rgb(255 255 255 / 0.4);
+}
+
+body.header-light:not(.scrolled) #header .navbar-guide-name {
+    color: #111111;
+    border-left-color: rgb(17 17 17 / 0.3);
+}
+
+/* on narrow phones, just the logo – the guide's colour and the page's back link show which guide it is */
+@media (max-width: 640px) {
+    #header .navbar-guide-name {
+        display: none;
+    }
+}
+
+/* Font Awesome 4 outline icon names, such as [fa="calendar-o"] in pages from older themes (Open Course Hub, Quark Open
+   Publishing): Font Awesome 5 and later dropped the "-o" names, so each is shown as its newer icon in the regular
+   (outline) style, which Font Awesome's free set includes. Other Font Awesome 4 names still work as they are */
+.fa.fa-calendar-o { --fa: "\f133"; --fa-style: 400; }
+.fa.fa-file-o { --fa: "\f15b"; --fa-style: 400; }
+.fa.fa-comments-o { --fa: "\f086"; --fa-style: 400; }
+.fa.fa-comment-o { --fa: "\f075"; --fa-style: 400; }
+.fa.fa-file-text-o { --fa: "\f15c"; --fa-style: 400; }
+.fa.fa-envelope-o { --fa: "\f0e0"; --fa-style: 400; }
+.fa.fa-clock-o { --fa: "\f017"; --fa-style: 400; }
+.fa.fa-star-o { --fa: "\f005"; --fa-style: 400; }
+.fa.fa-heart-o { --fa: "\f004"; --fa-style: 400; }
+.fa.fa-folder-o { --fa: "\f07b"; --fa-style: 400; }
+.fa.fa-folder-open-o { --fa: "\f07c"; --fa-style: 400; }
+.fa.fa-check-circle-o { --fa: "\f058"; --fa-style: 400; }
+.fa.fa-square-o { --fa: "\f0c8"; --fa-style: 400; }
+.fa.fa-check-square-o { --fa: "\f14a"; --fa-style: 400; }
+.fa.fa-circle-o { --fa: "\f111"; --fa-style: 400; }
+.fa.fa-lightbulb-o { --fa: "\f0eb"; --fa-style: 400; }
+.fa.fa-bookmark-o { --fa: "\f02e"; --fa-style: 400; }
+.fa.fa-calendar-check-o { --fa: "\f274"; --fa-style: 400; }
+.fa.fa-image-o { --fa: "\f03e"; --fa-style: 400; }
+.fa.fa-picture-o { --fa: "\f03e"; --fa-style: 400; }
+.fa.fa-file-pdf-o { --fa: "\f1c1"; --fa-style: 400; }
+.fa.fa-file-word-o { --fa: "\f1c2"; --fa-style: 400; }
+.fa.fa-file-video-o { --fa: "\f1c8"; --fa-style: 400; }
+.fa.fa-file-image-o { --fa: "\f1c5"; --fa-style: 400; }
+.fa.fa-file-code-o { --fa: "\f1c9"; --fa-style: 400; }
+.fa.fa-file-archive-o { --fa: "\f1c6"; --fa-style: 400; }
+.fa.fa-file-audio-o { --fa: "\f1c7"; --fa-style: 400; }
+.fa.fa-file-excel-o { --fa: "\f1c3"; --fa-style: 400; }
+.fa.fa-file-powerpoint-o { --fa: "\f1c4"; --fa-style: 400; }
+.fa.fa-files-o { --fa: "\f0c5"; --fa-style: 400; }
+.fa.fa-thumbs-o-up { --fa: "\f164"; --fa-style: 400; }
+.fa.fa-question-circle-o { --fa: "\f059"; --fa-style: 400; }
+.fa.fa-user-o { --fa: "\f007"; --fa-style: 400; }
+.fa.fa-paper-plane-o { --fa: "\f1d8"; --fa-style: 400; }
+.fa.fa-map-o { --fa: "\f279"; --fa-style: 400; }
+.fa.fa-keyboard-o { --fa: "\f11c"; --fa-style: 400; }
+.fa.fa-newspaper-o { --fa: "\f1ea"; --fa-style: 400; }
