@@ -1,3 +1,15 @@
+# v1.2.0
+## XX/XX/2026
+
+1. [](#new)
+    * Guide Color (guide home, Details tab): a guide's own colour on all its pages – a light tint behind the header, and links, focus rings and the current page in the side list in it; readable in light and dark modes
+    * On sites with more than one guide, the guide's name shows after the logo on its pages, linking to the guide home (hidden on narrow phones)
+    * Cover Image Layout "Hero": the cover across the full width behind the guide's title and subtitle, using Quark 2's hero
+1. [](#improved)
+    * Font Awesome 4 outline icon names, such as `[fa="calendar-o"]` in pages from older themes, show as their newer outline icons
+1. [](#bugfix)
+    * No automatic hyphenation on a guide home's details and intro either (only on its cards), as on the Guides page and guide pages
+
 # v1.1.2
 ## 11/10/2026
 
