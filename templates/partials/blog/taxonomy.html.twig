@@ -1,0 +1,8 @@
+{# Quark 2's post tags, left out when the blog hides them (Open Matter's hide_post_taxonomy) - hibbittsdesign.org #}
+{% if page.taxonomy.tag and not page.parent.header.hide_post_taxonomy %}
+<span class="tags">
+    {% for tag in page.taxonomy.tag %}
+    <a class="label p-category" href="{{ blog.url|rtrim('/') }}/tag{{ config.system.param_sep }}{{ tag }}#body-wrapper">{{ tag }}</a>
+    {% endfor %}
+</span>
+{% endif %}

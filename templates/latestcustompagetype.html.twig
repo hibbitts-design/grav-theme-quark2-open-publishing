@@ -1,0 +1,15 @@
+{# no tab indents for Page Inject Plugin compatibility - hibbittsdesign.org #}
+{# Latest Custom Page Type (from Open Matter): shows the newest page in its folder, e.g. injected into a
+   course sidebar with page-inject #}
+{% set latest_order = page.parent.header.content.order.by ?: 'default' %}
+{% set latest_page = null %}
+{% for child in page.parent.children.order(latest_order, 'desc').visible %}
+{% if not latest_page and child.route != page.route %}
+{% set latest_page = child %}
+{% endif %}
+{% endfor %}
+{% block content %}
+{% if latest_page %}
+{% include latest_page.template ~ '.html.twig' with { page: latest_page } %}
+{% endif %}
+{% endblock %}

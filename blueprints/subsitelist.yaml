@@ -1,0 +1,4 @@
+title: Courses Page Options (Open MultiCourse Hub)
+'@extends':
+    type: course-list
+    context: blueprints://pages

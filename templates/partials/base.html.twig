@@ -6,7 +6,7 @@
 
 {# Heading Weight option: lighter headings (see css/site.css) unless set to Quark 2's default #}
 {# Hide Header While Scrolling option (on unless turned off; js/reader.js reads this class on guide pages) #}
-{% block body_classes %}{{ parent() }}{% if theme_var('heading_weight') != 'quark2' %} headings-light{% endif %}{% if theme_var('header_hide_on_scroll', true) %} header-hide-on-scroll{% endif %}{% endblock %}
+{% block body_classes %}{{ parent() }}{% if theme_var('heading_weight') != 'quark2' %} headings-light{% endif %}{% if theme_var('header_hide_on_scroll', true) %} header-hide-on-scroll{% endif %}{% if course_page and show_site_chrome %} in-course{% endif %}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -18,7 +18,8 @@
         {% do assets.addInlineCss('.chromeless-show{display:block}.chromeless-hide{display:none}') %}
     {% endif %}
     {# multi-page content (Section List and Multi-Section pages) #}
-    {% if page.template in ['sections', 'section', 'subsection', 'section-page', 'section-list', 'reader-list'] %}
+    {# (and the Courses page, course-list or subsitelist, which shares the Guides List page's cards) #}
+    {% if page.template in ['sections', 'section', 'subsection', 'section-page', 'section-list', 'reader-list', 'course-list', 'subsitelist', 'module', 'course-page', 'page'] %}
         {% do assets.addCss('theme://css/reader.css', 74) %}
         {% do assets.addJs('theme://js/reader.js', {group:'bottom'}) %}
     {% elseif page.parent.template == 'section-list' %}
@@ -35,11 +36,22 @@
        it behind the header, and links, focus rings and the current page in the side list in it – as Quark 2's own
        Accent Color does site-wide. Mixed with near-black (light mode) or white (dark mode), so any colour stays readable.
        html:root:not([data-theme=dark]) and html:root[data-theme=dark] outrank Quark 2's own light and dark rules, wherever they come in the page - hibbittsdesign.org #}
+    {# a course's Course Color works the same way (navbar_bg_color on its course.md or subsite.md page) #}
     {% set guide_color = guide_home ? guide_home.header.navbar_bg_color : null %}
+    {% if not guide_color and course_page %}
+        {% set guide_color = course_page.header.navbar_bg_color %}
+    {% endif %}
     {% if guide_color and guide_color matches '/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/' %}
+        {# guides also tint the header; courses don't, as the course navbar below it shows the course #}
+        {% set light_extra = '' %}
+        {% set dark_extra = '' %}
+        {% if guide_home %}
+            {% set light_extra = '--q2-nav-bg:color-mix(in oklab,' ~ guide_color ~ ' 16%,rgb(255 255 255 / 0.9))' %}
+            {% set dark_extra = '--q2-nav-bg:color-mix(in oklab,' ~ guide_color ~ ' 24%,rgb(11 11 12 / 0.9))' %}
+        {% endif %}
         {% do assets.addInlineCss(
-            'html:root:not([data-theme=dark]){--q2-accent:color-mix(in oklab,' ~ guide_color ~ ' 70%,#111);--q2-link:color-mix(in oklab,' ~ guide_color ~ ' 70%,#111);--q2-focus-ring:color-mix(in oklab,' ~ guide_color ~ ' 45%,transparent);--q2-nav-bg:color-mix(in oklab,' ~ guide_color ~ ' 16%,rgb(255 255 255 / 0.9))}'
-            ~ 'html:root[data-theme=dark]{--q2-accent:color-mix(in oklab,' ~ guide_color ~ ' 75%,#fff);--q2-link:color-mix(in oklab,' ~ guide_color ~ ' 75%,#fff);--q2-focus-ring:color-mix(in oklab,' ~ guide_color ~ ' 45%,transparent);--q2-nav-bg:color-mix(in oklab,' ~ guide_color ~ ' 24%,rgb(11 11 12 / 0.9))}'
+            'html:root:not([data-theme=dark]){--q2-accent:color-mix(in oklab,' ~ guide_color ~ ' 70%,#111);--q2-link:color-mix(in oklab,' ~ guide_color ~ ' 70%,#111);--q2-focus-ring:color-mix(in oklab,' ~ guide_color ~ ' 45%,transparent);' ~ light_extra ~ '}'
+            ~ 'html:root[data-theme=dark]{--q2-accent:color-mix(in oklab,' ~ guide_color ~ ' 75%,#fff);--q2-link:color-mix(in oklab,' ~ guide_color ~ ' 75%,#fff);--q2-focus-ring:color-mix(in oklab,' ~ guide_color ~ ' 45%,transparent);' ~ dark_extra ~ '}'
             ~ '#sections-nav .nav-item.active>a{box-shadow:inset 3px 0 0 var(--q2-accent)}'
         ) %}
     {% endif %}
@@ -54,6 +66,10 @@
 {% block header %}
     <a class="skip-link" href="#start">{{ 'THEME_QUARK_OPEN_PUBLISHING.SKIP_TO_CONTENT'|t }}</a>
     {% if show_site_chrome %}{{ parent() }}{% endif %}
+    {# on a course's pages: the course navbar, with the course's name and menu, below the site's header #}
+    {% if show_site_chrome and course_page %}
+        {% include 'partials/course_navbar.html.twig' %}
+    {% endif %}
 {% endblock %}
 
 {# After the page content: the Git Sync and "This page as Markdown" links, and the Creative Commons license #}
@@ -71,7 +87,11 @@
    or Quark 2's own footer when there's no footer page #}
 {% block footer %}
     {% if show_site_chrome %}
-        {% set footer_content = pages.find('/footer').content %}
+        {# inside a course: the course's own "footer" page, or the site's when it has none (as in Open Matter) #}
+        {% set footer_content = course_page ? page.find(course_page.route ~ '/footer').content : '' %}
+        {% if not footer_content %}
+            {% set footer_content = pages.find('/footer').content %}
+        {% endif %}
         {# include() gets the "This page as Markdown" link first, so the footer only adds it when there is one #}
         {# (its location is Page when none has been saved yet, so only a saved 'footer' puts it here) #}
         {% set footer_markdown_link = '' %}

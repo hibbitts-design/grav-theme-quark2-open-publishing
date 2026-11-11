@@ -6,14 +6,28 @@
 
   {% set show_title = not(page.header.hide_page_title) and not(grav.uri.param('hidepagetitle')) %}
 
+  {# What this page lists: guides (the Guides List page), or courses (the Courses page – course-list.html.twig, as in
+     Grav Helios Course Hub, and subsitelist.html.twig, as in Open MultiCourse Hub, set list_kind to 'course') #}
+  {% set list_kind = list_kind ?? 'guide' %}
+
   {# The guides: top-level Section List pages (pages is the site's root page), in the site's page order, as in Helios Open Reader.
      Hidden (not visible) and unpublished guides are left out. #}
+  {# The courses: top-level course.md or subsite.md pages, in page order (not hidden by
+     hide_from_course_list or hide_from_subsite_list – courses are usually left out of the menu) #}
   {% set guide_pages = [] %}
-  {% for child_page in pages.children.visible.published %}
-    {% if child_page.template == 'section-list' %}
-      {% set guide_pages = guide_pages|merge([child_page]) %}
-    {% endif %}
-  {% endfor %}
+  {% if list_kind == 'course' %}
+    {% for child_page in pages.children.published %}
+      {% if child_page.template in ['course', 'subsite'] and not child_page.header.hide_from_course_list and not child_page.header.hide_from_subsite_list %}
+        {% set guide_pages = guide_pages|merge([child_page]) %}
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    {% for child_page in pages.children.visible.published %}
+      {% if child_page.template == 'section-list' %}
+        {% set guide_pages = guide_pages|merge([child_page]) %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
 
   <div class="section-list-page reader-list-page">
 
@@ -41,7 +55,8 @@
 
 
     {# A card for each guide, 1, 2 or 3 per row (one per row on phones) #}
-    {% set cards_per_row = page.header.cards_per_row|default(1) %}
+    {# (without the setting: 1 per row for guides, and 3 for courses, as on Open MultiCourse Hub's course list) #}
+    {% set cards_per_row = page.header.cards_per_row|default(list_kind == 'course' ? 3 : 1) %}
     {% if cards_per_row == 3 %}
       {% set card_column = 'col-4 col-md-6 col-sm-12' %}
     {% elseif cards_per_row == 2 %}
@@ -74,7 +89,7 @@
        this page is its search_scope, so only the guides' own pages are searched (see onSimpleSearchCollection), not the
        blog, other pages or this page. With 2 or 3 cards per row it's as wide as one card (the same grid columns as the
        cards); with 1 per row it keeps its usual width. Hidden in embedded mode. #}
-    {% if page.header.show_search_box and (config.plugins.simplesearch.enabled or config.plugins.tntsearch.enabled) and not embedded_mode %}
+    {% if list_kind == 'guide' and page.header.show_search_box and (config.plugins.simplesearch.enabled or config.plugins.tntsearch.enabled) and not embedded_mode %}
       {% set search_row_class = 'section-list-actions' %}
       {% set search_box_class = 'reader-search' %}
       {% if cards_per_row > 1 %}
@@ -125,11 +140,30 @@
           {# the guide's Cover Image, Subtitle (or Description), Author(s), Edition and Last Updated settings #}
           {% set card_image = guide_page.header.cover_image ? guide_page.media[guide_page.header.cover_image] : null %}
           {% set card_description = guide_page.header.subtitle ?: guide_page.header.description %}
+          {% set card_title = guide_page.title %}
+          {% set card_url = guide_page.url %}
+          {% set card_author = guide_page.header.authors %}
+          {# a course's card: its Image (or else its header image, or the first image on its home page), Description,
+             Instructor, and a link to its home page (see courseHomePage() in quark2-open-publishing.php) #}
+          {% if list_kind == 'course' %}
+            {% set course_home = course_home_page(guide_page) %}
+            {% set card_url = course_home ? course_home.url : guide_page.url %}
+            {% set card_image = guide_page.header.image ? guide_page.media.images[guide_page.header.image] : null %}
+            {% if not card_image %}
+              {% set card_image = page.find(guide_page.route ~ '/headerimage').media.images|first %}
+            {% endif %}
+            {% if not card_image and course_home %}
+              {% set card_image = course_home.media.images|first %}
+            {% endif %}
+            {% set card_description = guide_page.header.description ?: guide_page.header.subsite_list_description %}
+            {% set card_title = guide_page.header.course_list_title ?: guide_page.header.subsite_list_title ?: guide_page.title %}
+            {% set card_author = guide_page.header.instructor %}
+          {% endif %}
           {% set card_class = 'card section-card' %}
           {% if card_image and card_image_layout == 'side' %}
             {% set card_class = card_class ~ ' section-card-image-side' %}
           {% endif %}
-          {% if not card_image and not card_description and not guide_page.header.authors
+          {% if not card_image and not card_description and not card_author
             and not guide_page.header.edition and not guide_page.header.last_updated %}
             {% set card_class = card_class ~ ' section-card-title-only' %}
           {% endif %}
@@ -155,18 +189,18 @@
                 {# the link covers the whole card (see css/reader.css). Card titles are h2, or h3 below a group's heading
                    (the h5 class keeps their size the same) #}
                 {% set card_heading = guide_group.title ? 'h3' : 'h2' %}
-                <{{ card_heading }} class="card-title h5"><a class="section-card-link" href="{{ guide_page.url }}">{{ guide_page.title }}</a>
+                <{{ card_heading }} class="card-title h5"><a class="section-card-link" href="{{ card_url }}">{{ card_title }}</a>
                   {#- an arrow on every guide card, as on section cards -#}
                   <i class="fa fa-arrow-right section-card-arrow" aria-hidden="true"></i>
                 </{{ card_heading }}>
               </div>
-              {% if card_description or guide_page.header.authors or guide_page.header.edition or guide_page.header.last_updated %}
+              {% if card_description or card_author or guide_page.header.edition or guide_page.header.last_updated %}
                 <div class="card-body">
                   {% if card_description %}
                     <p class="section-card-description">{{ card_description }}</p>
                   {% endif %}
-                  {% if guide_page.header.authors %}
-                    <p class="section-card-author">{{ guide_page.header.authors }}</p>
+                  {% if card_author %}
+                    <p class="section-card-author">{{ card_author }}</p>
                   {% endif %}
                   {# the edition and last updated date share one line, as on the guide's home page #}
                   {% if guide_page.header.edition or guide_page.header.last_updated %}

@@ -1,6 +1,7 @@
+{# On a modular page: Quark 2's section and container. Injected with page-inject: just the content,
+   so it lines up with that page (as in Open Matter) - hibbittsdesign.org #}
+{% if grav.page.template == 'modular' %}
 {% set grid_size = theme_var('grid-size') %}
-{% set image = page.media.images|first %}
-
 <section id="modular" class="section">
     <section class="container {{ grid_size }}">
         <div class="columns">
@@ -10,3 +11,6 @@
         </div>
     </section>
 </section>
+{% else %}
+{{ content|raw }}
+{% endif %}

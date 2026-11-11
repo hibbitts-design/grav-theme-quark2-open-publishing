@@ -5,9 +5,13 @@
 {# Cover Image Layout "hero": the cover across the full width behind the guide's title and subtitle, using Quark 2's own
    hero (its overlay, light text and arrow down to the content; Quark 2's hero_classes and hero_align settings also
    work). Not on embedded pages, which show only the content, with the title as usual - hibbittsdesign.org #}
+{# A guide's home page, or a course's Modules page (module.html.twig sets list_mode to 'modules': module cards,
+   without a guide's cover, details, Start button or section labels) #}
+{% set list_mode = list_mode ?? 'guide' %}
+
 {% block hero %}
   {% set hero_cover = page.header.cover_image ? page.media[page.header.cover_image] : null %}
-  {% if hero_cover and page.header.cover_image_layout == 'hero' and show_site_chrome %}
+  {% if list_mode == 'guide' and hero_cover and page.header.cover_image_layout == 'hero' and show_site_chrome %}
     {% set hero_text %}
       <h1>{{ page.title }}</h1>
       {% if page.header.subtitle %}<p class="lead">{{ page.header.subtitle }}</p>{% endif %}
@@ -38,7 +42,8 @@
 
   {# Cover Image Layout: by default a small cover is shown with the title, subtitle, author(s), edition and license
      beside it; "large" shows it across the full width of the content area at the top, with the title below it #}
-  {% set cover = page.header.cover_image ? page.media[page.header.cover_image] : null %}
+  {% set modules_mode = list_mode == 'modules' %}
+  {% set cover = (page.header.cover_image and not modules_mode) ? page.media[page.header.cover_image] : null %}
   {% set large_cover = cover and page.header.cover_image_layout == 'large' %}
   {# "hero": the title and subtitle are in the hero above (see the hero block), so they and the cover are left out here #}
   {% set hero_cover = cover and page.header.cover_image_layout == 'hero' and show_site_chrome %}
@@ -46,6 +51,8 @@
   {# with a small cover, the title goes beside it, at the top of the details, like a publication card #}
   {% set title_beside_cover = cover and not large_cover and not hero_cover %}
 
+  {# (the page is saved as text first, so it can go beside the course sidebar on a Modules page - see the end) #}
+  {% set section_list_html %}
   <div class="section-list-page">
 
     {% if large_cover %}
@@ -70,9 +77,20 @@
       {% set start_text = 'THEME_QUARK_OPEN_PUBLISHING.READER_START'|t %}
     {% endif %}
     {% set first_section = reader_sections|first %}
-    {% set start_url = (start_text and first_section) ? first_section.url ~ filter_suffix : '' %}
+    {% set start_url = (start_text and first_section and not modules_mode) ? first_section.url ~ filter_suffix : '' %}
 
+    {% if modules_mode %}
+      {# a Modules page: its description as an intro (a Helios Modules page often has only that), and its Learning
+         Objectives, as on guide pages #}
+      {% if page.header.description %}
+        <p class="reader-subtitle module-intro">{{ page.header.description }}</p>
+      {% endif %}
+      {% if page.header.learning_objectives %}
+        {{ ('[objectives]' ~ page.header.learning_objectives|markdown ~ '[/objectives]')|shortcodes|raw }}
+      {% endif %}
+    {% else %}
     {% include 'partials/reader_header.html.twig' with { hide_cover: large_cover or hero_cover, hide_subtitle: hero_cover, show_title: show_title and title_beside_cover, start_text: start_text, start_url: start_url } %}
+    {% endif %}
 
     {# Text above and below the section cards, as in Helios Open Reader: a line with just === in the page's content
        splits it, with the text before it above the cards and the text after it below them (=== is Grav's summary
@@ -97,8 +115,11 @@
          reader's browser and shows it; its close button forgets the saved place.
        - A search box for this guide on the right (Show Search Box setting, on unless turned off; hidden in embedded
          mode). #}
-    {% set show_reader_resume = page.header.keep_my_place is not defined or page.header.keep_my_place %}
-    {% set show_reader_search = (page.header.show_search_box is not defined or page.header.show_search_box)
+    {# On a course's Modules page, Keep My Place too (the module pages save the place; a course can turn it off with
+       keep_my_place: false on its own page, as in Open Matter); its search box comes with the course's sidebar #}
+    {% set course_keeps_place = not modules_mode or not course_page or course_page.header.keep_my_place is not defined or course_page.header.keep_my_place %}
+    {% set show_reader_resume = course_keeps_place and (page.header.keep_my_place is not defined or page.header.keep_my_place) %}
+    {% set show_reader_search = not modules_mode and (page.header.show_search_box is not defined or page.header.show_search_box)
       and (config.plugins.simplesearch.enabled or config.plugins.tntsearch.enabled) and not embedded_mode %}
 
     {% if show_reader_resume or show_reader_search %}
@@ -119,7 +140,8 @@
     {% endif %}
 
     {# A card for each section, 1, 2 or 3 per row (one per row on phones) #}
-    {% set cards_per_row = page.header.cards_per_row|default(1) %}
+    {# (without the setting: 1 per row on a guide's home page, and 2 on a Modules page, as in Open Matter) #}
+    {% set cards_per_row = page.header.cards_per_row|default(modules_mode ? 2 : 1) %}
     {% if cards_per_row == 3 %}
       {% set card_column = 'col-4 col-md-6 col-sm-12' %}
     {% elseif cards_per_row == 2 %}
@@ -142,7 +164,8 @@
     {% endif %}
 
     {# Description Line Limit, as in Open Reader: card descriptions are cut to 2 or 3 lines, or not at all (0, the default) #}
-    {% set card_description_lines = page.header.card_description_lines|default(0) %}
+    {# (on a Modules page, 2 lines without the setting, as in Open Matter) #}
+    {% set card_description_lines = page.header.card_description_lines ?? (modules_mode ? 2 : 0) %}
     {% set section_cards_class = 'section-cards columns' %}
     {% if card_description_lines == 2 or card_description_lines == 3 %}
       {% set section_cards_class = section_cards_class ~ ' section-cards-lines-' ~ card_description_lines %}
@@ -156,7 +179,8 @@
     {% set group_sections = [] %}
     {% for section_item in reader_sections %}
       {# (trim turns the macro's result into plain text, so it can be compared with the previous title) #}
-      {% set part_title = reader.part_title(section_item, reader_home)|trim %}
+      {# (on a Modules page, the modules' Group setting instead, as in Open Matter and Helios Course Hub) #}
+      {% set part_title = modules_mode ? (section_item.header.group ?: '') : reader.part_title(section_item, reader_home)|trim %}
       {# a new group starts when the Part changes #}
       {% if not loop.first and part_title != group_title %}
         {% set part_groups = part_groups|merge([{ title: group_title, sections: group_sections }]) %}
@@ -182,7 +206,9 @@
             {% set card_number = card_number + 1 %}
           {% endif %}
           {# the label (for example "Unit 2") uses the card's position; don't loop over reader_sections again inside this loop #}
-          {% set label = reader.section_label(section_item, reader_home, card_number) %}
+          {% set label = modules_mode ? '' : reader.section_label(section_item, reader_home, card_number) %}
+          {# the card's text: the page's Description, or on a Modules page the start of its content, as in Open Matter #}
+          {% set card_description = section_item.header.description ?: (modules_mode ? section_item.summary|striptags|trim : '') %}
           {% set card_image = section_item.header.image ? section_item.media[section_item.header.image] : null %}
           {# a card with just a label and title (no image, description or author) gets equal space above and below
              its title (see css/reader.css), instead of the space a description below would normally take #}
@@ -190,7 +216,7 @@
           {% if card_image and card_image_layout == 'side' %}
             {% set card_class = card_class ~ ' section-card-image-side' %}
           {% endif %}
-          {% if not card_image and not section_item.header.description and not section_item.header.author %}
+          {% if not card_image and not card_description and not section_item.header.author %}
             {% set card_class = card_class ~ ' section-card-title-only' %}
           {% endif %}
           <li class="column {{ card_column }}">
@@ -226,10 +252,10 @@
                   <i class="fa fa-arrow-right section-card-arrow" aria-hidden="true"></i>
                 </{{ card_heading }}>
               </div>
-              {% if section_item.header.description or section_item.header.author %}
+              {% if card_description or section_item.header.author %}
                 <div class="card-body">
-                  {% if section_item.header.description %}
-                    <p class="section-card-description">{{ section_item.header.description }}</p>
+                  {% if card_description %}
+                    <p class="section-card-description">{{ card_description }}</p>
                   {% endif %}
                   {# the section's Author(s) setting, as in Grav Helios Open Reader #}
                   {% if section_item.header.author %}
@@ -261,5 +287,17 @@
     {% include 'partials/reader_attribution.html.twig' %}
 
   </div>
+  {% endset %}
+
+  {# a course's Modules page shows the course's sidebar beside the cards when the course has one, as in Open Matter #}
+  {% set show_sidebar = modules_mode and (page.header.show_sidebar ?? course_has_sidebar) and show_site_chrome %}
+  {% if show_sidebar %}
+    {% embed 'partials/layout.html.twig' with { show_sidebar: true } %}
+      {% block item %}{{ section_list_html|raw }}{% endblock %}
+      {% block sidebar %}{% include 'partials/sidebar.html.twig' %}{% endblock %}
+    {% endembed %}
+  {% else %}
+    {{ section_list_html|raw }}
+  {% endif %}
 
 {% endblock %}

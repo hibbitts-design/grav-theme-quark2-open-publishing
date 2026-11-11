@@ -32,7 +32,13 @@
 {% endif %}
 
     <div class="e-content">
-        {% if page.parent.header.display_post_summary.enabled %}
+        {# the post's image and credit at the top, as on its card (not when it has a hero image instead) #}
+        {% if not hero_image_name %}
+            {% include 'partials/page_header_image.html.twig' with { image_by_default: true } %}
+        {% endif %}
+
+        {# (Open Matter's hide_post_summary does the same) #}
+        {% if page.parent.header.display_post_summary.enabled or page.parent.header.hide_post_summary %}
             {% set content = page.content|slice(page.summary|length) %}
         {% else %}
             {% set content = page.content %}

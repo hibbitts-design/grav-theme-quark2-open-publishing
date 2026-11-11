@@ -1,0 +1,9 @@
+{# Quark 2's post date, unless the blog has hide_post_date (Open Matter) - hibbittsdesign.org #}
+{% if not page.parent.header.hide_post_date %}
+<span class="blog-date">
+    <time class="dt-published" datetime="{{ page.date|date('c') }}">
+        <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+        {{ page.date|date(system.pages.dateformat.short) }}
+    </time>
+</span>
+{% endif %}

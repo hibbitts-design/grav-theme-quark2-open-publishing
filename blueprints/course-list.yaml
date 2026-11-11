@@ -1,0 +1,87 @@
+title: Courses Page Options
+'@extends':
+    type: default
+    context: blueprints://pages
+
+# The Courses page (course-list.md, as in Grav Helios Course Hub): a card for each course - hibbittsdesign.org
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        options:
+          type: tab
+
+          fields:
+
+            pagetitle:
+                type: section
+                title: Page Title
+                underline: true
+
+            header.hide_page_title:
+                type: toggle
+                label: Display Title at top of Page
+                default: 0
+                highlight: 0
+                options:
+                    0:  'Yes'
+                    1:  'No'
+                validate:
+                    type: bool
+
+        courses:
+          type: tab
+          title: Courses
+
+          fields:
+
+            courses_info:
+              type: display
+              label: false
+              markdown: true
+              content: 'A card is shown for each top-level course (a folder with a course.md or subsite.md page) that is published.'
+
+            header.subtitle:
+              type: text
+              label: Subtitle
+              toggleable: true
+              help: 'Shown below the title.'
+
+            header.cards_per_row:
+              type: select
+              label: Cards Per Row
+              default: 3
+              options:
+                1: '1 (full width)'
+                2: '2 per row'
+                3: '3 per row'
+              help: 'One per row on phones.'
+
+            header.card_image_layout:
+              type: select
+              label: Card Image Layout
+              toggleable: true
+              default: side
+              options:
+                side: 'Side (left of content)'
+                top: 'Top (above content)'
+              help: 'Always top with 3 per row.'
+
+            header.card_description_lines:
+              type: select
+              label: Description Line Limit
+              default: 3
+              options:
+                0: 'No limit'
+                2: '2 lines'
+                3: '3 lines'
+
+        advanced:
+          fields:
+            overrides:
+              fields:
+                header.hide_from_menu:
+                  help: 'Leaves this page out of the site menu, such as when it is the home page.'

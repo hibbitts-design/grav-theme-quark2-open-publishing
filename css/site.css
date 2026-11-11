@@ -261,6 +261,24 @@ form.search-box[role="search"] input[type="search"]:not(:focus) {
     margin-bottom: 0;
 }
 
+/* headings in a "sidebar" page (Open Matter course sidebars use ## headings) look like Quark 2's own sidebar headings */
+.sidebar-page :is(h1, h2, h3) {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--q2-text-muted);
+    margin: 1.5rem 0 0.75rem;
+}
+
+.sidebar-page :is(h1, h2, h3):first-child {
+    margin-top: 0;
+}
+
+.sidebar-page h2::before {
+    display: none;
+}
+
 /* ---------- Embeds: responsive boxes for H5P, PDF, iFrame and video embeds (Spectre's video-responsive) ---------- */
 .video-responsive {
     display: block;
@@ -577,3 +595,462 @@ body.header-light:not(.scrolled) #header .navbar-guide-name {
 .fa.fa-map-o { --fa: "\f279"; --fa-style: 400; }
 .fa.fa-keyboard-o { --fa: "\f11c"; --fa-style: 400; }
 .fa.fa-newspaper-o { --fa: "\f1ea"; --fa-style: 400; }
+
+/* A course page's header image (header_image: true; see templates/partials/page_header_image.html.twig): a wide image
+   below the title, with rounded corners, and its "Image:" credit over the bottom-right corner, as in Open Matter */
+.page-header-image {
+    position: relative;
+    margin: 0 0 1.5rem;
+}
+
+.page-header-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--q2-radius-md);
+}
+
+.page-header-image-credit {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--q2-radius-sm);
+    background: rgb(0 0 0 / 0.55);
+    color: #ffffff;
+    font-size: 0.75rem;
+}
+
+.page-header-image-credit a {
+    color: #ffffff;
+}
+
+/* Course navbar: the header's second row on course pages (templates/partials/course_navbar.html.twig); sticks below the header */
+.course-navbar {
+    position: sticky;
+    top: var(--course-navbar-top, var(--q2-header-height, 72px));
+    z-index: 40;
+    background: var(--q2-nav-bg);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-top: 1px solid var(--q2-divider);
+    border-bottom: 1px solid var(--q2-divider);
+}
+
+.course-navbar-inner {
+    display: flex;
+    align-items: stretch;
+    gap: 1rem;
+    min-height: 3rem;
+    padding-block: 0.375rem;
+}
+
+.course-navbar-name {
+    /* the name keeps its width (a very long one is cut short with "…"); the tabs get the rest */
+    flex: none;
+    max-width: 40%;
+    align-self: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 1rem;
+    border-right: 1px solid var(--q2-divider);
+    color: var(--q2-text-strong);
+    font-family: var(--pico-font-family-display);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    text-decoration: none;
+}
+
+.course-navbar-name:hover {
+    color: var(--q2-link);
+}
+
+/* reset Quark 2's nav spacing (item padding, negative link margins) */
+.course-navbar .course-navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* without the script, tabs that don't fit scroll sideways (scrollbar hidden) */
+.course-navbar-menu {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.course-navbar-menu::-webkit-scrollbar {
+    display: none;
+}
+
+.course-navbar .course-navbar-menu li {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.course-navbar .course-navbar-menu a,
+.course-navbar .course-navbar-name {
+    margin: 0;
+}
+
+/* tabs sized like Quark 2's menu items; the current one a deeper shade than hover, and bold */
+.course-navbar-menu a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.9375rem;
+    border-radius: var(--q2-radius-sm);
+    font-family: var(--pico-font-family-sans-serif);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--q2-text-strong);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.course-navbar-menu a:hover {
+    background: var(--q2-bg-muted);
+    color: var(--q2-text-strong);
+    text-decoration: none;
+}
+
+.course-navbar-menu a.active,
+.course-navbar-menu a.active:hover {
+    background: color-mix(in srgb, var(--q2-text) 11%, transparent);
+    color: var(--q2-text-strong);
+    font-weight: 600;
+}
+
+/* in dark mode Quark 2's hover shade is already light, so the current page needs a stronger one to stay distinct */
+:root[data-theme=dark] .course-navbar-menu a.active,
+:root[data-theme=dark] .course-navbar-menu a.active:hover {
+    background: color-mix(in srgb, var(--q2-text) 28%, transparent);
+}
+
+.course-navbar a:focus-visible {
+    outline: 2px solid var(--q2-focus-ring, currentColor);
+    outline-offset: 2px;
+}
+
+/* (inside the scrolling menu, the focus ring goes inside the tab so it isn't cut off) */
+.course-navbar-menu a:focus-visible {
+    outline-offset: -2px;
+}
+
+/* linked-to headings and entries stop below the course navbar too (header height + navbar + a little space) */
+body.in-course [id] {
+    scroll-margin-top: calc(var(--course-navbar-top, var(--q2-header-height, 72px)) + 4.75rem);
+}
+
+/* on phones and tablets: at the very top of the window once the header slides away (js/reader.js) */
+@media (max-width: 959px) {
+    .course-navbar {
+        transition: top 0.2s ease;
+    }
+
+    body.header-fixed.header-hide-on-scroll.reader-header-away .course-navbar {
+        top: 0;
+    }
+}
+
+@media (max-width: 959px) and (prefers-reduced-motion: reduce) {
+    .course-navbar {
+        transition: none;
+    }
+}
+
+
+/* Course banner: the course's header image across the top of its home page (partials/course_hero.html.twig), cropped
+   to a short band so the home page content stays in view */
+.course-banner {
+    height: clamp(9rem, 22vw, 15rem);
+    overflow: hidden;
+}
+
+.course-banner img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* fills the band, trimming the image's edges rather than stretching it */
+}
+
+/* Accordion pages (Open Matter's accordion page type): sections that open and close, in Quark 2's card style */
+/* the sections sit together in one bordered block, with a line between each (as in Open Matter) */
+.accordion {
+    margin-top: 1.5rem;
+    border: 1px solid var(--q2-divider);
+    border-radius: var(--q2-radius-sm, 6px);
+    overflow: hidden;
+}
+
+.accordion-section {
+    margin: 0;
+    background: var(--q2-bg, transparent);
+}
+
+/* (+ matches each section after the first) */
+.accordion-section + .accordion-section {
+    border-top: 1px solid var(--q2-divider);
+}
+
+.accordion-section > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.875rem 1.125rem;
+    cursor: pointer;
+    list-style: none;
+}
+
+.accordion-section > summary::-webkit-details-marker {
+    display: none;
+}
+
+.accordion-section > summary::after {
+    content: "";
+    flex: none;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    /* (Pico draws its own chevron here as a background image; without this a sliver of it shows as a faint line) */
+    background-image: none;
+    float: none;
+    margin-inline-start: 0;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+}
+
+.accordion-section[open] > summary::after {
+    transform: rotate(-135deg);
+}
+
+.accordion-section[open] > summary {
+    margin-bottom: 0;
+}
+
+.accordion-section > summary:hover {
+    background: var(--q2-bg-muted);
+}
+
+.accordion-section > summary:focus-visible {
+    outline: 2px solid var(--q2-focus-ring, var(--q2-accent));
+    outline-offset: -2px; /* inside, so the block's edge doesn't cut it off */
+}
+
+.accordion-section > summary h2 {
+    margin: 0;
+    font-size: 1.125rem;
+}
+
+.accordion-section > summary h2::before {
+    display: none;
+}
+
+.accordion-body {
+    padding: 0.25rem 1.125rem 1.125rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .accordion-section > summary::after {
+        transition: none;
+    }
+}
+
+/* an older-style icon ([fa="calendar"][/fa] or <i class="fa fa-calendar">) placed right before a link, as in moved-over
+   course sidebars and schedules, gets a small gap so it doesn't touch the link text */
+i.fa + a {
+    margin-left: 0.3em;
+}
+
+/* RSS Feeds page (Open Matter's rssfeeds page type) */
+.rss-feed-item {
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--q2-divider);
+}
+
+.rss-feed-item h2 {
+    margin: 0 0 0.25rem;
+    font-size: 1.25rem;
+}
+
+.rss-feed-item h2::before {
+    display: none;
+}
+
+.rss-feed-meta {
+    margin: 0 0 0.75rem;
+    color: var(--q2-text-muted);
+    font-size: 0.875rem;
+}
+
+.rss-feed-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--q2-radius-sm, 6px);
+}
+
+.rss-feed-pages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 1.5rem;
+}
+
+.rss-feed-pages .active {
+    background: color-mix(in srgb, var(--q2-text) 11%, transparent);
+    font-weight: 600;
+}
+
+/* Alert boxes (modular/alert.html.twig), such as a course home's "What's Happening This Week": Quark 2's sidebar box -
+   a plain card with a soft shadow, matching the sidebar beside it - or, when a colour is set, the callout style */
+.course-alert {
+    margin: 0 0 1.5rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--q2-bg-elev);
+    border-radius: var(--q2-radius-md, 12px);
+    box-shadow:
+        rgba(19, 19, 22, 0.04) 0 1px 2px,
+        rgba(19, 19, 22, 0.06) 0 8px 24px -8px;
+}
+
+:root[data-theme="dark"] .course-alert {
+    box-shadow:
+        rgba(0, 0, 0, 0.4) 0 1px 2px,
+        rgba(0, 0, 0, 0.55) 0 10px 28px -8px;
+}
+
+.course-alert.md-alert {
+    border-radius: var(--q2-radius-sm, 6px);
+    box-shadow: none;
+}
+
+/* headings and text inside a box keep their standard sizes; only Quark 2's accent dash is left out */
+.course-alert h2::before {
+    display: none;
+}
+
+.course-alert > :first-child {
+    margin-top: 0;
+}
+
+.course-alert > :last-child {
+    margin-bottom: 0;
+}
+
+/* Course navbar, compact mode (when the tabs don't fit – set by the script in course_navbar.html.twig): the course name
+   and a button that opens the course pages as a list */
+.course-navbar-toggle {
+    display: none;
+}
+
+.course-navbar.is-compact .course-navbar-inner {
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    padding-block: 0.375rem;
+}
+
+.course-navbar.is-compact .course-navbar-name {
+    align-self: center;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: none;
+    padding-right: 0;
+    border-right: 0;
+}
+
+.course-navbar.is-compact .course-navbar-toggle {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    margin: 0 0 0 auto;
+    padding: 0.5rem 0.875rem;
+    border: 1px solid var(--q2-divider);
+    border-radius: var(--q2-radius-sm);
+    background: transparent;
+    color: var(--q2-text-strong);
+    font-family: var(--pico-font-family-sans-serif);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+}
+
+.course-navbar.is-compact .course-navbar-toggle:hover {
+    background: var(--q2-bg-muted);
+}
+
+/* Pico's focus ring only for keyboard focus (:focus-visible), not after a click or tap */
+.course-navbar-toggle:focus:not(:focus-visible) {
+    box-shadow: none;
+    outline: none;
+}
+
+.course-navbar-toggle:focus-visible {
+    outline: 2px solid var(--q2-focus-ring, currentColor);
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+.course-navbar-toggle .fa-chevron-down {
+    font-size: 0.75em;
+    transition: transform 0.2s ease;
+}
+
+.course-navbar.is-open .course-navbar-toggle .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+/* the list: hidden until the button opens it, then below the navbar on the right, one page per line */
+.course-navbar.is-compact .course-navbar-menu {
+    display: none;
+}
+
+.course-navbar.is-compact.is-open .course-navbar-menu {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    right: clamp(1rem, 4vw, 2rem); /* the same as the container's side padding */
+    z-index: 41;
+    flex-direction: column;
+    align-items: stretch;
+    width: min(18rem, calc(100% - 2rem));
+    max-height: 70vh;
+    margin: 0.25rem 0 0;
+    padding: 0.375rem;
+    gap: 2px;
+    overflow-y: auto;
+    scrollbar-width: auto; /* (the tabs hide their scrollbar; a long list on a short screen should show it) */
+    /* the same surface, corners and shadow as Quark 2's own dropdown menus */
+    background: var(--q2-bg-elev);
+    border-radius: var(--q2-radius-md);
+    box-shadow: var(--q2-shadow-dropdown);
+}
+
+.course-navbar.is-compact.is-open .course-navbar-menu li {
+    display: block;
+}
+
+.course-navbar.is-compact.is-open .course-navbar-menu a {
+    display: flex;
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.625rem 0.875rem;
+    white-space: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .course-navbar-toggle .fa-chevron-down {
+        transition: none;
+    }
+}

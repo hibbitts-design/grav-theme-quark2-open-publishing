@@ -1,0 +1,28 @@
+{# A course page that isn't a module (Home, Schedule, Syllabus...). Shows the course's sidebar only when
+   the course has its own "sidebar" page (show_sidebar overrides) - hibbittsdesign.org #}
+{% extends 'partials/base.html.twig' %}
+
+{% block hero %}
+    {% include 'partials/course_hero.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    {% set show_sidebar = (page.header.show_sidebar ?? course_has_sidebar) and show_site_chrome %}
+    {% embed 'partials/layout.html.twig' with { show_sidebar: show_sidebar } %}
+        {% block item %}
+            <article class="content-item">
+                {% include 'partials/page_header_image.html.twig' %}
+                {# Learning Objectives box (as in Helios Course Hub) #}
+                {% if page.header.learning_objectives %}
+                    {% set objectives_box = '[objectives]' ~ page.header.learning_objectives|markdown ~ '[/objectives]' %}
+                    {{ objectives_box|shortcodes|raw }}
+                {% endif %}
+                {{ page.content|raw }}
+                {% include 'partials/page_extras.html.twig' with { inline: true } %}
+            </article>
+        {% endblock %}
+        {% block sidebar %}
+            {% include 'partials/sidebar.html.twig' %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

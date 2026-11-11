@@ -1,0 +1,11 @@
+{# A course page (course-page.md, as in Helios Course Hub), shown by where it is, as in Open Matter - hibbittsdesign.org #}
+{% if page.parent.template == 'module' or page.parent.parent.template == 'module' %}
+  {# a module, or a page inside one: like a guide's section page #}
+  {% include 'sections.html.twig' %}
+{% elseif page.children.visible|length > 0 %}
+  {# a page with its own pages: its content, then a card for each #}
+  {% include 'module.html.twig' %}
+{% else %}
+  {# Home, Schedule, Syllabus and the like #}
+  {% include 'course-page-standard.html.twig' %}
+{% endif %}

@@ -1,0 +1,60 @@
+title: Course Page Options
+'@extends':
+    type: default
+    context: blueprints://pages
+
+# A course page (course-page.md, as in Grav Helios Course Hub): Home, Schedule, Syllabus and the like, or a module
+# inside a Modules page - hibbittsdesign.org
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        coursepage:
+          type: tab
+          title: Course Page
+
+          fields:
+
+            header.description:
+              type: textarea
+              label: Description
+              toggleable: true
+              rows: 2
+              help: 'Shown on this page''s card, such as on the Modules page.'
+
+            header.group:
+              type: text
+              label: Group
+              toggleable: true
+              placeholder: 'e.g. Part 1'
+              help: 'Shows this page''s card under a heading with this name.'
+
+            header.learning_objectives:
+              type: textarea
+              label: Learning Objectives
+              toggleable: true
+              rows: 4
+              help: 'Shown as a Learning Objectives box. Supports Markdown.'
+
+            header.show_sidebar:
+              type: toggle
+              label: Show Course Sidebar
+              toggleable: true
+              highlight: 1
+              default: 1
+              options:
+                1: PLUGIN_ADMIN.YES
+                0: PLUGIN_ADMIN.NO
+              validate:
+                type: bool
+              help: 'When the course has a sidebar page (not on module pages).'
+
+            header.side_box:
+              type: textarea
+              label: Side Box
+              toggleable: true
+              rows: 4
+              help: 'On module pages: Markdown under the module list, in place of the course''s (false hides it).'

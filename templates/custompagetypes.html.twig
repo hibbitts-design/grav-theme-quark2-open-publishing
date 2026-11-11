@@ -1,10 +1,10 @@
 {% extends 'partials/base.html.twig' %}
 
+{# in a course with its own "sidebar" page, that sidebar is beside it - hibbittsdesign.org #}
 {% block content %}
-
-    <div class="columns">
-
-        <div id="section" class="column col-12">
+    {% set show_sidebar = (page.header.show_sidebar ?? course_has_sidebar) and show_site_chrome %}
+    {% embed 'partials/layout.html.twig' with { show_sidebar: show_sidebar } %}
+        {% block item %}
 
             {% if not(page.header.hide_page_title) and not(grav.uri.param('hidepagetitle')) %}
                 <h3>{{ page.title }}</h3>
@@ -24,14 +24,16 @@
                     {% include templatename with {
                         'page':child,
                         'displaypagetitle':page.header.display_child_page_titles,
-                        'displaycontenttitle':page.header.display_content_titles,
+                        'displaypagetitlelink':page.header.display_child_page_titles_link,
+                        'displaycontenttitle':page.header.display_content_titles ?? page.header.display_content_title,
+                        'displaycontenttitlelink':page.header.display_content_titles_link,
                         'displaycontentlinks':page.header.display_content_links
                     } %}
                 </p>
             {% endfor %}
-
-        </div>
-
-    </div>
-
+        {% endblock %}
+        {% block sidebar %}
+            {% include 'partials/sidebar.html.twig' %}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}

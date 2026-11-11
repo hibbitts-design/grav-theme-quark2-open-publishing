@@ -1,0 +1,97 @@
+{# RSS Feeds page (from Open Matter): newest items from the Twig Feeds plugin, using the same rss_feed_*
+   page settings - hibbittsdesign.org #}
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+    {% set show_sidebar = (page.header.show_sidebar ?? course_has_sidebar) and show_site_chrome %}
+    {% embed 'partials/layout.html.twig' with { show_sidebar: show_sidebar } %}
+        {% block item %}
+        <article class="content-item rss-feeds-page">
+            {% if not page.header.hide_page_title and not grav.uri.param('hidepagetitle') %}
+                <h1>{{ page.title }}</h1>
+            {% endif %}
+            {{ page.content|raw }}
+
+            {% if config.plugins.twigfeeds.enabled %}
+                {% set text_filter = page.header.rss_feed_text_filter %}
+                {% set feed_items = [] %}
+                {% for name, feed in twig_feeds %}
+                    {% for item in feed.items %}
+                        {# Twig Feeds 5: the text is in item.content, the full HTML (with images) in content:encoded #}
+                        {% set item_text = item.description ?: item.content ?: item.elements['content:encoded']|default('') %}
+                        {% set item_html = item.elements['content:encoded']|default(item_text) %}
+                        {# keep the item if there's no text filter, or its text contains the filter words #}
+                        {% if not text_filter or text_filter in item_text %}
+                            {% set extra_details = { 'text': item_text, 'image_html': item_html, 'source': feed.title, 'sortDate': item.lastModified } %}
+                            {% set feed_items = feed_items|merge([item|merge(extra_details)]) %}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+
+                {# Paging (/page:2 in the address); |number_format makes whole numbers #}
+                {% set per_page = (page.header.rss_feed_limit ?: 10)|number_format %}
+                {% set total_pages = (feed_items|length / per_page)|round(0, 'ceil') %}
+                {% set current_page = (uri.param('page') ?: 1)|number_format %}
+                {% if current_page < 1 or current_page > total_pages %}
+                    {% set current_page = 1 %}
+                {% endif %}
+                {% set first_item = (current_page - 1) * per_page %}
+
+                {# none, one, two or all paragraphs #}
+                {% set preview = page.header.rss_feed_preview_paragraphs ?: 'one' %}
+
+                {# images: not with "all" (already in the text), and optionally not when embedded #}
+                {% set show_images = page.header.rss_feed_header_images and preview != 'all' %}
+                {% if not show_site_chrome and page.header.hide_rss_feed_header_images_when_chromeless %}
+                    {% set show_images = false %}
+                {% endif %}
+
+                {# Newest first #}
+                {% set feed_items = feed_items|sort((a, b) => b.sortDate <=> a.sortDate) %}
+
+                <div class="rss-feed-items">
+                {% for item in feed_items|slice(first_item, per_page) %}
+                    <section class="rss-feed-item">
+                        <h2><a class="newwindow external-link" href="{{ item.link|e('html_attr') }}">{{ item.title }}</a></h2>
+                        <p class="rss-feed-meta">
+                            {% if item.lastModified %}<time datetime="{{ item.lastModified|date('c') }}">{{ item.lastModified|date(system.pages.dateformat.short) }}</time> · {% endif %}{{ item.source }}
+                        </p>
+                        {% if show_images %}
+                            {# first image, without its height so it scales #}
+                            {% set item_image = item.image_html|preg_get('/(<img[^>]+>)/') %}
+                            {% if item_image %}<p class="rss-feed-image">{{ item_image|preg_replace('/\\sheight="[0-9]+"/', '')|raw }}</p>{% endif %}
+                        {% endif %}
+                        {% if preview == 'all' %}
+                            {{ item.text|raw }}
+                        {% elseif preview != 'none' %}
+                            {% set paragraphs = item.text|split('</p>') %}
+                            <p>{{ paragraphs[0]|striptags|trim }}</p>
+                            {% if preview == 'two' and paragraphs[1] is defined and paragraphs[1]|striptags|trim %}
+                                <p>{{ paragraphs[1]|striptags|trim }}</p>
+                            {% endif %}
+                            <p><a class="newwindow external-link" href="{{ item.link|e('html_attr') }}" aria-label="{{ ('THEME_QUARK.BLOG.ITEM.CONTINUE_READING'|t ~ ': ' ~ item.title)|e('html_attr') }}">{{ 'THEME_QUARK.BLOG.ITEM.CONTINUE_READING'|t }}</a></p>
+                        {% endif %}
+                    </section>
+                {% endfor %}
+                </div>
+
+                {% if total_pages > 1 and (page.header.rss_feed_pagination ?? true) %}
+                    <nav class="rss-feed-pages" aria-label="{{ page.title|e('html_attr') }}">
+                        {% if current_page > 1 %}<a class="btn btn-ghost btn-sm" href="{{ page.url }}/page{{ config.system.param_sep }}{{ current_page - 1 }}" rel="prev">&larr;</a>{% endif %}
+                        {% for i in 1..total_pages %}
+                            <a class="btn btn-ghost btn-sm{{ i == current_page ? ' active' }}" href="{{ page.url }}/page{{ config.system.param_sep }}{{ i }}"{% if i == current_page %} aria-current="page"{% endif %}>{{ i }}</a>
+                        {% endfor %}
+                        {% if current_page < total_pages %}<a class="btn btn-ghost btn-sm" href="{{ page.url }}/page{{ config.system.param_sep }}{{ current_page + 1 }}" rel="next">&rarr;</a>{% endif %}
+                    </nav>
+                {% endif %}
+            {% else %}
+                <p>{{ 'THEME_QUARK_OPEN_PUBLISHING.RSS_FEEDS_PLUGIN_OFF'|t }}</p>
+            {% endif %}
+            {% include 'partials/page_extras.html.twig' with { inline: true } %}
+        </article>
+        {% endblock %}
+        {% block sidebar %}
+            {% include 'partials/sidebar.html.twig' %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

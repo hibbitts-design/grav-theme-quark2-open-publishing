@@ -9,8 +9,9 @@ Based on the Grav Helios Open Reader print stylesheet. To leave something out of
 }
 
 @media print {
-    /* Hide the header, menus, hero image, sidebar, footer, page navigation, the Git Sync link and the Copy as Markdown button */
+    /* Hide the header, course navbar, menus, hero image, sidebar, footer, page navigation, the Git Sync link and the Copy as Markdown button */
     #header,
+    .course-navbar,
     .mobile-menu,
     .mobile-container,
     .modular-hero,

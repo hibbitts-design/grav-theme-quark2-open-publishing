@@ -1,0 +1,160 @@
+title: Course Options (Open MultiCourse Hub)
+'@extends':
+    type: default
+    context: blueprints://pages
+
+# A course's own page (subsite.md, as in Open MultiCourse Hub): its card on the Courses page, its home page, colour and course-wide settings.
+# The same field names as Open MultiCourse Hub and Open Matter, so existing courses keep their settings. - hibbittsdesign.org
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        content:
+          fields:
+            header.title:
+              label: Course Title
+
+        course:
+          type: tab
+          title: Course
+
+          fields:
+
+            course_info:
+              type: display
+              label: false
+              markdown: true
+              content: 'This page holds the course''s settings; its pages are the folders inside it.'
+
+            header.subsite_list_description:
+              type: textarea
+              label: Course Card Description
+              toggleable: true
+              rows: 3
+              help: 'Shown on the course''s card on the Courses page.'
+
+            header.instructor:
+              type: text
+              label: Instructor(s)
+              toggleable: true
+              placeholder: 'e.g. Jane Smith or Jane Smith & John Doe'
+              help: 'Shown on the course''s card.'
+
+            header.image:
+              type: pagemediaselect
+              label: Course Card Image
+              toggleable: true
+              help: 'If empty, the course''s header image is used.'
+
+            header.subsite_list_title:
+              type: text
+              label: Course Card Title
+              toggleable: true
+              help: 'If empty, the Course Title is used.'
+
+            header.group:
+              type: text
+              label: Courses Page Group
+              toggleable: true
+              placeholder: 'e.g. Current Courses'
+              help: 'Shows the course''s card under a heading with this name.'
+
+            header.badge_label:
+              type: text
+              size: small
+              label: Badge Label
+              toggleable: true
+              placeholder: 'e.g. Coming Soon, New, Archived'
+              help: 'A short status badge on the course''s card.'
+
+            header.badge_color:
+              type: select
+              label: Badge Color
+              toggleable: true
+              default: default
+              options:
+                default: Default
+                blue: Blue
+                green: Green
+                yellow: Yellow
+                red: Red
+                purple: Purple
+                plain: Plain
+
+            header.hide_from_subsite_list:
+              type: toggle
+              label: Show on Courses Page
+              default: 0
+              highlight: 0
+              options:
+                0: PLUGIN_ADMIN.YES
+                1: PLUGIN_ADMIN.NO
+              validate:
+                type: bool
+
+            course_pages:
+              type: section
+              title: Course Pages
+              underline: true
+
+            header.subsite_home:
+              type: text
+              size: small
+              label: Course Home Page
+              toggleable: true
+              placeholder: 'e.g. home'
+              help: 'The folder name of the course''s home page, such as home.'
+
+            header.subsite_site_title:
+              type: text
+              label: Course Name in Header
+              toggleable: true
+              help: 'If empty, the Course Title is used.'
+
+            header.navbar_bg_color:
+              type: colorpicker
+              label: Course Color
+              toggleable: true
+              help: 'Colours links and focus rings on the course''s pages.'
+
+            header.hide_header_image:
+              type: toggle
+              label: Show Header Image on Home Page
+              default: 0
+              highlight: 0
+              options:
+                0: PLUGIN_ADMIN.YES
+                1: PLUGIN_ADMIN.NO
+              validate:
+                type: bool
+              help: 'The image in the course''s headerimage folder, as a banner.'
+
+            header.keep_my_place:
+              type: toggle
+              label: Keep My Place
+              highlight: 1
+              default: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+              help: 'A "Continue reading" bar on the Modules page for returning readers.'
+
+            header.side_box:
+              type: textarea
+              label: Side Box
+              toggleable: true
+              rows: 4
+              help: 'Markdown shown under the module list on every module page.'
+
+        # a course's own page isn't in the site menu: its pages are in the course menu instead
+        advanced:
+          fields:
+            overrides:
+              fields:
+                header.visible:
+                  default: 0

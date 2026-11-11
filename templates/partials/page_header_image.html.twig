@@ -1,0 +1,31 @@
+{# A wide image below a page's title with Open Matter's header_image_* settings. Course pages show it with
+   header_image: true; blog posts (image_by_default) unless header_image: false - hibbittsdesign.org #}
+{% set show_header_image = page.header.header_image or page.header.header_image_file %}
+{% if (image_by_default ?? false) and page.header.header_image is not defined %}
+  {% set show_header_image = true %}
+{% endif %}
+{% if show_header_image and not grav.uri.param('hideheaderimage') %}
+  {% set header_image_media = page.header.header_image_file ? page.media[page.header.header_image_file] : null %}
+  {% if not header_image_media %}
+    {% set header_image_media = page.media.images|first %}
+  {% endif %}
+  {# (a blog post whose image is already in its text doesn't show it twice) #}
+  {% if header_image_media and (image_by_default ?? false) and header_image_media.filename in page.content %}
+    {% set header_image_media = null %}
+  {% endif %}
+  {% if header_image_media %}
+    {% set header_image_url = header_image_media.cropZoom(page.header.header_image_width ?: 1200, page.header.header_image_height ?: 400).url %}
+    <figure class="page-header-image">
+      <img src="{{ header_image_url }}" alt="{{ page.header.header_image_alt_text }}">
+      {% if page.header.header_image_credit %}
+        <figcaption class="page-header-image-credit">Image:
+          {% if page.header.header_image_creditlink %}
+            <a href="{{ page.header.header_image_creditlink }}" target="_blank" rel="noopener">{{ page.header.header_image_credit }}</a>
+          {% else %}
+            {{ page.header.header_image_credit }}
+          {% endif %}
+        </figcaption>
+      {% endif %}
+    </figure>
+  {% endif %}
+{% endif %}

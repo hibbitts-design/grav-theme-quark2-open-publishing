@@ -7,9 +7,13 @@
 {% set collection = page.collection() %}
 {% set site_chrome = not embedded_mode and not theme_var('chromeless.enabled') %}
 {% set blog = page.find(header_var('blog_url')|defined(theme_var('blog-page'))) %}
+{# a course's own blog (such as Weekly Units) uses its own settings, and shows the course's sidebar if it has one #}
+{% if course_page %}
+    {% set blog = page %}
+{% endif %}
 {# the same settings and defaults as Quark 2's blog (the sidebar is off unless show_sidebar is turned on) #}
 {% set show_breadcrumbs = header_var('show_breadcrumbs', [page, blog])|defined(true) %}
-{% set show_sidebar = header_var('show_sidebar', [page, blog])|defined(false) and site_chrome %}
+{% set show_sidebar = header_var('show_sidebar', [page, blog])|defined(course_has_sidebar ?? false) and site_chrome %}
 {% set show_pagination = header_var('show_pagination', [page, blog])|defined(true) %}
 {% set grid_layout = page.header.bricklayer_layout is not defined or page.header.bricklayer_layout %}
 
@@ -23,7 +27,8 @@
     <section id="body-wrapper" class="section blog-listing">
         <div class="container">
             {# no breadcrumbs when embedded (for example in an LMS), as on blog posts #}
-            {% if show_breadcrumbs and config.plugins.breadcrumbs.enabled and site_chrome %}
+            {# (not inside a course: the course navbar already shows where the page is) #}
+            {% if show_breadcrumbs and config.plugins.breadcrumbs.enabled and site_chrome and not course_page %}
                 {% include 'partials/breadcrumbs.html.twig' %}
             {% endif %}
 

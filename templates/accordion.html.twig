@@ -1,0 +1,35 @@
+{# Accordion (from Open Matter): one section per child page that has pages inside it, using <details>
+   (keyboard and screen reader friendly, no script) - hibbittsdesign.org #}
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+    {% set show_title = not page.header.hide_page_title and not grav.uri.param('hidepagetitle') %}
+    {% set show_sidebar = (page.header.show_sidebar ?? course_has_sidebar) and show_site_chrome %}
+    {% embed 'partials/layout.html.twig' with { show_sidebar: show_sidebar } %}
+        {% block item %}
+            <article class="content-item accordion-page">
+                {% if show_title %}<h1>{{ page.title }}</h1>{% endif %}
+                {{ page.content|raw }}
+                <div class="accordion">
+                    {% for section in page.collection() %}
+                        {% if section.children|length > 0 %}
+                            <details class="accordion-section">
+                                <summary><h2>{{ section.title }}</h2></summary>
+                                <div class="accordion-body">
+                                    {% if section.content|trim %}{{ section.content|raw }}{% endif %}
+                                    {% for child in section.children %}
+                                        <div class="accordion-item">{{ child.content|raw }}</div>
+                                    {% endfor %}
+                                </div>
+                            </details>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% include 'partials/page_extras.html.twig' with { inline: true } %}
+            </article>
+        {% endblock %}
+        {% block sidebar %}
+            {% include 'partials/sidebar.html.twig' %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

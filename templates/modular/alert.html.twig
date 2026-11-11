@@ -1,15 +1,30 @@
 {% if page.header.published %}
-{% if page.header.alert_color is defined %}
-  {% set alert_color = page.header.alert_color %}
-{% else %}
-  {% set alert_color = 'blue' %}
+{# Alert box (from Open Matter): a plain Quark 2 card, or a callout-style edge when a colour is set via
+   alert_color (green/yellow/red) or alert_style (alert-success/-warning/-danger) - hibbittsdesign.org #}
+
+{# 1. Find the box's colour name (green, yellow, red or none) #}
+{% set alert_color = page.header.alert_color %}
+{% if not alert_color %}
+    {% if page.header.alert_style == 'alert-success' %}
+        {% set alert_color = 'green' %}
+    {% elseif page.header.alert_style == 'alert-warning' %}
+        {% set alert_color = 'yellow' %}
+    {% elseif page.header.alert_style == 'alert-danger' %}
+        {% set alert_color = 'red' %}
+    {% endif %}
 {% endif %}
 
-<div class="notices {{ alert_color }} list-blog-header">
-    <div class="list-blog-padding">
-        <div class="listbullet">
-            {{ page.content|raw }}
-        </div>
-    </div>
+{# 2. Turn the colour into a callout class #}
+{% set callout_class = '' %}
+{% if alert_color == 'green' %}
+    {% set callout_class = 'md-alert markdown-alert-tip' %}
+{% elseif alert_color == 'yellow' %}
+    {% set callout_class = 'md-alert markdown-alert-warning' %}
+{% elseif alert_color == 'red' %}
+    {% set callout_class = 'md-alert markdown-alert-caution' %}
+{% endif %}
+
+<div class="course-alert {{ callout_class }}">
+{{ page.content|raw }}
 </div>
 {% endif %}

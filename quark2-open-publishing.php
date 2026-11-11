@@ -33,7 +33,10 @@ class Quark2OpenPublishing extends Quark2
                 ['onEmbeddedRedirect', 1000]
             ],
             'onSimpleSearchCollection' => ['onSimpleSearchCollection', 0],
-            'onPageInitialized' => ['skipCacheForNumberedPages', 0],
+            'onPageInitialized' => [
+                ['skipCacheForNumberedPages', 0],
+                ['onCourseOwnPage', 10]
+            ],
             'onPageContentRaw' => ['onPageContentRaw', 0],
             'onPageContentProcessed' => ['onPageContentProcessed', -100]
         ];
@@ -117,6 +120,11 @@ class Quark2OpenPublishing extends Quark2
         $this->grav['twig']->twig()->addFunction(
             new \Twig\TwigFunction('open_publishing_search_groups', [$this, 'searchGroups'])
         );
+
+        // course_home_page(course) gives a course's home page, for its card on the Courses page
+        $this->grav['twig']->twig()->addFunction(
+            new \Twig\TwigFunction('course_home_page', [$this, 'courseHomePage'])
+        );
     }
 
     public function onShortcodeHandlers()
@@ -159,6 +167,27 @@ class Quark2OpenPublishing extends Quark2
         // for the guide's name and colour in the header (see templates/partials/logo.html.twig and base.html.twig)
         $twig->twig_vars['guide_home'] = $this->guideHomeOf($this->grav['page']);
         $twig->twig_vars['guide_count'] = count($this->grav['pages']->all()->ofType('section-list')->published());
+
+        // The course the current page is in: its course_page (the course's subsite.md or course.md page, or null), plus
+        // the address of its home page and its name – for the course navbar, colour, sidebar and footer
+        $coursePage = $this->coursePageOf($this->grav['page']);
+        $twig->twig_vars['course_page'] = $coursePage;
+        $twig->twig_vars['course_home_url'] = $coursePage ? $this->courseHomeUrl($coursePage) : null;
+        $twig->twig_vars['course_title'] = $coursePage ? $this->courseTitle($coursePage) : null;
+        // does the course have its own "sidebar" page with text? (its pages then show it, as in Open Matter)
+        $courseHasSidebar = false;
+        if ($coursePage) {
+            $courseSidebar = $coursePage->find($coursePage->route() . '/sidebar');
+            $courseHasSidebar = $courseSidebar && trim($courseSidebar->rawMarkdown()) !== '';
+        }
+        $twig->twig_vars['course_has_sidebar'] = $courseHasSidebar;
+        $listedCourses = $this->listedCourses();
+
+        // Only one course (and no guides): the site is that course, so the logo goes straight to its home page, as in
+        // Grav Helios Course Hub (the Courses page, if there is one, stays at its own address)
+        if (count($listedCourses) === 1 && $twig->twig_vars['guide_count'] === 0) {
+            $twig->twig_vars['home_url'] = $this->courseHomeUrl($listedCourses[0]);
+        }
 
         if ($this->isAdmin() && ($this->grav['config']->get('plugins.shortcode-core.enabled'))) {
             $this->grav['assets']->add('theme://editor-buttons/admin/js/shortcode-pdf.js');
@@ -384,6 +413,10 @@ class Quark2OpenPublishing extends Quark2
         foreach ($collection as $page) {
             if (in_array($page->route(), $skipRoutes, true)) {
                 $pagesToRemove[] = $page;
+            } elseif (in_array($page->slug(), ['footer', 'sidebar', 'headerimage'], true) && $page->parent()
+                && in_array($page->parent()->template(), ['subsite', 'course'], true)) {
+                // a course's own footer, sidebar and header image pages are shared parts of its pages too
+                $pagesToRemove[] = $page;
             } elseif ($this->isInHiddenTopLevelPage($page)) {
                 $pagesToRemove[] = $page;
             } elseif ($this->isInsideUnpublishedPage($page)) {
@@ -391,7 +424,8 @@ class Quark2OpenPublishing extends Quark2
             } elseif ($scopePage && $scopePage->template() === 'reader-list' && !$this->isInGuide($page)) {
                 // from a Guides List page: only the guides' own pages (not the blog, other pages or the Guides List page)
                 $pagesToRemove[] = $page;
-            } elseif ($scopePage && $scopePage->template() === 'section-list' && !$this->isPageOrChildOf($page, $scopePage)) {
+            } elseif ($scopePage && in_array($scopePage->template(), ['section-list', 'subsite', 'course'], true) && !$this->isPageOrChildOf($page, $scopePage)) {
+                // from a guide or a course: only its own pages
                 $pagesToRemove[] = $page;
             }
         }
@@ -421,11 +455,12 @@ class Quark2OpenPublishing extends Quark2
         // Find the page at that address
         $scopePage = $this->grav['pages']->find($scope);
 
-        // No page there, or it isn't a Section List or Guides List page: search the whole site
+        // No page there, or it isn't a Section List or Guides List page, or a course's own page (subsite.md or course.md):
+        // search the whole site
         if (!$scopePage) {
             return null;
         }
-        if (!in_array($scopePage->template(), ['section-list', 'reader-list'], true)) {
+        if (!in_array($scopePage->template(), ['section-list', 'reader-list', 'subsite', 'course'], true)) {
             return null;
         }
 
@@ -446,6 +481,101 @@ class Quark2OpenPublishing extends Quark2
             $page = $page->parent();
         }
         return null;
+    }
+
+    /**
+     * A course's own page (subsite.md or course.md) has no content of its own, so visiting its address (for example
+     * /cpt363) goes to the course's home page instead (its course_home or subsite_home setting), as in Helios Course Hub.
+     */
+    public function onCourseOwnPage(Event $event)
+    {
+        if ($this->isAdmin()) {
+            return;
+        }
+        $page = $event['page'];
+        if (!$page || !in_array($page->template(), ['subsite', 'course'], true)) {
+            return;
+        }
+        // (Grav's redirect adds the site's base address itself, so it gets the home page's route, such as /cpt363/home)
+        $homePage = $this->courseHomePage($page);
+        if ($homePage && $homePage->route() !== $page->route()) {
+            $this->grav->redirect($homePage->route(), 302);
+        }
+    }
+
+    /**
+     * The course a page belongs to: the course's own page (subsite.md, as in Open MultiCourse Hub, or course.md, as in
+     * Grav Helios Course Hub) – the page itself or the nearest one above it – or null when the page isn't in a course.
+     */
+    protected function coursePageOf($page)
+    {
+        // go up from the page through its parents, looking for a course's own page
+        while ($page) {
+            if (in_array($page->template(), ['subsite', 'course'], true)) {
+                return $page;
+            }
+            $page = $page->parent();
+        }
+        return null;
+    }
+
+    /**
+     * A course's home page: its course_home or subsite_home setting (such as "home", as in Open Matter), or else its
+     * first visible page (as in Grav Helios Course Hub, whose course.md has no home setting) – or null when it has none.
+     */
+    public function courseHomePage($coursePage)
+    {
+        $header = (array) $coursePage->header();
+        $homeSlug = trim((string) ($header['course_home'] ?? $header['subsite_home'] ?? ''), '/');
+        if ($homeSlug !== '') {
+            $homePage = $coursePage->find($coursePage->route() . '/' . $homeSlug);
+            if ($homePage) {
+                return $homePage;
+            }
+        }
+        return $coursePage->children()->visible()->published()->first() ?: null;
+    }
+
+    /**
+     * The address of a course's home page (see courseHomePage), or the course's own address when it has none.
+     */
+    protected function courseHomeUrl($coursePage)
+    {
+        $homePage = $this->courseHomePage($coursePage);
+        return $homePage ? $homePage->url() : $coursePage->url();
+    }
+
+    /**
+     * The courses listed on the site: published course and subsite pages not hidden from the course list.
+     */
+    protected function listedCourses()
+    {
+        $listed = [];
+        $pages = $this->grav['pages']->all();
+        foreach (['course', 'subsite'] as $type) {
+            foreach ($pages->ofType($type)->published() as $coursePage) {
+                $header = (array) $coursePage->header();
+                if (empty($header['hide_from_course_list']) && empty($header['hide_from_subsite_list'])) {
+                    $listed[] = $coursePage;
+                }
+            }
+        }
+        return $listed;
+    }
+
+    /**
+     * A course's name for the header: its course_site_title or subsite_site_title setting, or else its title
+     * (the same order as Open Matter).
+     */
+    protected function courseTitle($coursePage)
+    {
+        $header = (array) $coursePage->header();
+        foreach (['course_site_title', 'subsite_site_title'] as $key) {
+            if (!empty($header[$key])) {
+                return $header[$key];
+            }
+        }
+        return $coursePage->title();
     }
 
     /**
@@ -507,6 +637,11 @@ class Quark2OpenPublishing extends Quark2
 
         // the home page (and the pages inside it) is always searched
         if ($topLevelPage->home()) {
+            return false;
+        }
+
+        // so are courses, which are usually hidden from the site's menu (the Courses page lists them instead)
+        if (in_array($topLevelPage->template(), ['subsite', 'course'], true)) {
             return false;
         }
 

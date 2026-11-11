@@ -1,0 +1,118 @@
+{# Course navbar below the site header: the course's name (links to its home) and its visible pages as tabs. When the
+   tabs don't fit (usually on phones), they move into a dropdown list (see the script below) - hibbittsdesign.org #}
+
+{# the current course page's menu name, for the dropdown button (or "Pages" when it isn't in the menu) #}
+{% set current_menu_name = 'THEME_QUARK_OPEN_PUBLISHING.COURSE_PAGES'|t %}
+{% for p in course_page.children.visible %}
+    {% if (p.active or p.activeChild) and not p.header.hide_from_menu %}
+        {% set current_menu_name = p.menu %}
+    {% endif %}
+{% endfor %}
+
+<nav class="course-navbar" aria-label="{{ (course_title ~ ' – ' ~ 'THEME_QUARK_OPEN_PUBLISHING.COURSE_MENU'|t)|e('html_attr') }}">
+    <div class="container course-navbar-inner">
+        <a class="course-navbar-name" href="{{ course_home_url }}">{{ course_title }}</a>
+        {# shown by the script only in compact mode #}
+        <button type="button" class="course-navbar-toggle" aria-expanded="false" aria-controls="course-navbar-menu" hidden>
+            <span class="course-navbar-toggle-label">{{ current_menu_name }}</span>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <ul class="course-navbar-menu" id="course-navbar-menu">
+            {% for p in course_page.children.visible %}
+                {% if not p.header.hide_from_menu %}
+                    {% set page_icon = p.header.menu_icon ?: p.header.icon %}
+                    <li>
+                        <a href="{{ p.url }}" class="{{ (p.active or p.activeChild) ? 'active' : '' }}"{% if p.active %} aria-current="page"{% endif %}>
+                            {% if page_icon %}<i class="{{ page_icon|fa_icon }}" aria-hidden="true"></i>{% endif %}
+                            {{ p.menu }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</nav>
+<script>
+/* keep --course-navbar-top equal to the header's height, which shrinks on scroll (see css/site.css);
+   the function wrapper lets "return" stop early in older browsers */
+(function () {
+    var header = document.getElementById('header');
+    if (!header || !window.ResizeObserver) {
+        return;
+    }
+    function saveHeaderHeight() {
+        document.documentElement.style.setProperty('--course-navbar-top', header.offsetHeight + 'px');
+    }
+    var headerWatcher = new ResizeObserver(saveHeaderHeight);
+    headerWatcher.observe(header);
+})();
+
+/* compact mode: when the tabs don't fit beside the course name (at any width), they move into a dropdown list opened by
+   a button showing the current page */
+(function () {
+    var navbar = document.querySelector('.course-navbar');
+    if (!navbar) {
+        return;
+    }
+    var menu = navbar.querySelector('.course-navbar-menu');
+    var toggle = navbar.querySelector('.course-navbar-toggle');
+
+    function openMenu() {
+        navbar.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMenu() {
+        navbar.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    function updateMode() {
+        // measure with the tabs showing: do they need more room than they have?
+        navbar.classList.remove('is-compact');
+        var tabsDontFit = menu.scrollWidth > menu.clientWidth + 1;
+
+        if (tabsDontFit) {
+            navbar.classList.add('is-compact');
+            toggle.hidden = false;
+        } else {
+            toggle.hidden = true;
+            closeMenu();
+        }
+    }
+
+    toggle.addEventListener('click', function () {
+        if (navbar.classList.contains('is-open')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    // close the list with Escape (back to the button), or by tapping anywhere outside the navbar
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && navbar.classList.contains('is-open')) {
+            closeMenu();
+            toggle.focus();
+        }
+    });
+    document.addEventListener('click', function (event) {
+        if (!navbar.contains(event.target)) {
+            closeMenu();
+        }
+    });
+    // ...or when keyboard focus moves on past the list (relatedTarget is where the focus went)
+    navbar.addEventListener('focusout', function (event) {
+        if (!navbar.contains(event.relatedTarget)) {
+            closeMenu();
+        }
+    });
+
+    // check again when the window changes size, and once the fonts have loaded (they change the tabs' widths)
+    window.addEventListener('resize', updateMode);
+    if (document.fonts) {
+        document.fonts.ready.then(updateMode);
+    }
+    updateMode();
+})();
+</script>

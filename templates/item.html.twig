@@ -2,6 +2,10 @@
    the Git Sync note and Creative Commons license, and no hero or sidebar in embedded mode - hibbittsdesign.org #}
 {% extends 'partials/base.html.twig' %}
 {% set blog = page.find(header_var('blog_url')|defined(theme_var('blog-page')|default('/blog'))) %}
+{# a post in a course's own blog (such as Weekly Units) uses that blog, not the site's #}
+{% if page.parent.template == 'blog' %}
+    {% set blog = page.parent %}
+{% endif %}
 {% set site_chrome = not embedded_mode and not theme_var('chromeless.enabled') %}
 {% set show_breadcrumbs = header_var('show_breadcrumbs', [page, blog])|defined(true) %}
 {% set show_sidebar = header_var('show_sidebar', [page, blog])|defined(true) and site_chrome %}
@@ -29,7 +33,8 @@
 <section id="body-wrapper" class="section blog-listing">
     <div class="container">
 
-        {% if show_breadcrumbs and config.plugins.breadcrumbs.enabled and site_chrome %}
+        {# (not inside a course: the course navbar already shows where the page is) #}
+        {% if show_breadcrumbs and config.plugins.breadcrumbs.enabled and site_chrome and not course_page %}
             {% include 'partials/breadcrumbs.html.twig' %}
         {% endif %}
 
