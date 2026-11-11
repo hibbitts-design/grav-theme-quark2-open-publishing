@@ -68,11 +68,12 @@ Your pages and settings stay as they are:
 1. Update Quark 2 Open Publishing in the Admin Panel (**Themes**), or with `bin/gpm update quark2-open-publishing`
 2. Clear the Grav cache (`bin/grav clearcache`)
 
-Your pages, settings and child theme (such as `mytheme`) stay as they are. Newer defaults do change how guide pages look, if you're updating from a version before 0.9.63:
+Your pages, settings and child theme (such as `mytheme`) stay as they are. Newer defaults do change how guide pages look, if you're updating from a version before 1.2.0:
 
 - **Previous/Next at the top and bottom, with the reading progress** (such as "Page 4 of 12") – since 0.9.59. To keep the earlier look, set **Prev/Next Page Controls Position** to Bottom and turn off **Show Reading Progress** on the guide's home page
 - **On phones, Previous/Next in a compact bar** fixed to the bottom of the screen – since 0.9.63 (**Show Sticky Prev/Next Bar**, on the guide's home page)
 - **On phones, the header slides away while scrolling down**, when Quark 2's Header Fixed is on – since 0.9.59 (**Hide Header While Scrolling**, in Quark 2 Options)
+- **On sites with more than one guide, the guide's name shows after the logo** on its pages, linking to the guide home – since 1.2.0
 - **Page badges** beside the section label, for pages that already have a Badge Label – since 0.9.57
 
 ## Theme Options
