@@ -123,7 +123,9 @@
         </nav>
       {% endif %}
 
-      {% if not(page.header.hide_page_title) and not(grav.uri.param('hidepagetitle')) %}
+      {# a course's module page whose text has its own "# ..." heading (as in Helios) gets no second title #}
+      {% if course_page and '<h1' in page.content %}
+      {% elseif not(page.header.hide_page_title) and not(grav.uri.param('hidepagetitle')) %}
         {# The page's own status badge, such as "Draft" (its Badge Label and Badge Color settings, also shown on its section
            card), beside the section label, so readers see it on the page too #}
         {% set page_badge_label = page.header.badge_label %}

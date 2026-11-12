@@ -66,11 +66,13 @@
       <img class="{{ cover_class }}" src="{{ cover.url }}" alt="{{ cover_alt }}">
     {% endif %}
 
-    {% if show_title and not title_beside_cover %}
+    {# a course page whose text has its own "# ..." heading (as in Helios) gets no second title #}
+    {% set text_has_title = course_page and '<h1' in page.content %}
+    {% if show_title and not title_beside_cover and not text_has_title %}
       <h1 class="sections-page-title-template h3">{{ page.title }}</h1>
     {% endif %}
     {# a hidden title stays for screen readers (a hero cover shows the title itself) #}
-    {% if not show_title and not hero_cover %}
+    {% if not show_title and not hero_cover and not text_has_title %}
       <h1 class="visually-hidden">{{ page.title }}</h1>
     {% endif %}
 
