@@ -12,8 +12,10 @@
 <nav class="course-navbar" aria-label="{{ (course_title ~ ' – ' ~ 'THEME_QUARK_OPEN_PUBLISHING.COURSE_MENU'|t)|e('html_attr') }}">
     <div class="container course-navbar-inner">
         <a class="course-navbar-name" href="{{ course_home_url }}">{{ course_title }}</a>
-        {# shown by the script only in compact mode #}
-        <button type="button" class="course-navbar-toggle" aria-expanded="false" aria-controls="course-navbar-menu" hidden>
+        {# shown by the script only in compact mode; screen readers hear its purpose too ("Schedule, course menu"), with
+           the visible text first so voice control users can say it #}
+        <button type="button" class="course-navbar-toggle" aria-expanded="false" aria-controls="course-navbar-menu"
+            aria-label="{{ (current_menu_name ~ ', ' ~ 'THEME_QUARK_OPEN_PUBLISHING.COURSE_MENU'|t)|e('html_attr') }}" hidden>
             <span class="course-navbar-toggle-label">{{ current_menu_name }}</span>
             <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
         </button>
