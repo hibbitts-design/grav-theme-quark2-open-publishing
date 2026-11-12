@@ -1,5 +1,5 @@
 # v1.2.0
-## XX/XX/2026
+## 11/12/2026
 
 1. [](#new)
     * Guide Color (guide home, Details tab): a light tint of the guide's own colour behind the header on all its pages, readable in light and dark modes
