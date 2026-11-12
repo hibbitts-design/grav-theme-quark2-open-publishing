@@ -7,7 +7,9 @@
 {% set sidebar_page_content = sidebar_page.content %}
 {% set sidebar_position = sidebar_page.header.position ?: 'top' %}
 
-{% if config.plugins.tntsearch.enabled or config.plugins.simplesearch.enabled %}
+{# (a course can turn its search off with its Show Search Box setting) #}
+{% set course_search_off = course_page and course_page.header.show_search_box is defined and not course_page.header.show_search_box %}
+{% if (config.plugins.tntsearch.enabled or config.plugins.simplesearch.enabled) and not course_search_off %}
 <div class="sidebar-content">
     {# (in a course, search just the course) #}
     {% set sidebar_search_scope = search_scope ?? null %}

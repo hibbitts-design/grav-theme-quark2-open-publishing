@@ -294,8 +294,10 @@
 
         {# The top of the side list: on a guide's pages, the Hide/Show sidebar button, and a search box (on pages of a Section
            List page: its Show Search Box setting; hidden in embedded mode) #}
+        {# (on a module page, the course's own Show Search Box setting) #}
+        {% set search_settings = (is_course_modules and course_page) ? course_page : reader_home %}
         {% set show_side_search = is_reader
-          and (reader_home.header.show_search_box is not defined or reader_home.header.show_search_box)
+          and (search_settings.header.show_search_box is not defined or search_settings.header.show_search_box)
           and (config.plugins.simplesearch.enabled or config.plugins.tntsearch.enabled) and not embedded_mode %}
         {# (the button can be turned off with the theme's Hide Sidebar Button option) #}
         {% set show_sidebar_toggle = theme_var('sidebar_hide_button', true) and is_reader and page.route != reader_home.route and not content_only %}
