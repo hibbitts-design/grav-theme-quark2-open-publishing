@@ -1,3 +1,10 @@
+# v1.2.1
+## 11/12/2026
+
+1. [](#improved)
+    * A course module with pages of its own (as the Common Cartridge Converter makes, for assignments) ends with a card for each, as in Open Course Hub and Grav Helios Course Hub
+    * A course whose home page is its Modules page shows the course's header image above it
+
 # v1.2.0
 ## 11/12/2026
 
