@@ -5,7 +5,7 @@
     * Guide Color (guide home, Details tab): a light tint of the guide's own colour behind the header on all its pages, readable in light and dark modes
     * On sites with more than one guide, the guide's name shows after the logo on its pages, linking to the guide home (hidden on narrow phones)
     * Cover Image Layout "Hero": the cover across the full width behind the guide's title and subtitle, using Quark 2's hero
-    * Course page types (in progress, for a future course skeleton)
+    * Courses, as in Open MultiCourse Hub and Grav Helios Course Hub (for the Open Course Space skeleton): Course, Courses Page, Modules Page and Course Page types, a course navbar with the course's pages, and each course's own colour, header image, sidebar and footer
     * Courses are in the site menu like guides, unless Hide from Menu is on
     * Courses have an Attribution tab, as guides do: an OER attribution block and license at the bottom of every course page
     * Show Search Box on the Courses page, as on a Guides List page, searching all the courses

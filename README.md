@@ -4,7 +4,7 @@
 
 ### A Quark 2 version of Quark Open Publishing
 
-<p><em>A Grav theme for open guides and books, with a blog and almost any other Grav page alongside them – embeddable anywhere, with Git-based open editing built in.</em></p>
+<p><em>A Grav theme for open guides, books and courses, with a blog and almost any other Grav page alongside them – embeddable anywhere, with Git-based open editing built in.</em></p>
 
 [![Grav Discord Chat](https://img.shields.io/discord/501836936584101899.svg?logo=discord&colorB=728ADA&label=Grav%20Discord%20Chat)](https://chat.getgrav.org) [![Latest Release](https://img.shields.io/github/v/release/hibbitts-design/grav-theme-quark2-open-publishing?style=flat-square&label=Release)](https://github.com/hibbitts-design/grav-theme-quark2-open-publishing/releases/latest) [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE) [![PHP](https://img.shields.io/badge/PHP-%3E%3D8.3-8892BF?style=flat-square&logo=php&logoColor=white)](https://learn.getgrav.org/17/basics/requirements)
 
@@ -14,12 +14,13 @@
 
 </div>
 
-Quark 2 Open Publishing brings Quark Open Publishing to Quark 2's modern design – its fonts, cards, Light, Dark and Auto modes, accent colour and theme toggle – and adds what open guides and books need on top, while keeping everything else Quark 2 can do, such as a blog and modular pages: guides with section cards and reading progress, pages that embed cleanly in other systems, and links that open each page's source in your Git repository.
+Quark 2 Open Publishing brings Quark Open Publishing to Quark 2's modern design – its fonts, cards, Light, Dark and Auto modes, accent colour and theme toggle – and adds what open guides, books and courses need on top, while keeping everything else Quark 2 can do, such as a blog and modular pages: guides with section cards and reading progress, pages that embed cleanly in other systems, and links that open each page's source in your Git repository.
 
 ## What Sets It Apart
 
-- **The same content as Quark Open Publishing** – pages, page settings, shortcodes, theme options and page URL parameters are the same (Reuse Pages as Markdown needs Grav 2, so it's only in this theme), so a site can move between the two themes without changing its content
+- **The same content as Quark Open Publishing** – pages, page settings, shortcodes, theme options and page URL parameters are the same (Reuse Pages as Markdown needs Grav 2, and courses are new, so both are only in this theme), so a site can move between the two themes without changing its content
 - **Guides that carry over to Grav Helios Open Reader** – the Section List page type, with section cards, parts, reading progress, Previous/Next navigation, Keep My Place, a last updated date and OER attribution, plus a Guides List page with a card for each guide, using the same page types and settings as [Grav Helios Open Reader](https://github.com/hibbitts-design/grav-skeleton-helios-open-reader), so an Open Reader publication can be copied in as it is
+- **Courses that carry over from Open MultiCourse Hub and Grav Helios Course Hub** – one course or many, each with a course navbar, its own colour, header image, sidebar and footer, modules with a module list and Previous/Next navigation, and a Courses page with a card for each course, using the same page types and settings as [Grav Helios Course Hub](https://github.com/hibbitts-design/grav-skeleton-helios-course-hub) (see [Courses](#courses))
 - **Comfortable reading** – section pages keep lines to a comfortable length with slightly larger text and no words broken across lines; wide tables scroll sideways, footnotes (`[^1]`, with no need to turn on Markdown Extra) sit as small notes below the text, glossary terms (`[term]OER[/term]`, defined in the Glossary setting of a section or of a standard page in the guide, which lists them on that page) show their definition when hovered over, tapped or chosen with the keyboard, captioned figures and tables can be numbered by section (the guide's Number Figures and Tables setting; a table's caption is a `Table: …` line), an image shown smaller than its full size can be tapped to see it larger, and on phones an optional Sections link jumps to the list of sections (the Sections Link on Phones theme option, off by default; renamed with the guide's Section Label (Plural) setting, e.g. "Units"); with the [Page TOC plugin](https://github.com/trilbymedia/grav-plugin-page-toc), the side list also shows the current page's sections (its headings), marking the one you're reading as you scroll, with an "On this page" box above the text on phones, as on Grav Open Course Hub's module pages; on phones, Previous/Next sit in a compact bar at the bottom of the screen, as in Grav Helios Open Reader (the guide's Show Sticky Prev/Next Bar setting)
 - **Arrow keys** – on guide pages, ← and → go to the previous and next page (→ on a guide's home page starts reading, and ← on its first page goes back to the home page), handy when presenting a guide by screen sharing, and **/** jumps to the guide's search box
 - **Built on Quark 2** – its design, blog, hero images, modular pages, and Light, Dark and Auto modes with a theme toggle, used as they are wherever possible
@@ -28,8 +29,8 @@ Quark 2 Open Publishing brings Quark Open Publishing to Quark 2's modern design 
 - **Open authoring with Git Sync** – a "View Git Repository" or "View/Edit Page in Git Repository" link in the menu, footer, or page
 - **Reuse pages as Markdown** – an optional "This page as Markdown (.md)" link below a page's content (or in the footer or menu), using Grav 2's Markdown output, so anyone can get a page's Markdown to adapt and reuse, with no Git Sync needed (the same link as in Grav Helios Open Reader), plus an optional full text link on each guide's home page to the whole guide as one Markdown file (llms-full.txt)
 - **Shortcodes and callouts** – Badge (a small label such as "Draft"), Embedly, Google Slides, H5P, iFrame, Link Preview Card, Markdown File, PDF, SpeakerDeck, Topics (an A–Z topics index, as in Open Course Hub), Show/Hide If Embedded (content shown only on the site, or only when embedded), and the callout shortcodes (`[objectives]`, `[key-takeaways]`, `[example]`, `[exercise]`, `[definition]`, `[reflection]`, `[case-study]`, `[announcement]`, `[project-brief]`, `[feedback-requested]`, `[process-note]`, `[references]` and `[excerpt]`), plus GitHub-style alerts
-- **Search** – with the SimpleSearch plugin, results grouped by section with the search words highlighted, and a search box on each guide that searches just that guide
-- **Open licensing and printing** – Creative Commons license display, OER attribution for guides, and print-friendly pages
+- **Search** – with the SimpleSearch plugin, results grouped by section with the search words highlighted, and a search box on each guide or course that searches just that guide or course
+- **Open licensing and printing** – Creative Commons license display, OER attribution for guides and courses, and print-friendly pages
 
 ## Quark 2 Open Publishing or Quark Open Publishing?
 
@@ -39,6 +40,7 @@ Quark 2 Open Publishing brings Quark Open Publishing to Quark 2's modern design 
 | Grav | 2.1 or newer | 1.7 or 2 |
 | Light and Dark modes | Light, Dark and Auto, with a theme toggle for visitors | Off, on, or following the visitor's system setting |
 | Content and settings | the same | the same |
+| Courses | Yes (Open Course Space) | No |
 
 Choose Quark 2 Open Publishing for new sites on Grav 2.1 or newer. Quark Open Publishing remains available for sites on Grav 1.7.
 
@@ -107,6 +109,16 @@ These work the same as in Quark Open Publishing – see its README:
 - **Pages for a guide** – a guide's own pages outside its reading order, such as Topics or Resources, in a folder without a number inside the guide's folder: while reading that guide, they appear in the site menu after a thin divider, ordered by **Menu Order**, with a link back to the guide (see [Pages for a Guide](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#pages-for-a-guide))
 - **Links between pages** – a relative link, such as `[Accessibility](../accessibility)`, keeps working when a guide moves to another folder or site (see [Links Between Pages](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#links-between-pages))
 - **Markdown of any page** – add `.md` to a page's address (for example `/open-education-essentials.md`, or `/index.md` for the home page) to get that page as Markdown, ready to reuse. This is Grav 2.1's Markdown output, which can be turned off in **Configuration → System → Content**
+
+## Courses
+
+Courses are the twin of guides, set up the way the Open Course Space skeleton shows:
+
+- **A course** – a top-level folder with a **Course** page (`course.md`) of its own: its card on the Courses page, home page, colour, attribution and search settings. Its pages are **Course Pages** (`course-page.md`), and modules sit in a **Modules Page** (`module.md`) with a card for each
+- **The course navbar** – a second row below the header with the course's name and pages, which becomes a dropdown when they don't fit. **Course Color** gives it a light tint (links keep the site's accent colour)
+- **Each course's own parts** – a `sidebar`, `footer` and `headerimage` folder inside the course (the header image is a banner on the course's home page)
+- **Courses page** – the **Courses Page** type (`course-list.md`), with a card for each course, using the Guides List page's cards and options
+- **Moving courses** – Open MultiCourse Hub courses (`subsite.md`) move in unchanged; Grav Helios Course Hub courses use the same page types and settings. An Open Course Hub course moves into its own folder with a `course.md` page
 
 ## Requirements
 

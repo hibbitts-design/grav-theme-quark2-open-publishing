@@ -1,8 +1,9 @@
-title: Section List Page Options
+title: Guide Options
 '@extends':
     type: default
     context: blueprints://pages
 
+# A guide's home page (the Section List page type, as in Grav Helios Open Reader) - hibbittsdesign.org
 form:
   fields:
     tabs:
@@ -10,6 +11,11 @@ form:
       active: 1
 
       fields:
+        content:
+          fields:
+            header.title:
+              label: Guide Title
+
         options:
           type: tab
 
