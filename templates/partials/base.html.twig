@@ -6,7 +6,8 @@
 
 {# Heading Weight option: lighter headings (see css/site.css) unless set to Quark 2's default #}
 {# Hide Header While Scrolling option (on unless turned off; js/reader.js reads this class on guide pages) #}
-{% block body_classes %}{{ parent() }}{% if theme_var('heading_weight') != 'quark2' %} headings-light{% endif %}{% if theme_var('header_hide_on_scroll', true) %} header-hide-on-scroll{% endif %}{% if course_page and show_site_chrome %} in-course{% endif %}{% endblock %}
+{# guide-or-course: every page in a guide or course, embedded too, gets the same type scale (see css/site.css) #}
+{% block body_classes %}{{ parent() }}{% if theme_var('heading_weight') != 'quark2' %} headings-light{% endif %}{% if theme_var('header_hide_on_scroll', true) %} header-hide-on-scroll{% endif %}{% if course_page and show_site_chrome %} in-course{% endif %}{% if guide_home or course_page %} guide-or-course{% endif %}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}

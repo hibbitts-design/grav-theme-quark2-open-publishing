@@ -11,6 +11,7 @@
     * A blog post shows its image and credit at the top, as on its card (`header_image: false` turns it off)
     * Accordion, RSS Feeds and Latest Custom Page Type page types, and more Open Matter page settings, for pages moved from older themes
     * Accessibility: links on separate lines in blog post cards are far enough apart to tap
+    * Every page in a guide or course uses the same title, heading and text sizes as a guide's section pages (titles 30px and left-aligned, not 60px); a Custom Page Types page's title is its main (h1) heading
 1. [](#bugfix)
     * No automatic hyphenation on a guide home's details and intro either (only on its cards), as on the Guides page and guide pages
     * A modular part injected into another page (with Page Inject) no longer adds extra space around itself

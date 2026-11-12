@@ -1062,3 +1062,30 @@ i.fa + a {
 .blog-grid .card-body :is(p, li) {
     line-height: 1.6;
 }
+
+/* Every page in a guide or a course (body class guide-or-course, embedded too) uses the same type scale as a guide's section
+   pages (see css/reader.css): titles 30px, bold and left-aligned (not Quark 2's 60px, or centred on blog posts),
+   headings a step below, and text a little larger. ":not(.card *)" leaves cards (such as blog post cards) as they are */
+body.guide-or-course main h1 {
+    font-size: clamp(1.5rem, 2vw + 0.75rem, 1.875rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    text-align: start;
+}
+
+body.guide-or-course main .content-title {
+    text-align: start;
+}
+
+body.guide-or-course main :is(.content-item, .e-content) h2:not(.card *) {
+    font-size: clamp(1.25rem, 1vw + 0.875rem, 1.5rem);
+}
+
+body.guide-or-course main :is(.content-item, .e-content) h3:not(.card *) {
+    font-size: clamp(1.125rem, 0.5vw + 1rem, 1.25rem);
+}
+
+body.guide-or-course main :is(.content-item, .e-content) :is(p, li, dd, blockquote):not(.card *) {
+    font-size: 1.0625rem;
+}
