@@ -172,6 +172,36 @@
         {{ page.content|raw }}
       </div>
 
+      {# A course module with pages of its own (as the Common Cartridge Converter makes, for a module's assignments and
+         pages): a card for each, after the module's text, as in Open Course Hub and Grav Helios Course Hub - hibbittsdesign.org #}
+      {# (only a module itself: a course page right inside the Modules page, not a Multi-Section page, whose own
+         sections are already on it) #}
+      {% set is_module = course_page and page.template == 'course-page' and page.parent.template == 'module' %}
+      {% set module_pages = is_module ? page.children.visible : [] %}
+      {% if module_pages|length > 0 %}
+        <ul class="section-cards columns section-cards-lines-2 module-page-cards">
+          {% for module_page in module_pages %}
+            {# the card's text: the page's Description, or the start of its content, as on the Modules page #}
+            {% set card_description = module_page.header.description ?: module_page.summary|striptags|trim %}
+            <li class="column col-6 col-sm-12">
+              <div class="card section-card{{ card_description ? '' : ' section-card-title-only' }}">
+                <div class="card-header">
+                  <h2 class="card-title h5"><a class="section-card-link" href="{{ module_page.url }}">{{ module_page.title }}</a>
+                    {#- the arrow, as on the other section cards -#}
+                    <i class="fa fa-arrow-right section-card-arrow" aria-hidden="true"></i>
+                  </h2>
+                </div>
+                {% if card_description %}
+                  <div class="card-body">
+                    <p class="section-card-description">{{ card_description }}</p>
+                  </div>
+                {% endif %}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
       {# Previous/Next navigation: tiles grouped with the reading progress (as in Helios Open Reader), or the classic buttons.
          Section List pages always use the tiles. Multi-Section pages use the classic buttons unless their
          "Next/Prev Section Buttons Style" setting (or, for sites that set it in 3.0.x, the old theme-wide

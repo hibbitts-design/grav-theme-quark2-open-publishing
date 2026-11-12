@@ -18,6 +18,11 @@
     {% endset %}
     {% include 'partials/hero.html.twig' with { id: 'guide-hero', hero_image: hero_cover, content: hero_text } %}
   {% endif %}
+  {# a course whose home page is its Modules page (as in Open Course Hub, and for converted courses): the course's
+     header image above it, as on a course's own Home page #}
+  {% if list_mode == 'modules' %}
+    {% include 'partials/course_hero.html.twig' %}
+  {% endif %}
 {% endblock %}
 
 {% block content %}
