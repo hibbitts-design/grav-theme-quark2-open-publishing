@@ -23,7 +23,7 @@
     {% endfor %}
   {% else %}
     {% for child_page in pages.children.visible.published %}
-      {% if child_page.template == 'section-list' and not child_page.header.hide_from_guides_list %}
+      {% if child_page.template in ['section-list', 'guide'] and not child_page.header.hide_from_guides_list %}
         {% set guide_pages = guide_pages|merge([child_page]) %}
       {% endif %}
     {% endfor %}

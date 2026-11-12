@@ -13,7 +13,7 @@
   {# Reader details (the same page settings as Helios Open Reader) are set on the reader home: the Multi-Section page
      or Section List page that this page belongs to - hibbittsdesign.org #}
   {# (and a course's Modules page, module.md, for its module pages: course-page.md one or two levels below it) #}
-  {% set reader_home_templates = ['sections', 'section-list', 'module'] %}
+  {% set reader_home_templates = ['sections', 'section-list', 'guide', 'module'] %}
   {% if page.template in reader_home_templates %}
     {% set reader_home = page %}
   {% elseif page.parent.template in reader_home_templates %}
@@ -25,7 +25,7 @@
      doesn't list its items (such as a publication copied from Grav Helios Open Reader), its child pages,
      in the Order By and Order settings' order when set (as on the Section List page) #}
   {# a guide or a course's Modules page: pages with the side list, back link, Keep My Place and search #}
-  {% set is_reader = reader_home.template in ['section-list', 'module'] %}
+  {% set is_reader = reader_home.template in ['section-list', 'guide', 'module'] %}
   {% set is_course_modules = reader_home.template == 'module' %}
   {% if is_reader and reader_home.header.content.items is not defined %}
     {% set reader_sections = reader_home.children.visible() %}
@@ -69,7 +69,7 @@
      set them, Previous/Next is at the top and bottom, with the reading progress, as in Helios Open Reader; Multi-Section
      pages keep Previous/Next at the bottom only, without the progress. (?? only uses the default when a setting isn't
      there at all, so a guide set to "bottom" or with the progress turned off keeps its choice.) #}
-  {% set is_guide = reader_home.template == 'section-list' %}
+  {% set is_guide = reader_home.template in ['section-list', 'guide'] %}
   {% set prev_next_position = reader_home.header.prev_next_position ?? (is_guide ? 'both' : 'bottom') %}
   {% set show_reading_progress = reader_home.header.show_reading_progress ?? is_guide %}
 

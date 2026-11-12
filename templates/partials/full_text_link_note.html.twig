@@ -13,7 +13,7 @@
 {% endif %}
 
 {# only on a guide's home page (the Section List page type) #}
-{% if viewed_page.template != 'section-list' %}
+{% if viewed_page.template not in ['section-list', 'guide'] %}
     {% set show_link = false %}
 {% endif %}
 

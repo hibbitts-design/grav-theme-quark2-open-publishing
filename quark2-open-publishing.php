@@ -12,7 +12,11 @@ use RocketTheme\Toolbox\Event\Event;
 class Quark2OpenPublishing extends Quark2
 {
     // guide pages
-    const GUIDE_TEMPLATES = ['section-list', 'section', 'section-page', 'sections', 'subsection'];
+    const GUIDE_TEMPLATES = ['section-list', 'guide', 'section', 'section-page', 'sections', 'subsection'];
+
+    // a guide's home page and the Guides page: the names used so far, and the new ones (guide.md and guide-list.md)
+    const GUIDE_HOME_TEMPLATES = ['section-list', 'guide'];
+    const GUIDE_LIST_TEMPLATES = ['reader-list', 'guide-list'];
 
     // The search route set in the SimpleSearch plugin, for example '/search'
     protected $searchRoute = '/search';
@@ -163,10 +167,14 @@ class Quark2OpenPublishing extends Quark2
         // The Multi-Page Content (Section List) page that search is limited to, if any (see getSearchScopePage)
         $twig->twig_vars['search_scope_page'] = $this->getSearchScopePage();
 
-        // The guide the current page belongs to (its Section List page, or null), and how many guides the site has –
+        // The guide the current page belongs to (its home page, guide.md or section-list.md, or null), and how many guides the site has –
         // for the guide's name and colour in the header (see templates/partials/logo.html.twig and base.html.twig)
         $twig->twig_vars['guide_home'] = $this->guideHomeOf($this->grav['page']);
-        $twig->twig_vars['guide_count'] = count($this->grav['pages']->all()->ofType('section-list')->published());
+        $guideCount = 0;
+        foreach (self::GUIDE_HOME_TEMPLATES as $type) {
+            $guideCount += count($this->grav['pages']->all()->ofType($type)->published());
+        }
+        $twig->twig_vars['guide_count'] = $guideCount;
 
         // The course the current page is in: its course_page (the course's subsite.md or course.md page, or null), plus
         // the address of its home page and its name – for the course navbar, colour, sidebar and footer
@@ -312,9 +320,9 @@ class Quark2OpenPublishing extends Quark2
             return;
         }
 
-        // only a guide's home page (the Section List page type)
+        // only a guide's home page (guide.md, or section-list.md)
         $guide = $this->grav['pages']->find($guideRoute);
-        if (!$guide || $guide->template() !== 'section-list') {
+        if (!$guide || !in_array($guide->template(), self::GUIDE_HOME_TEMPLATES, true)) {
             return;
         }
 
@@ -421,14 +429,14 @@ class Quark2OpenPublishing extends Quark2
                 $pagesToRemove[] = $page;
             } elseif ($this->isInsideUnpublishedPage($page)) {
                 $pagesToRemove[] = $page;
-            } elseif ($scopePage && $scopePage->template() === 'reader-list' && !$this->isInListedGuide($page)) {
+            } elseif ($scopePage && in_array($scopePage->template(), self::GUIDE_LIST_TEMPLATES, true) && !$this->isInListedGuide($page)) {
                 // from a Guides List page: only the pages of the guides it shows (not the blog or other pages)
                 $pagesToRemove[] = $page;
             } elseif ($scopePage && in_array($scopePage->template(), ['course-list', 'subsitelist'], true)
                 && !in_array($this->coursePageOf($page), $this->listedCourses(), true)) {
                 // from the Courses page: only the pages of the courses it shows
                 $pagesToRemove[] = $page;
-            } elseif ($scopePage && in_array($scopePage->template(), ['section-list', 'subsite', 'course'], true) && !$this->isPageOrChildOf($page, $scopePage)) {
+            } elseif ($scopePage && in_array($scopePage->template(), ['section-list', 'guide', 'subsite', 'course'], true) && !$this->isPageOrChildOf($page, $scopePage)) {
                 // from a guide or a course: only its own pages
                 $pagesToRemove[] = $page;
             }
@@ -464,7 +472,7 @@ class Quark2OpenPublishing extends Quark2
         if (!$scopePage) {
             return null;
         }
-        if (!in_array($scopePage->template(), ['section-list', 'reader-list', 'course-list', 'subsitelist', 'subsite', 'course'], true)) {
+        if (!in_array($scopePage->template(), ['section-list', 'guide', 'reader-list', 'guide-list', 'course-list', 'subsitelist', 'subsite', 'course'], true)) {
             return null;
         }
 
@@ -472,14 +480,14 @@ class Quark2OpenPublishing extends Quark2
     }
 
     /**
-     * The guide a page belongs to: the Section List page itself, or the nearest one above it – or null when the page
+     * The guide a page belongs to: its home page itself (guide.md or section-list.md), or the nearest one above it – or null when the page
      * isn't part of a guide.
      */
     protected function guideHomeOf($page)
     {
         // go up from the page through its parents, looking for a guide's home page
         while ($page) {
-            if ($page->template() === 'section-list') {
+            if (in_array($page->template(), self::GUIDE_HOME_TEMPLATES, true)) {
                 return $page;
             }
             $page = $page->parent();
@@ -721,7 +729,7 @@ class Quark2OpenPublishing extends Quark2
                 foreach (array_slice($parents, 1) as $parent) {
                     $trailTitles[] = $parent->title();
                 }
-            } elseif ($page->template() === 'section-list') {
+            } elseif (in_array($page->template(), self::GUIDE_HOME_TEMPLATES, true)) {
                 // a guide's home page at the top of the site goes with its own guide's pages, not under the site title
                 $groupTitle = $page->title();
             }

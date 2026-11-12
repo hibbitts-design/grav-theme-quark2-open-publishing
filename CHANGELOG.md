@@ -11,6 +11,7 @@
     * Show Search Box on the Courses page, as on a Guides List page, searching all the courses
     * Show Search Box for a course (Course tab, on unless turned off), as for a guide
     * Show on Guides List (guide home, Details tab): leave a guide's card off the Guides List page and its search
+    * New names guide.md (guide home) and guide-list.md (Guides page), like course.md and course-list.md; the old names still work
 1. [](#improved)
     * Font Awesome 4 outline icon names, such as `[fa="calendar-o"]` in pages from older themes, show as their newer outline icons
     * A blog post shows its image and credit at the top, as on its card (`header_image: false` turns it off)
