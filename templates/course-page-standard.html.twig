@@ -11,6 +11,12 @@
     {% embed 'partials/layout.html.twig' with { show_sidebar: show_sidebar } %}
         {% block item %}
             <article class="content-item">
+                {# the page's title as its h1, as on guide and module pages, unless the text has its own "# ..." heading (as in
+                   Helios); Hide Page Title keeps it for screen readers only #}
+                {% if '<h1' not in page.content %}
+                    {% set hide_title = page.header.hide_page_title or grav.uri.param('hidepagetitle') %}
+                    <h1{% if hide_title %} class="visually-hidden"{% endif %}>{{ page.title }}</h1>
+                {% endif %}
                 {% include 'partials/page_header_image.html.twig' %}
                 {# Learning Objectives box (as in Helios Course Hub) #}
                 {% if page.header.learning_objectives %}

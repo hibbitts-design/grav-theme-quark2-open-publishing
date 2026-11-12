@@ -1078,6 +1078,17 @@ body.guide-or-course main .content-title {
     text-align: start;
 }
 
+/* (Quark 2 styles an h2 right after an h1 as a subtitle; in a guide or course it's a section heading, so it keeps its
+   usual spacing, colour and accent dash) */
+body.guide-or-course main h1 + h2 {
+    margin-top: 1.75rem;
+    color: var(--q2-text-strong);
+}
+
+body.guide-or-course main h1 + h2::before {
+    display: block;
+}
+
 body.guide-or-course main :is(.content-item, .e-content) h2:not(.card *) {
     font-size: clamp(1.25rem, 1vw + 0.875rem, 1.5rem);
 }
@@ -1088,4 +1099,17 @@ body.guide-or-course main :is(.content-item, .e-content) h3:not(.card *) {
 
 body.guide-or-course main :is(.content-item, .e-content) :is(p, li, dd, blockquote):not(.card *) {
     font-size: 1.0625rem;
+}
+
+/* hidden from view but still read by screen readers, such as a course page's hidden title */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
 }
