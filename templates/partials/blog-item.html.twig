@@ -10,9 +10,12 @@
     <header class="content-title text-center">
         {# embedded (for example in an LMS), the title is plain text rather than a link to this same page;
            a link post keeps its title link, which goes to the article it shares #}
-        {% if site_chrome or page.header.link %}
+        {# /hidepagetitle:true keeps the title for screen readers only #}
+        {% if grav.uri.param('hidepagetitle') %}
+            <h1 class="p-name visually-hidden">{{ page.title }}</h1>
+        {% elseif site_chrome or page.header.link %}
             {% include 'partials/blog/title.html.twig' with {title_level: 'h1'} %}
-        {% elseif not grav.uri.param('hidepagetitle') %}
+        {% else %}
             <h1 class="p-name mt-1">{{ page.title }}</h1>
         {% endif %}
         {% if not grav.uri.param('hidepagetitle') %}

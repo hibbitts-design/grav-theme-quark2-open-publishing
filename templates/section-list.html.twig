@@ -69,6 +69,10 @@
     {% if show_title and not title_beside_cover %}
       <h1 class="sections-page-title-template h3">{{ page.title }}</h1>
     {% endif %}
+    {# a hidden title stays for screen readers (a hero cover shows the title itself) #}
+    {% if not show_title and not hero_cover %}
+      <h1 class="visually-hidden">{{ page.title }}</h1>
+    {% endif %}
 
     {# Start button, linking to the first section, at the end of the details (an empty start_button_text hides it) #}
     {% if page.header.start_button_text is defined %}
