@@ -1,8 +1,13 @@
 {# OER attribution and license from the reader home's settings (Multi-Section or Section List page), shown on each of its pages when turned on (as in Helios Open Reader) - hibbittsdesign.org #}
-{% set attribution_text = reader_home.header.attribution_text %}
-{% set license = reader_home.header.license %}
-{% set license_url = reader_home.header.license_url %}
-{% if reader_home.header.show_oer_attribution and (attribution_text or license) and not embedded_mode %}
+{# in a course: the course's own settings (its Attribution tab), unless the guide or page it's in has its own #}
+{% set attribution_page = reader_home ?? null %}
+{% if course_page and not (attribution_page and attribution_page.header.show_oer_attribution) %}
+    {% set attribution_page = course_page %}
+{% endif %}
+{% set attribution_text = attribution_page ? attribution_page.header.attribution_text : null %}
+{% set license = attribution_page ? attribution_page.header.license : null %}
+{% set license_url = attribution_page ? attribution_page.header.license_url : null %}
+{% if attribution_page and attribution_page.header.show_oer_attribution and (attribution_text or license) and not embedded_mode %}
     <div class="reader-attribution">
         {% if attribution_text %}
             <p>{{ attribution_text|raw }}</p>

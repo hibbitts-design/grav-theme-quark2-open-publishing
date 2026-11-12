@@ -81,6 +81,10 @@
     {% if 'class="page-extras"' not in main_content %}
         {% include 'partials/page_extras.html.twig' %}
     {% endif %}
+    {# a course's attribution (Attribution tab), on its pages that don't place it themselves, such as a blog #}
+    {% if course_page and 'class="reader-attribution"' not in main_content %}
+        {% include 'partials/reader_attribution.html.twig' %}
+    {% endif %}
 {% endblock %}
 
 {# Footer: the text of the site's "footer" page (and the Git Sync link, when its location is the footer),

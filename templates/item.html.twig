@@ -42,6 +42,8 @@
             {% block item %}
                 {% include 'partials/blog-item.html.twig' %}
                 {% include 'partials/page_extras.html.twig' with { inline: true } %}
+                {# a course's attribution, on a post in a course #}
+                {% include 'partials/reader_attribution.html.twig' %}
             {% endblock %}
             {% block sidebar %}
                 {% include 'partials/sidebar.html.twig' %}

@@ -79,6 +79,18 @@ form:
                 2: '2 lines'
                 3: '3 lines'
 
+            header.show_search_box:
+              type: toggle
+              label: Show Search Box
+              highlight: 0
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+              help: 'A search box above the cards that searches all the courses.'
+
         advanced:
           fields:
             overrides:

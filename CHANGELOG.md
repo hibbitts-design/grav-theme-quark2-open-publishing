@@ -7,6 +7,9 @@
     * Cover Image Layout "Hero": the cover across the full width behind the guide's title and subtitle, using Quark 2's hero
     * Course page types (in progress, for a future course skeleton)
     * Courses are in the site menu like guides, unless Hide from Menu is on
+    * Courses have an Attribution tab, as guides do: an OER attribution block and license at the bottom of every course page
+    * Show Search Box on the Courses page, as on a Guides List page, searching all the courses
+    * Show on Guides List (guide home, Details tab): leave a guide's card off the Guides List page and its search
 1. [](#improved)
     * Font Awesome 4 outline icon names, such as `[fa="calendar-o"]` in pages from older themes, show as their newer outline icons
     * A blog post shows its image and credit at the top, as on its card (`header_image: false` turns it off)

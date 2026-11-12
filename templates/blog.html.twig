@@ -74,6 +74,8 @@
                     {% endif %}
 
                     {% include 'partials/page_extras.html.twig' with { inline: true } %}
+                    {# a course's attribution, on a blog or Weekly Units page in a course #}
+                    {% include 'partials/reader_attribution.html.twig' %}
                 {% endblock %}
 
                 {% block sidebar %}

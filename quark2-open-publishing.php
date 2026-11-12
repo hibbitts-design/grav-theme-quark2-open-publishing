@@ -421,8 +421,12 @@ class Quark2OpenPublishing extends Quark2
                 $pagesToRemove[] = $page;
             } elseif ($this->isInsideUnpublishedPage($page)) {
                 $pagesToRemove[] = $page;
-            } elseif ($scopePage && $scopePage->template() === 'reader-list' && !$this->isInGuide($page)) {
-                // from a Guides List page: only the guides' own pages (not the blog, other pages or the Guides List page)
+            } elseif ($scopePage && $scopePage->template() === 'reader-list' && !$this->isInListedGuide($page)) {
+                // from a Guides List page: only the pages of the guides it shows (not the blog or other pages)
+                $pagesToRemove[] = $page;
+            } elseif ($scopePage && in_array($scopePage->template(), ['course-list', 'subsitelist'], true)
+                && !in_array($this->coursePageOf($page), $this->listedCourses(), true)) {
+                // from the Courses page: only the pages of the courses it shows
                 $pagesToRemove[] = $page;
             } elseif ($scopePage && in_array($scopePage->template(), ['section-list', 'subsite', 'course'], true) && !$this->isPageOrChildOf($page, $scopePage)) {
                 // from a guide or a course: only its own pages
@@ -436,8 +440,8 @@ class Quark2OpenPublishing extends Quark2
 
     /**
      * The page that search is limited to, from ?scope=/its-route (added by the search box on a Multi-Page Content page,
-     * or on a Guides List page to search all the guides). Only a Section List or Guides List page is accepted; otherwise
-     * (or with no scope) this returns null and the whole site is searched.
+     * or on a Guides List or Courses page to search all the guides or courses). Only a guide, a course, or a Guides List
+     * or Courses page is accepted; otherwise (or with no scope) this returns null and the whole site is searched.
      */
     protected function getSearchScopePage()
     {
@@ -455,12 +459,12 @@ class Quark2OpenPublishing extends Quark2
         // Find the page at that address
         $scopePage = $this->grav['pages']->find($scope);
 
-        // No page there, or it isn't a Section List or Guides List page, or a course's own page (subsite.md or course.md):
-        // search the whole site
+        // No page there, or it isn't a guide, a Guides List page, a course's own page (subsite.md or course.md) or the
+        // Courses page: search the whole site
         if (!$scopePage) {
             return null;
         }
-        if (!in_array($scopePage->template(), ['section-list', 'reader-list', 'subsite', 'course'], true)) {
+        if (!in_array($scopePage->template(), ['section-list', 'reader-list', 'course-list', 'subsitelist', 'subsite', 'course'], true)) {
             return null;
         }
 
@@ -579,18 +583,12 @@ class Quark2OpenPublishing extends Quark2
     }
 
     /**
-     * Is the page part of a guide: a Section List page itself, or a page inside one?
+     * Is the page in a guide that its Guides List page shows (Show on Guides List not turned off)?
      */
-    protected function isInGuide($page)
+    protected function isInListedGuide($page)
     {
-        // go up from the page through its parents, looking for a guide's home page
-        while ($page) {
-            if ($page->template() === 'section-list') {
-                return true;
-            }
-            $page = $page->parent();
-        }
-        return false;
+        $guideHome = $this->guideHomeOf($page);
+        return $guideHome && empty(((array) $guideHome->header())['hide_from_guides_list']);
     }
 
     /**

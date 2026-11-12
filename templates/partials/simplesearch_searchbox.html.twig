@@ -9,6 +9,10 @@
     {# from a Guides List page (or its results page): all the guides #}
     {% set search_placeholder = 'THEME_QUARK_OPEN_PUBLISHING.SEARCH_GUIDES_PLACEHOLDER'|t %}
     {% set search_label = 'THEME_QUARK_OPEN_PUBLISHING.SEARCH_GUIDES_LABEL'|t %}
+{% elseif box_scope and box_scope.template in ['course-list', 'subsitelist'] %}
+    {# from the Courses page (or its results page): all the courses #}
+    {% set search_placeholder = 'THEME_QUARK_OPEN_PUBLISHING.SEARCH_COURSES_PLACEHOLDER'|t %}
+    {% set search_label = 'THEME_QUARK_OPEN_PUBLISHING.SEARCH_COURSES_LABEL'|t %}
 {% elseif box_scope %}
     {% set search_placeholder = 'THEME_QUARK_OPEN_PUBLISHING.SEARCH_SCOPE_PLACEHOLDER'|t %}
     {% set search_label = 'THEME_QUARK_OPEN_PUBLISHING.SEARCH_SCOPE_LABEL'|t %}

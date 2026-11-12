@@ -1186,37 +1186,6 @@ html:not(.reader-sections-hidden) .reader-sidebar-toggle-show,
     width: auto;
 }
 
-/* ---------- OER attribution ---------- */
-
-.reader-attribution {
-    color: var(--q2-text-muted);
-    font-size: 0.875rem;
-    text-align: center;
-    margin-top: 2.5rem;
-}
-
-/* after the page links, the attribution sits close below them, as one block (as in Grav Helios Open Reader) */
-.page-extras + .reader-attribution {
-    margin-top: 1rem;
-}
-
-/* (Quark 2 gives paragraphs their own colour and size, so these take the attribution's instead) */
-.reader-attribution p {
-    margin: 0 0 0.3rem;
-    color: inherit;
-    font-size: inherit;
-}
-
-/* its links stay muted, like the text, so the line reads as fine print (underlined, so they still look like links) */
-.reader-attribution a {
-    color: inherit;
-    text-decoration: underline;
-}
-
-.reader-attribution a:hover {
-    color: var(--q2-text-strong);
-}
-
 /* ---------- Reduced motion ---------- */
 /* Cards and Previous/Next tiles don't lift on hover for visitors who ask for less motion */
 @media (prefers-reduced-motion: reduce) {

@@ -132,6 +132,18 @@ form:
                 plain: Plain
               help: 'The badge colour.'
 
+            header.hide_from_guides_list:
+              type: toggle
+              label: Show on Guides List
+              default: 0
+              highlight: 0
+              options:
+                0: PLUGIN_ADMIN.YES
+                1: PLUGIN_ADMIN.NO
+              validate:
+                type: bool
+              help: 'Whether this guide''s card appears on a Guides List page.'
+
             header.navbar_bg_color:
               type: colorpicker
               label: Guide Color

@@ -151,6 +151,55 @@ form:
               rows: 4
               help: 'Markdown shown under the module list on every module page.'
 
+        # the same attribution settings as a guide's, shown at the bottom of the course's pages
+        attribution:
+          type: tab
+          title: Attribution
+
+          fields:
+
+            header.show_oer_attribution:
+              type: toggle
+              label: Show OER Attribution Block
+              highlight: 1
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+              help: 'The attribution text and license at the bottom of every page in this course.'
+
+            header.license:
+              type: select
+              label: License
+              toggleable: true
+              default: ''
+              options:
+                '': 'Not specified'
+                'CC BY 4.0': 'CC BY 4.0 – Attribution'
+                'CC BY-SA 4.0': 'CC BY-SA 4.0 – Attribution-ShareAlike'
+                'CC BY-NC 4.0': 'CC BY-NC 4.0 – Attribution-NonCommercial'
+                'CC BY-NC-SA 4.0': 'CC BY-NC-SA 4.0 – Attribution-NonCommercial-ShareAlike'
+                'CC BY-ND 4.0': 'CC BY-ND 4.0 – Attribution-NoDerivatives'
+                'CC BY-NC-ND 4.0': 'CC BY-NC-ND 4.0 – Attribution-NonCommercial-NoDerivatives'
+              help: 'The course''s Creative Commons license.'
+
+            header.license_url:
+              type: text
+              label: License URL
+              toggleable: true
+              placeholder: 'e.g. https://creativecommons.org/licenses/by/4.0/'
+              help: 'Links the license. Leave empty for no link.'
+
+            header.attribution_text:
+              type: textarea
+              label: Attribution Text
+              toggleable: true
+              rows: 3
+              placeholder: 'e.g. This course by Jane Smith is licensed under CC BY 4.0.'
+              help: 'The full attribution statement. Supports basic HTML.'
+
         # Hide from Menu comes from this theme's default.yaml; only its help text changes here (as for guides)
         advanced:
           fields:

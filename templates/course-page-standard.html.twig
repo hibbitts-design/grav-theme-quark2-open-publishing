@@ -25,6 +25,7 @@
                 {% endif %}
                 {{ page.content|raw }}
                 {% include 'partials/page_extras.html.twig' with { inline: true } %}
+                {% include 'partials/reader_attribution.html.twig' %}
             </article>
         {% endblock %}
         {% block sidebar %}

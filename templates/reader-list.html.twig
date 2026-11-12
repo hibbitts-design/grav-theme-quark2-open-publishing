@@ -11,7 +11,7 @@
   {% set list_kind = list_kind ?? 'guide' %}
 
   {# The guides: top-level Section List pages (pages is the site's root page), in the site's page order, as in Helios Open Reader.
-     Hidden (not visible) and unpublished guides are left out. #}
+     Hidden (not visible) and unpublished guides are left out, and so are guides with Show on Guides List turned off. #}
   {# The courses: top-level course.md or subsite.md pages, in page order (not hidden by
      hide_from_course_list or hide_from_subsite_list – courses are usually left out of the menu) #}
   {% set guide_pages = [] %}
@@ -23,7 +23,7 @@
     {% endfor %}
   {% else %}
     {% for child_page in pages.children.visible.published %}
-      {% if child_page.template == 'section-list' %}
+      {% if child_page.template == 'section-list' and not child_page.header.hide_from_guides_list %}
         {% set guide_pages = guide_pages|merge([child_page]) %}
       {% endif %}
     {% endfor %}
@@ -88,11 +88,11 @@
       {% set section_cards_class = section_cards_class ~ ' section-cards-lines-' ~ card_description_lines %}
     {% endif %}
 
-    {# Show Search Box (off unless turned on): a search box above the cards, on the left, that searches all the guides -
-       this page is its search_scope, so only the guides' own pages are searched (see onSimpleSearchCollection), not the
-       blog, other pages or this page. With 2 or 3 cards per row it's as wide as one card (the same grid columns as the
+    {# Show Search Box (off unless turned on): a search box above the cards, on the left, that searches all the guides
+       or courses listed here - this page is its search_scope, so only their own pages are searched (see
+       onSimpleSearchCollection), not the blog, other pages or this page. With 2 or 3 cards per row it's as wide as one card (the same grid columns as the
        cards); with 1 per row it keeps its usual width. Hidden in embedded mode. #}
-    {% if list_kind == 'guide' and page.header.show_search_box and (config.plugins.simplesearch.enabled or config.plugins.tntsearch.enabled) and not embedded_mode %}
+    {% if page.header.show_search_box and (config.plugins.simplesearch.enabled or config.plugins.tntsearch.enabled) and not embedded_mode %}
       {% set search_row_class = 'section-list-actions' %}
       {% set search_box_class = 'reader-search' %}
       {% if cards_per_row > 1 %}
