@@ -1056,3 +1056,9 @@ i.fa + a {
         transition: none;
     }
 }
+
+/* text on blog post cards: line spacing of 24px, so links on separate lines (as in Weekly Units) are far enough apart
+   to tap (WCAG 2.2 target size) */
+.blog-grid .card-body :is(p, li) {
+    line-height: 1.6;
+}

@@ -10,6 +10,7 @@
     * Font Awesome 4 outline icon names, such as `[fa="calendar-o"]` in pages from older themes, show as their newer outline icons
     * A blog post shows its image and credit at the top, as on its card (`header_image: false` turns it off)
     * Accordion, RSS Feeds and Latest Custom Page Type page types, and more Open Matter page settings, for pages moved from older themes
+    * Accessibility: Embedly link cards have a title for screen readers, and links on separate lines in blog post cards are far enough apart to tap
 1. [](#bugfix)
     * No automatic hyphenation on a guide home's details and intro either (only on its cards), as on the Guides page and guide pages
     * A modular part injected into another page (with Page Inject) no longer adds extra space around itself

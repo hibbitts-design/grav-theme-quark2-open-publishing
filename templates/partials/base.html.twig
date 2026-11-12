@@ -59,6 +59,21 @@
 {% block javascripts %}
     {{ parent() }}
     {% do assets.addJs('theme://js/my.js', {group:'bottom'}) %}
+    {# Embedly card frames get a title for screen readers ("Link preview: " and the card's title), which Embedly's own
+       frames lack. In the page's head, so it's ready before Embedly's script runs (see the bottom block) #}
+    {% set link_preview_label = 'THEME_QUARK_OPEN_PUBLISHING.LINK_PREVIEW'|t %}
+    {% do assets.addInlineJs(
+        "window.embedly = window.embedly || function () { (window.embedly.q = window.embedly.q || []).push(arguments); };\n"
+        ~ "embedly('on', 'card.rendered', function (iframe) {\n"
+        ~ "    var label = " ~ link_preview_label|json_encode ~ ";\n"
+        ~ "    var cardTitle = '';\n"
+        ~ "    try {\n"
+        ~ "        var heading = iframe.contentDocument.querySelector('h1, h2, .title');\n"
+        ~ "        if (heading) { cardTitle = heading.textContent.trim(); }\n"
+        ~ "    } catch (error) {}\n"
+        ~ "    iframe.setAttribute('title', cardTitle ? label + ': ' + cardTitle : label);\n"
+        ~ "});"
+    ) %}
 {% endblock %}
 
 {# A "Skip to content" link first on the page, shown when it gets keyboard focus #}
