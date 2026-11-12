@@ -6,6 +6,7 @@
     * On sites with more than one guide, the guide's name shows after the logo on its pages, linking to the guide home (hidden on narrow phones)
     * Cover Image Layout "Hero": the cover across the full width behind the guide's title and subtitle, using Quark 2's hero
     * Course page types (in progress, for a future course skeleton)
+    * Courses are in the site menu like guides, unless Hide from Menu is on
 1. [](#improved)
     * Font Awesome 4 outline icon names, such as `[fa="calendar-o"]` in pages from older themes, show as their newer outline icons
     * A blog post shows its image and credit at the top, as on its card (`header_image: false` turns it off)
