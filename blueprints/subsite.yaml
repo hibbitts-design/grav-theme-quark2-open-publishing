@@ -132,6 +132,18 @@ form:
                 type: bool
               help: 'The image in the course''s headerimage folder, as a banner.'
 
+            header.course_navbar_below_image:
+              type: toggle
+              label: Course Navbar Below Header Image
+              default: 0
+              highlight: 0
+              options:
+                1: PLUGIN_ADMIN.YES
+                0: PLUGIN_ADMIN.NO
+              validate:
+                type: bool
+              help: 'On the home page, the course navbar goes below the header image.'
+
             header.keep_my_place:
               type: toggle
               label: Keep My Place

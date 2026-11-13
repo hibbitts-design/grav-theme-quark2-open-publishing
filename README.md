@@ -116,7 +116,7 @@ Courses are the twin of guides, set up the way the Open Course Space skeleton sh
 
 - **A course** – a top-level folder with a **Course** page (`course.md`) of its own: its card on the Courses page, home page, colour, attribution and search settings. Its pages are **Course Pages** (`course-page.md`), and modules sit in a **Modules Page** (`module.md`) with a card for each
 - **The course navbar** – a second row below the header with the course's name and pages, which becomes a dropdown when they don't fit. **Course Color** gives it a light tint (links keep the site's accent colour)
-- **Each course's own parts** – a `sidebar`, `footer` and `headerimage` folder inside the course (the header image is a banner on the course's home page)
+- **Each course's own parts** – a `sidebar`, `footer` and `headerimage` folder inside the course (the header image is a banner on the course's home page; **Course Navbar Below Header Image** puts the course navbar under it there)
 - **Courses page** – the **Courses Page** type (`course-list.md`), with a card for each course, using the Guides List page's cards and options
 - **Moving courses** – Open MultiCourse Hub courses (`subsite.md`) move in unchanged; Grav Helios Course Hub courses use the same page types and settings. An Open Course Hub course moves into its own folder with a `course.md` page
 

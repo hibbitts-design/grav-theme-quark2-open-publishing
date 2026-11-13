@@ -1,16 +1,12 @@
-{# The course's header image as a banner on its home page only (hide_header_image: true turns it off) - just the image,
-   as in Open Matter: the course's name is already in the course navbar above it - hibbittsdesign.org #}
-{% set is_course_home_page = course_page and page.url == course_home_url %}
-{% if is_course_home_page and show_site_chrome and not course_page.header.hide_header_image %}
-    {# the course's "headerimage" folder, or else the site's #}
-    {% set course_banner = page.find(course_page.route ~ '/headerimage').media.images|first %}
-    {% if not course_banner %}
-        {% set course_banner = page.find('/headerimage').media.images|first %}
-    {% endif %}
-    {% if course_banner %}
-        {# alt="" as the image is decoration (screen readers skip it) #}
-        <div class="course-banner">
-            <img src="{{ course_banner.url }}" alt="">
-        </div>
+{# The course's header image as a banner on its home page only - just the image, as in Open Matter: the course's name
+   is in the course navbar, above it or (Course Navbar Below Header Image setting) below it. The banner itself is worked
+   out in partials/base.html.twig - hibbittsdesign.org #}
+{% if course_banner %}
+    {# alt="" as the image is decoration (screen readers skip it) #}
+    <div class="course-banner">
+        <img src="{{ course_banner.url }}" alt="">
+    </div>
+    {% if course_navbar_below_banner %}
+        {% include 'partials/course_navbar.html.twig' %}
     {% endif %}
 {% endif %}

@@ -2,14 +2,19 @@
    tabs don't fit (usually on phones), they move into a dropdown list (see the script below) - hibbittsdesign.org #}
 
 {# the current course page's menu name, for the dropdown button (or "Pages" when it isn't in the menu) #}
+{# (and how many tabs there are: with none, the course's name has the navbar to itself – see css/site.css) #}
 {% set current_menu_name = 'THEME_QUARK_OPEN_PUBLISHING.COURSE_PAGES'|t %}
+{% set tab_count = 0 %}
 {% for p in course_page.children.visible %}
+    {% if not p.header.hide_from_menu %}
+        {% set tab_count = tab_count + 1 %}
+    {% endif %}
     {% if (p.active or p.activeChild) and not p.header.hide_from_menu %}
         {% set current_menu_name = p.menu %}
     {% endif %}
 {% endfor %}
 
-<nav class="course-navbar" aria-label="{{ (course_title ~ ' – ' ~ 'THEME_QUARK_OPEN_PUBLISHING.COURSE_MENU'|t)|e('html_attr') }}">
+<nav class="course-navbar{{ tab_count == 0 ? ' course-navbar-no-tabs' : '' }}" aria-label="{{ (course_title ~ ' – ' ~ 'THEME_QUARK_OPEN_PUBLISHING.COURSE_MENU'|t)|e('html_attr') }}">
     <div class="container course-navbar-inner">
         <a class="course-navbar-name" href="{{ course_home_url }}">{{ course_title }}</a>
         {# shown by the script only in compact mode; screen readers hear its purpose too ("Schedule, course menu"), with
@@ -19,7 +24,7 @@
             <span class="course-navbar-toggle-label">{{ current_menu_name }}</span>
             <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
         </button>
-        <ul class="course-navbar-menu" id="course-navbar-menu">
+        <ul class="course-navbar-menu" id="course-navbar-menu"{% if tab_count == 0 %} hidden{% endif %}>
             {% for p in course_page.children.visible %}
                 {% if not p.header.hide_from_menu %}
                     {% set page_icon = p.header.menu_icon ?: p.header.icon %}

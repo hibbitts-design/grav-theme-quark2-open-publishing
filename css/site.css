@@ -694,6 +694,13 @@ body.header-light:not(.scrolled) #header .navbar-guide-name {
     text-decoration: none;
 }
 
+/* a course with no tabs (only its home page): its name can use the whole navbar, without the divider after it */
+.course-navbar-no-tabs .course-navbar-name {
+    max-width: 100%;
+    padding-right: 0;
+    border-right: none;
+}
+
 .course-navbar-name:hover {
     color: var(--q2-link);
 }
