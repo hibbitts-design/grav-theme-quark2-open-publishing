@@ -1,8 +1,9 @@
 # v1.2.3
-## XX/XX/2026
+## 11/13/2026
 
 1. [](#improved)
     * On a site with no menu (such as a single converted course), phones show the light/dark toggle in the header, without a menu button that would open almost nothing
+    * On phones and tablets, the course navbar slides away with the header when scrolling down, and comes back with it when scrolling up, instead of staying on screen
 
 # v1.2.2
 ## 11/12/2026
