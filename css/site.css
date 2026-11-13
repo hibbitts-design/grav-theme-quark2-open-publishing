@@ -800,14 +800,23 @@ body.in-course [id] {
     scroll-margin-top: calc(var(--course-navbar-top, var(--q2-header-height, 72px)) + 4.75rem);
 }
 
-/* on phones and tablets: at the very top of the window once the header slides away (js/reader.js) */
+/* on phones and tablets, the course navbar doesn't stay on screen while reading: scrolling down, it slides away with the
+   header (js/reader.js), and comes back with it when scrolling up */
 @media (max-width: 959px) {
     .course-navbar {
-        transition: top 0.2s ease;
+        transition: top 0.2s ease, transform 0.2s ease;
     }
 
     body.header-fixed.header-hide-on-scroll.reader-header-away .course-navbar {
         top: 0;
+        transform: translateY(-100%);
+    }
+
+    /* with Hide Header While Scrolling off (or no fixed header), it simply scrolls away with the page */
+    body:not(.header-fixed) .course-navbar,
+    body:not(.header-hide-on-scroll) .course-navbar {
+        position: relative;
+        top: auto;
     }
 }
 
