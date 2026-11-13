@@ -1,5 +1,5 @@
 # v1.2.4
-## XX/XX/2026
+## 11/13/2026
 
 1. [](#new)
     * Single Course Site Logo Link (Open Publishing Options, Courses): with only one course listed and no guides, the logo goes to the course's home page (the default) or the site's home page, as in Grav Helios Course Hub
