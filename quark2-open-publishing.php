@@ -184,10 +184,12 @@ class Quark2OpenPublishing extends Quark2
         $twig->twig_vars['course_title'] = $coursePage ? $this->courseTitle($coursePage) : null;
 
         // A course's home page is called by the course's name, as a guide's home page is by the guide's: in the browser
-        // tab and its heading (for screen readers, or on screen), instead of "Home". Only for this request, and not for a
-        // Modules page used as the home page, whose "Modules" heading is part of the page
+        // tab and its heading (for screen readers, or on screen), instead of "Home". Only for this request, not for a
+        // Modules page used as the home page (whose "Modules" heading is part of the page), and not for the page's
+        // Markdown version (.md), which keeps the page's own title, as in its file
         $currentPage = $this->grav['page'];
-        if ($coursePage && $currentPage->url() === $twig->twig_vars['course_home_url'] && $currentPage->template() !== 'module') {
+        $isMarkdownVersion = $uri->extension() === 'md';
+        if ($coursePage && !$isMarkdownVersion && $currentPage->url() === $twig->twig_vars['course_home_url'] && $currentPage->template() !== 'module') {
             // keep its menu label, which otherwise follows the title
             $currentPage->menu($currentPage->menu());
             $currentPage->title($twig->twig_vars['course_title']);
