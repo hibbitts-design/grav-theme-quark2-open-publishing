@@ -203,12 +203,20 @@ class Quark2OpenPublishing extends Quark2
         $twig->twig_vars['course_has_sidebar'] = $courseHasSidebar;
         $listedCourses = $this->listedCourses();
 
-        // Only one course (and no guides): the site is that course, so the logo goes straight to its home page, as in
-        // Grav Helios Course Hub (the Courses page, if there is one, stays at its own address) – unless the
-        // Single Course Site Logo Link setting keeps it on the site's home page
+        // Only one course (and no guides), or only one guide (and no courses): the site is that course or guide, so the
+        // logo goes straight to its home page, as in Grav Helios Course Hub (the Courses or Guides page, if there is one,
+        // stays at its own address) – unless the Single Guide or Course Logo Link setting keeps it on the site's home page
         $logoLinkTarget = $this->config->get('theme.logo_link_target', 'single_course');
-        if ($logoLinkTarget === 'single_course' && count($listedCourses) === 1 && $twig->twig_vars['guide_count'] === 0) {
-            $twig->twig_vars['home_url'] = $this->courseHomeUrl($listedCourses[0]);
+        if ($logoLinkTarget === 'single_course') {
+            if (count($listedCourses) === 1 && $twig->twig_vars['guide_count'] === 0) {
+                $twig->twig_vars['home_url'] = $this->courseHomeUrl($listedCourses[0]);
+            } elseif ($twig->twig_vars['guide_count'] === 1 && count($listedCourses) === 0) {
+                foreach (self::GUIDE_HOME_TEMPLATES as $type) {
+                    foreach ($this->grav['pages']->all()->ofType($type)->published() as $guideHome) {
+                        $twig->twig_vars['home_url'] = $guideHome->url();
+                    }
+                }
+            }
         }
 
         if ($this->isAdmin() && ($this->grav['config']->get('plugins.shortcode-core.enabled'))) {

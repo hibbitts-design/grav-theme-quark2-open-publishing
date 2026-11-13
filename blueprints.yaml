@@ -198,17 +198,13 @@ form:
                 '1': Enabled
               validate:
                 type: bool
-            coursesoptions:
-              type: section
-              title: 'Courses'
-              underline: true
             logo_link_target:
               type: select
-              label: 'Single Course Site Logo Link'
-              help: 'Where the logo goes when only one course is listed and the site has no guides.'
+              label: 'Single Guide or Course Logo Link'
+              help: 'Where the logo goes when the site has only one guide or course.'
               default: single_course
               options:
-                single_course: 'Course Home Page (default)'
+                single_course: 'Guide or Course Home Page (default)'
                 site_home: 'Site Home Page'
             typographyoptions:
               type: section
