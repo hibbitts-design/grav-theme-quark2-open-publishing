@@ -1,3 +1,11 @@
+# v1.2.2
+## 11/12/2026
+
+1. [](#new)
+    * Course Navbar Below Header Image (Course tab, off by default): on the course's home page, the course navbar goes below the header image, as in Open Course Hub
+1. [](#improved)
+    * A course with no pages in its navbar shows its full name there, without the divider after it
+
 # v1.2.1
 ## 11/12/2026
 
