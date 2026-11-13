@@ -16,10 +16,16 @@
 {% endif %}
 {% set course_navbar_below_banner = course_banner and course_page.header.course_navbar_below_image %}
 
+{# Is the site menu empty (no pages, custom menu items or Git Sync link, as on a site with a single converted course)?
+   Then on phones the light/dark toggle shows in the header itself, instead of a menu button that would open almost
+   nothing (see css/site.css). The menu is rendered here just to check for links - hibbittsdesign.org #}
+{% set site_menu_html %}{% include 'partials/navigation.html.twig' %}{% endset %}
+{% set site_menu_empty = '<a ' not in site_menu_html %}
+
 {# Heading Weight option: lighter headings (see css/site.css) unless set to Quark 2's default #}
 {# Hide Header While Scrolling option (on unless turned off; js/reader.js reads this class on guide pages) #}
 {# guide-or-course: every page in a guide or course, embedded too, gets the same type scale (see css/site.css) #}
-{% block body_classes %}{{ parent() }}{% if theme_var('heading_weight') != 'quark2' %} headings-light{% endif %}{% if theme_var('header_hide_on_scroll', true) %} header-hide-on-scroll{% endif %}{% if course_page and show_site_chrome %} in-course{% endif %}{% if guide_home or course_page %} guide-or-course{% endif %}{% endblock %}
+{% block body_classes %}{{ parent() }}{% if theme_var('heading_weight') != 'quark2' %} headings-light{% endif %}{% if theme_var('header_hide_on_scroll', true) %} header-hide-on-scroll{% endif %}{% if course_page and show_site_chrome %} in-course{% endif %}{% if guide_home or course_page %} guide-or-course{% endif %}{% if site_menu_empty %} site-menu-empty{% endif %}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}

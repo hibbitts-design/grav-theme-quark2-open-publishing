@@ -694,6 +694,18 @@ body.header-light:not(.scrolled) #header .navbar-guide-name {
     text-decoration: none;
 }
 
+/* No site menu (see partials/base.html.twig): on phones, the light/dark toggle stays in the header, and the menu button
+   (which would open just the logo and that toggle) is left out. 860px is where Quark 2 switches to its phone header */
+@media (max-width: 860px) {
+    body.site-menu-empty .mobile-menu {
+        display: none;
+    }
+
+    body.site-menu-empty .navbar-section.actions {
+        display: flex;
+    }
+}
+
 /* a course with no tabs (only its home page): its name can use the whole navbar, without the divider after it */
 .course-navbar-no-tabs .course-navbar-name {
     max-width: 100%;
