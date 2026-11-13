@@ -82,7 +82,7 @@ Your pages, settings and child theme (such as `mytheme`) stay as they are. Newer
 
 All options are available in the Admin Panel under **Themes → Quark 2 Open Publishing**.
 
-- **Open Publishing Options** – Creative Commons license display, Reuse Pages as Markdown, chromeless site, menu dropdowns, **Hide Sidebar Button** (on by default: readers can hide a guide's sidebar on wider screens), **Sections Link on Phones** (off by default: a link at the top of guide pages that jumps to the section list, useful for long guides with many sections), Heading Weight (lighter headings using the heading font as designed, the default, or Quark 2's bolder default), and H5P setup
+- **Open Publishing Options** – Creative Commons license display, Reuse Pages as Markdown, chromeless site, menu dropdowns, **Hide Sidebar Button** (on by default: readers can hide a guide's sidebar on wider screens), **Sections Link on Phones** (off by default: a link at the top of guide pages that jumps to the section list, useful for long guides with many sections), **Single Course Site Logo Link** (with only one course listed and no guides, the logo goes to the course's home page by default, as in Grav Helios Course Hub, or to the site's home page), Heading Weight (lighter headings using the heading font as designed, the default, or Quark 2's bolder default), and H5P setup
 - **Quark 2 Options** – Light, Dark or Auto mode by default, accent colour, logos and favicon, header and footer (including **Hide Header While Scrolling**, on by default: on guide pages on phones, a fixed header slides away while scrolling down and returns when scrolling up), blog page, and Font Awesome
 - **Custom Menu Items** – text, icon, URL, and target for extra menu links
 - **Git Sync Link** – location, link type (view or edit), icon and text, and a custom Git repository URL
@@ -118,6 +118,7 @@ Courses are the twin of guides, set up the way the Open Course Space skeleton sh
 - **The course navbar** – a second row below the header with the course's name and pages, which becomes a dropdown when they don't fit. **Course Color** gives it a light tint (links keep the site's accent colour)
 - **Each course's own parts** – a `sidebar`, `footer` and `headerimage` folder inside the course (the header image is a banner on the course's home page; **Course Navbar Below Header Image** puts the course navbar under it there)
 - **Courses page** – the **Courses Page** type (`course-list.md`), with a card for each course, using the Guides List page's cards and options
+- **A single course** – with only one course listed and no guides, the logo goes to the course's home page; set **Single Course Site Logo Link** in the theme options to keep it on the site's home page
 - **Moving courses** – Open MultiCourse Hub courses (`subsite.md`) move in unchanged; Grav Helios Course Hub courses use the same page types and settings. An Open Course Hub course moves into its own folder with a `course.md` page
 
 ## Requirements
