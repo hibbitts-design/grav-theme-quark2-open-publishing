@@ -1,3 +1,9 @@
+# v1.2.6
+## XX/XX/2026
+
+1. [](#improved)
+    * Demo content: the Reuse this guide Side Box, Give a Guide Its Own Address on the Read Me page, and https footer links, as in Open Publishing Space
+
 # v1.2.5
 ## 11/13/2026
 
