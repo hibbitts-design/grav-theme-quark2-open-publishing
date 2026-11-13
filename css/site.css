@@ -1137,6 +1137,20 @@ body.guide-or-course main .content-title {
     text-align: start;
 }
 
+/* (a blog post's title, such as a course's weekly unit: without the side padding Pico gives an article's header, which
+   only suits a centred title, so it lines up with the post's text) */
+body.guide-or-course main article > header.content-title {
+    padding-inline: 0;
+}
+
+/* ...and a blog's title without a hero image (such as a course's Weekly Units or Course News) lines up with the posts below,
+   instead of Quark 2's centred box */
+body.guide-or-course .blog-page-header {
+    max-width: none;
+    margin-inline: 0;
+    text-align: start;
+}
+
 /* (Quark 2 styles an h2 right after an h1 as a subtitle; in a guide or course it's a section heading, so it keeps its
    usual spacing, colour and accent dash) */
 body.guide-or-course main h1 + h2 {
