@@ -1,3 +1,9 @@
+# v1.2.5
+## 11/13/2026
+
+1. [](#improved)
+    * Single Guide or Course Logo Link (was Single Course Site Logo Link, now in the Guides section): with only one guide and no courses, the logo also goes to the guide's home page, so a Guides page can be the home page of a one-guide site (choose Site Home Page to keep the logo there)
+
 # v1.2.4
 ## 11/13/2026
 
