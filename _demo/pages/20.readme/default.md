@@ -21,6 +21,17 @@ For example, the URL [https://demo.hibbittsdesign.org/grav-open-publishing-quark
 
 On Grav 2.1 and newer, the "This page as Markdown (.md)" link below a page's content gets that page as Markdown, ready to reuse – the same as adding `.md` to the page's address, for example `/blog/hero-classes.md`, or `/index.md` for the home page. The link's settings are under **Reuse Pages as Markdown** in **Themes → My Theme**, and Grav's Markdown output can be turned off in **Configuration → System → Content**.
 
+## Give a Guide Its Own Address
+
+Want a guide to open at its own address – for a talk, a workshop or a class? Point a second domain or subdomain at this site's folder (your web host's control panel can do this), then create `user/env/<that address>/config/system.yaml` with:
+
+```yaml
+home:
+  alias: '/my-guide'
+```
+
+The site's main address still opens as before, and both addresses share the same pages. A `site.yaml` beside it can also give that address its own description and share image – see Grav's [Environment Configuration](https://learn.getgrav.org/2/advanced/environment-config).
+
 ## What Else Can the Open Publishing Space do for You? ##
 Learn more about the capabilities of the Open Publishing Space project in its [README on GitHub](https://github.com/hibbitts-design/grav-skeleton-open-publishing-space#readme).
 
