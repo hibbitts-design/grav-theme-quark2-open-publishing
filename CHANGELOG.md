@@ -1,3 +1,9 @@
+# v1.2.8
+## XX/XX/2026
+
+1. [](#improved)
+    * Courses page: a course card without an image now shows a band in its place, in the course's Course Color (or the site's accent colour), so it lines up with cards that have one
+
 # v1.2.7
 ## 11/14/2026
 
