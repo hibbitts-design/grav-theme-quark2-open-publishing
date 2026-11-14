@@ -1,9 +1,3 @@
-# v1.2.8
-## XX/XX/2026
-
-1. [](#improved)
-    * Course header images are a little dimmer and softer in dark mode, so a bright photo doesn't glare against the dark page
-
 # v1.2.7
 ## 11/14/2026
 
