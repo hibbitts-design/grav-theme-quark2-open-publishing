@@ -1,7 +1,8 @@
 # v1.2.6
-## XX/XX/2026
+## 11/13/2026
 
 1. [](#improved)
+    * The guide's name no longer shows after the logo on sites with more than one guide – the guide's colour and its back link already show which guide you're in
     * Demo content: the Reuse this guide Side Box, Give a Guide Its Own Address on the Read Me page, and https footer links, as in Open Publishing Space
 
 # v1.2.5
