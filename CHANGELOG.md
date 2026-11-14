@@ -1,3 +1,9 @@
+# v1.2.7
+## 11/14/2026
+
+1. [](#bugfix)
+    * PDF shortcode: the PDF now shows in the browser's own PDF viewer, instead of Google's viewer, which sometimes started a "gview" download that failed with "File wasn't available on site"
+
 # v1.2.6
 ## 11/13/2026
 
