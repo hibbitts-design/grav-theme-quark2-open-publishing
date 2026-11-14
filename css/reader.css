@@ -137,6 +137,14 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     .section-cards > .col-sm-12 { grid-column: span 12; }
 }
 
+/* A course card without an image: a band in the image's place and shape (2:1, as the images are cropped), in the
+   course's Course Color (--card-band-color, set on the card) or the site's accent colour, softened (see
+   reader-list.html.twig) */
+.card-color-band {
+    aspect-ratio: 2 / 1;
+    background: color-mix(in oklab, var(--card-band-color, var(--q2-accent)) 55%, transparent);
+}
+
 /* Cards side by side line up: each card's image, title and details share rows with the other cards in its row,
    so a one-line title leaves space to match a two-line title next to it (subgrid; older browsers keep each card's
    own heights). Only in lists without side-image cards, which have their own layout. */
@@ -565,6 +573,11 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
         min-height: 9rem;
     }
 
+    /* a colour band fills its column, as an image does */
+    .section-card-image-side .card-color-band {
+        aspect-ratio: auto;
+    }
+
     /* the image is cropped to fill its column, however tall the text beside it is */
     .section-card-image-side .card-image img {
         position: absolute;
@@ -586,6 +599,10 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
 }
 
 @media (max-width: 599px) {
+    .section-card-image-side .card-color-band {
+        height: 10rem;
+    }
+
     .section-card-image-side .card-image img {
         height: 10rem;
         aspect-ratio: auto;

@@ -162,11 +162,21 @@
             {% set card_title = guide_page.header.course_list_title ?: guide_page.header.subsite_list_title ?: guide_page.title %}
             {% set card_author = guide_page.header.instructor %}
           {% endif %}
+          {# a course card without an image gets a band in the image's place, in the course's Course Color (or the
+             site's accent colour), so it still lines up with the cards that have one #}
+          {% set has_color_band = list_kind == 'course' and not card_image %}
+          {% set color_band_style = '' %}
+          {% if has_color_band %}
+            {% set course_color = guide_page.header.navbar_bg_color %}
+            {% if course_color and course_color matches '/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/' %}
+              {% set color_band_style = '--card-band-color:' ~ course_color %}
+            {% endif %}
+          {% endif %}
           {% set card_class = 'card section-card' %}
-          {% if card_image and card_image_layout == 'side' %}
+          {% if (card_image or has_color_band) and card_image_layout == 'side' %}
             {% set card_class = card_class ~ ' section-card-image-side' %}
           {% endif %}
-          {% if not card_image and not card_description and not card_author
+          {% if not card_image and not has_color_band and not card_description and not card_author
             and not guide_page.header.edition and not guide_page.header.last_updated %}
             {% set card_class = card_class ~ ' section-card-title-only' %}
           {% endif %}
@@ -176,6 +186,8 @@
                 <div class="card-image">
                   <img class="img-responsive" src="{{ card_image.cropZoom(800, 400).url }}" alt="">
                 </div>
+              {% elseif has_color_band %}
+                <div class="card-image card-color-band" aria-hidden="true"{% if color_band_style %} style="{{ color_band_style }}"{% endif %}></div>
               {% endif %}
               <div class="card-header">
                 {# the guide's status badge such as "New" or "Draft" (its Badge Label and Badge Color settings, as in Helios Open Reader) #}
