@@ -799,11 +799,6 @@ body.in-course [id] {
     object-fit: cover; /* fills the band, trimming the image's edges rather than stretching it */
 }
 
-/* in dark mode, a little dimmer and softer, so a bright photo doesn't glare against the dark page */
-:root[data-theme='dark'] .course-banner img {
-    filter: brightness(0.85) saturate(0.9);
-}
-
 /* Accordion pages (Open Matter's accordion page type): sections that open and close, in Quark 2's card style */
 /* the sections sit together in one bordered block, with a line between each (as in Open Matter) */
 .accordion {
