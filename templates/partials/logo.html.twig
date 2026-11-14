@@ -1,8 +1,0 @@
-{# Quark 2's logo, followed by the guide's name on a guide's pages when the site has more than one guide – linking to
-   the guide's home page, while the logo still goes to the site's home page. Hidden on narrow phones (see css/site.css),
-   where the guide's colour and the page's own back link show which guide it is - hibbittsdesign.org #}
-{% include '@quark2/partials/logo.html.twig' %}
-{# (a course's name and menu are in the course navbar below the header instead – see partials/course_navbar.html.twig) #}
-{% if guide_home and guide_count > 1 and not mobile %}
-    <a href="{{ guide_home.url }}" class="navbar-guide-name">{{ guide_home.menu }}</a>
-{% endif %}

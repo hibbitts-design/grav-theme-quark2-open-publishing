@@ -75,7 +75,6 @@ Your pages, settings and child theme (such as `mytheme`) stay as they are. Newer
 - **Previous/Next at the top and bottom, with the reading progress** (such as "Page 4 of 12") – since 0.9.59. To keep the earlier look, set **Prev/Next Page Controls Position** to Bottom and turn off **Show Reading Progress** on the guide's home page
 - **On phones, Previous/Next in a compact bar** fixed to the bottom of the screen – since 0.9.63 (**Show Sticky Prev/Next Bar**, on the guide's home page)
 - **On phones, the header slides away while scrolling down**, when Quark 2's Header Fixed is on – since 0.9.59 (**Hide Header While Scrolling**, in Quark 2 Options)
-- **On sites with more than one guide, the guide's name shows after the logo** on its pages, linking to the guide home – since 1.2.0
 - **Page badges** beside the section label, for pages that already have a Badge Label – since 0.9.57
 
 ## Theme Options
@@ -103,7 +102,7 @@ These work the same as in Quark Open Publishing – see its README:
 - [Search](https://github.com/hibbitts-design/grav-theme-quark-open-publishing#search) – SimpleSearch, or the optional TNTSearch plugin
 - **Side Box** – Markdown under a guide's side list, such as a call to action: set it in the guide's Section List page settings for every page, change it on any page, or enter `false` to hide it on a page (or a section and its pages). It's the same `side_box` setting as in Grav Helios Open Reader, so it moves with a guide
 - **Hide sidebar** – on wider screens, readers can hide a guide's sidebar to focus on the page, with the button in the same top corner to show it again; their choice is remembered. Turn it off with the **Hide Sidebar Button** theme option
-- **Guide Color and name** – set **Guide Color** on a guide's home page (Details tab) to give its pages a light tint of that colour behind the header (readable in light and dark modes); links keep the site's accent colour. Leave it off for the site's own colours. On sites with more than one guide, the guide's name also shows after the logo on its pages, linking to the guide home. Only in this theme – Quark Open Publishing ignores the setting
+- **Guide Color** – set **Guide Color** on a guide's home page (Details tab) to give its pages a light tint of that colour behind the header (readable in light and dark modes); links keep the site's accent colour. Leave it off for the site's own colours. Only in this theme – Quark Open Publishing ignores the setting
 - **A single guide** – with only one guide and no courses, the logo goes to the guide's home page, so a Guides page can be the site's home page while the guide stays one click away; set **Single Guide or Course Logo Link** in the theme options to keep it on the site's home page
 - **Hero cover** – set **Cover Image Layout** to Hero on a guide's home page to show its cover across the full width behind the title and subtitle, using Quark 2's hero (its `hero_classes` and `hero_align` settings also work). Only in this theme
 - **Older icon names** – Font Awesome 4 outline names such as `[fa="calendar-o"]` or `[fa="file-text-o"]`, common in pages from older themes, show as their newer outline icons

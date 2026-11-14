@@ -544,48 +544,6 @@ a.content-badge-link {
     hyphens: manual;
 }
 
-/* A guide's name in the header, after the logo (sites with more than one guide; see templates/partials/logo.html.twig) */
-#header .navbar-section.logo {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    min-width: 0;
-}
-
-#header .navbar-guide-name {
-    padding-left: 0.75rem;
-    border-left: 1px solid var(--q2-divider);
-    color: var(--q2-text-strong);
-    font-weight: 600;
-    text-decoration: none;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    min-width: 0;
-}
-
-#header .navbar-guide-name:hover {
-    color: var(--q2-link);
-}
-
-/* over a hero image, with Quark 2's Header Transparent on: the same white or near-black text as Quark 2's own logo */
-body.header-dark:not(.scrolled) #header .navbar-guide-name {
-    color: #ffffff;
-    border-left-color: rgb(255 255 255 / 0.4);
-}
-
-body.header-light:not(.scrolled) #header .navbar-guide-name {
-    color: #111111;
-    border-left-color: rgb(17 17 17 / 0.3);
-}
-
-/* on narrow phones, just the logo – the guide's colour and the page's back link show which guide it is */
-@media (max-width: 640px) {
-    #header .navbar-guide-name {
-        display: none;
-    }
-}
-
 /* Font Awesome 4 outline icon names, such as [fa="calendar-o"] in pages from older themes (Open Course Hub, Quark Open
    Publishing): Font Awesome 5 and later dropped the "-o" names, so each is shown as its newer icon in the regular
    (outline) style, which Font Awesome's free set includes. Other Font Awesome 4 names still work as they are */

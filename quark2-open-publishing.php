@@ -168,7 +168,7 @@ class Quark2OpenPublishing extends Quark2
         $twig->twig_vars['search_scope_page'] = $this->getSearchScopePage();
 
         // The guide the current page belongs to (its home page, guide.md or section-list.md, or null), and how many guides the site has –
-        // for the guide's name and colour in the header (see templates/partials/logo.html.twig and base.html.twig)
+        // for the guide's colour in the header (see base.html.twig)
         $twig->twig_vars['guide_home'] = $this->guideHomeOf($this->grav['page']);
         $guideCount = 0;
         foreach (self::GUIDE_HOME_TEMPLATES as $type) {
