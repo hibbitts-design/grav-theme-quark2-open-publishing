@@ -1,3 +1,9 @@
+# v1.2.10
+## XX/XX/2026
+
+1. [](#new)
+    * Fluid Layout (Quark 2 tab), Quark 2's new option to stretch pages to the full window width – guide and course pages, and the Guides and Courses pages, keep their reading width
+
 # v1.2.9
 ## 11/16/2026
 
