@@ -1,5 +1,5 @@
 # v1.2.11
-## XX/XX/2026
+## 11/16/2026
 
 1. [](#bugfix)
     * Blog posts: the date on a post's hero image is readable, in light text like the title, instead of Quark 2's muted grey
