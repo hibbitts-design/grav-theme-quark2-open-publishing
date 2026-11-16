@@ -14,6 +14,7 @@ header-transparent: false
 header-dark: false
 header-light: false
 sticky-footer: true
+layout-fluid: false
 theme-mode: auto
 accent-color: '#8428DF'
 blog-page: '/blog'

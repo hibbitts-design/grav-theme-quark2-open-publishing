@@ -25,7 +25,8 @@
 {# Heading Weight option: lighter headings (see css/site.css) unless set to Quark 2's default #}
 {# Hide Header While Scrolling option (on unless turned off; js/reader.js reads this class on guide pages) #}
 {# guide-or-course: every page in a guide or course, embedded too, gets the same type scale (see css/site.css) #}
-{% block body_classes %}{{ parent() }}{% if theme_var('heading_weight') != 'quark2' %} headings-light{% endif %}{% if theme_var('header_hide_on_scroll', true) %} header-hide-on-scroll{% endif %}{% if course_page and show_site_chrome %} in-course{% endif %}{% if guide_home or course_page %} guide-or-course{% endif %}{% if site_menu_empty %} site-menu-empty{% endif %}{% endblock %}
+{# reading-width: guide and course pages, and the Guides and Courses pages, keep their width with Quark 2's Fluid Layout on (see css/site.css) #}
+{% block body_classes %}{{ parent() }}{% if theme_var('heading_weight') != 'quark2' %} headings-light{% endif %}{% if theme_var('header_hide_on_scroll', true) %} header-hide-on-scroll{% endif %}{% if course_page and show_site_chrome %} in-course{% endif %}{% if guide_home or course_page %} guide-or-course{% endif %}{% if site_menu_empty %} site-menu-empty{% endif %}{% if guide_home or course_page or page.template in ['reader-list', 'guide-list', 'course-list'] %} reading-width{% endif %}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}

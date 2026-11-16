@@ -1144,3 +1144,10 @@ body.guide-or-course main :is(.content-item, .e-content) :is(p, li, dd, blockquo
     white-space: nowrap;
     border: 0;
 }
+
+/* Quark 2's Fluid Layout stretches pages to the full window width. Guide and course pages, and the Guides and
+   Courses pages, keep their usual width so lines stay readable; the header and footer still stretch - hibbittsdesign.org */
+body.layout-fluid.reading-width #body-wrapper .container,
+body.layout-fluid.reading-width .course-navbar-inner {
+    max-width: 1200px;
+}
