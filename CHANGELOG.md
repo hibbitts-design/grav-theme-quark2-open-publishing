@@ -4,6 +4,7 @@
 1. [](#improved)
     * Theme options, now that Open Course Space uses the theme too: the first tab is Configuration, starting with Guides and Courses (Hide Header While Scrolling moved there from Quark 2 Options), then Reuse Pages as Markdown, Creative Commons License, Menu, Typography, Embedding in an LMS and H5P; Quark 2 Options is now Quark 2
     * Clearer labels and help: Text before Markdown Link and Text before Git Sync Link, where the CC license shows, single-page embedding with `?embedded=true`, and Enabled/Disabled on every switch – existing settings are kept
+    * Theme description now includes courses and names the two skeletons that use it, Open Publishing Space and Open Course Space
 
 # v1.2.8
 ## 11/14/2026
