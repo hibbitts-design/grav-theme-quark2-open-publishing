@@ -1,8 +1,10 @@
 # v1.2.10
-## XX/XX/2026
+## 11/16/2026
 
 1. [](#new)
     * Fluid Layout (Quark 2 tab), Quark 2's new option to stretch pages to the full window width – guide and course pages, and the Guides and Courses pages, keep their reading width
+1. [](#bugfix)
+    * Blog link posts (a post whose title goes to another site) match Quark 2: the "open post" icon has a label for screen readers and appears unless `continue_link: false`
 
 # v1.2.9
 ## 11/16/2026
