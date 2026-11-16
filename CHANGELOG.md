@@ -1,3 +1,9 @@
+# v1.2.12
+## XX/XX/2026
+
+1. [](#improved)
+    * New screenshot and thumbnail, showing a guide home page as it looks now, without the old Setup Git Sync menu item
+
 # v1.2.11
 ## 11/16/2026
 
