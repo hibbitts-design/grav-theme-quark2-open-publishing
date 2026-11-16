@@ -74,15 +74,15 @@ Your pages, settings and child theme (such as `mytheme`) stay as they are. Newer
 
 - **Previous/Next at the top and bottom, with the reading progress** (such as "Page 4 of 12") – since 0.9.59. To keep the earlier look, set **Prev/Next Page Controls Position** to Bottom and turn off **Show Reading Progress** on the guide's home page
 - **On phones, Previous/Next in a compact bar** fixed to the bottom of the screen – since 0.9.63 (**Show Sticky Prev/Next Bar**, on the guide's home page)
-- **On phones, the header slides away while scrolling down**, when Quark 2's Header Fixed is on – since 0.9.59 (**Hide Header While Scrolling**, in Quark 2 Options)
+- **On phones, the header slides away while scrolling down**, when Quark 2's Header Fixed is on – since 0.9.59 (**Hide Header While Scrolling**, under Guides and Courses)
 - **Page badges** beside the section label, for pages that already have a Badge Label – since 0.9.57
 
 ## Theme Options
 
 All options are available in the Admin Panel under **Themes → Quark 2 Open Publishing**.
 
-- **Open Publishing Options** – Creative Commons license display, Reuse Pages as Markdown, chromeless site, menu dropdowns, **Hide Sidebar Button** (on by default: readers can hide a guide's sidebar on wider screens), **Sections Link on Phones** (off by default: a link at the top of guide pages that jumps to the section list, useful for long guides with many sections), **Single Guide or Course Logo Link** (with only one guide and no courses, or one course and no guides, the logo goes to that guide's or course's home page by default, as in Grav Helios Course Hub, or to the site's home page), Heading Weight (lighter headings using the heading font as designed, the default, or Quark 2's bolder default), and H5P setup
-- **Quark 2 Options** – Light, Dark or Auto mode by default, accent colour, logos and favicon, header and footer (including **Hide Header While Scrolling**, on by default: on guide pages on phones, a fixed header slides away while scrolling down and returns when scrolling up), blog page, and Font Awesome
+- **Configuration** – **Guides and Courses**: **Hide Sidebar Button** (on by default: readers can hide a guide's or course's sidebar on wider screens), **Sections Link on Phones** (off by default: a link at the top of guide and course pages that jumps to the section list, useful for long guides with many sections), **Hide Header While Scrolling (Phones)** (on by default: on guide and course pages on phones, with Quark 2's Header Fixed on, the header slides away while scrolling down and returns when scrolling up) and **Single Guide or Course Logo Link** (with only one guide and no courses, or one course and no guides, the logo goes to that guide's or course's home page by default, as in Grav Helios Course Hub, or to the site's home page); then Reuse Pages as Markdown, Creative Commons license display, menu dropdowns, Heading Weight (lighter headings using the heading font as designed, the default, or Quark 2's bolder default), Embedding in an LMS (hide the site menu, sidebar and footer site-wide) and H5P setup
+- **Quark 2** – Light, Dark or Auto mode by default, accent colour, logos and favicon, header and footer, blog page, and Font Awesome
 - **Custom Menu Items** – text, icon, URL, and target for extra menu links
 - **Git Sync Link** – location, link type (view or edit), icon and text, and a custom Git repository URL
 

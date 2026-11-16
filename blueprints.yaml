@@ -30,53 +30,53 @@ form:
       fields:
         general_info:
           type: tab
-          title: 'Open Publishing Options'
+          title: 'Configuration'
           fields:
-            displaycclicense:
+            guidesoptions:
               type: section
-              title: 'Creative Commons License'
+              title: 'Guides and Courses'
               underline: true
-              fields:
-                cc_license.enabled:
-                  type: toggle
-                  label: 'Display CC License'
-                  highlight: 1
-                  default: 0
-                  options:
-                    '0': 'No'
-                    '1': 'Yes'
-                  validate:
-                    type: bool
-                cc_license.type:
-                  type: select
-                  label: 'CC License Type'
-                  default: ccby
-                  size: long
-                  description: 'Looking for more info about Creative Commons (CC) Licenses?<br> Visit the <a href="https://creativecommons.org/" target="_blank">creativecommons.org</a> site.'
-                  options:
-                    ccby: 'CC Attribution'
-                    ccbysa: 'CC Attribution Share Alike'
-                    ccbynd: 'CC Attribution No Derivatives'
-                    ccbync: 'CC Attribution Non-Commercial'
-                    ccbyncsa: 'CC Attribution Non-Commercial Share Alike'
-                    ccbyncnd: 'CC Attribution Non-Commercial No Derivatives'
-                cc_license.icon:
-                  type: toggle
-                  label: 'Display Only CC License Icon'
-                  highlight: 1
-                  default: 0
-                  options:
-                    '0': 'No'
-                    '1': 'Yes'
-                  validate:
-                    type: bool
-                cc_license.text:
-                  type: text
-                  size: long
-                  description: 'For example, ''except where otherwise noted.'''
-                  label: 'Additional CC License Text'
-                  validate:
-                    type: text
+            sidebar_hide_button:
+              type: toggle
+              label: 'Hide Sidebar Button'
+              help: "Let readers hide a guide's or course's sidebar on wider screens to focus on the page."
+              highlight: 1
+              default: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+            phone_sections_link:
+              type: toggle
+              label: 'Sections Link on Phones'
+              help: "Show a link at the top of guide and course pages on phones that jumps to the section list."
+              highlight: 1
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+            header_hide_on_scroll:
+              type: toggle
+              label: 'Hide Header While Scrolling (Phones)'
+              help: 'On guide and course pages on phones, with Header Fixed on, the header slides away while scrolling down and returns when scrolling up.'
+              highlight: 1
+              default: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+            logo_link_target:
+              type: select
+              label: 'Single Guide or Course Logo Link'
+              help: 'Where the logo goes when the site has only one guide or course.'
+              default: single_course
+              options:
+                single_course: 'Guide or Course Home Page (default)'
+                site_home: 'Site Home Page'
             markdownlinkoptions:
               type: section
               title: 'Reuse Pages as Markdown'
@@ -88,8 +88,8 @@ form:
               highlight: 1
               default: 0
               options:
-                '0': 'No'
-                '1': 'Yes'
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
               validate:
                 type: bool
             markdown_link.location:
@@ -125,7 +125,7 @@ form:
             markdown_link.note_text:
               type: text
               size: medium
-              label: 'Text before Page Link'
+              label: 'Text before Markdown Link'
               description: 'e.g. ''Want to reuse this open content?'''
             full_text_link.enabled:
               type: toggle
@@ -134,8 +134,8 @@ form:
               highlight: 1
               default: 0
               options:
-                '0': 'No'
-                '1': 'Yes'
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
               validate:
                 type: bool
             full_text_link.text:
@@ -143,20 +143,52 @@ form:
               size: medium
               label: 'Full Text Link Text'
               placeholder: 'Full text (llms-full.txt)'
-            chromelessoptions:
+            displaycclicense:
               type: section
-              title: 'Chromeless Site (i.e. Embedded)'
+              title: 'Creative Commons License'
               underline: true
-            chromeless.enabled:
-              type: toggle
-              label: 'Hide Site Menu, Sidebar and Footer'
-              highlight: 1
-              default: 0
-              options:
-                '0': 'No'
-                '1': 'Yes'
-              validate:
-                type: bool
+              fields:
+                cc_license.enabled:
+                  type: toggle
+                  label: 'Display CC License'
+                  help: 'Site-wide, below each page''s content. Guides and courses can also show their own on their Attribution tab.'
+                  highlight: 1
+                  default: 0
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool
+                cc_license.type:
+                  type: select
+                  label: 'CC License Type'
+                  default: ccby
+                  size: long
+                  description: 'Looking for more info about Creative Commons (CC) Licenses?<br> Visit the <a href="https://creativecommons.org/" target="_blank">creativecommons.org</a> site.'
+                  options:
+                    ccby: 'CC Attribution'
+                    ccbysa: 'CC Attribution Share Alike'
+                    ccbynd: 'CC Attribution No Derivatives'
+                    ccbync: 'CC Attribution Non-Commercial'
+                    ccbyncsa: 'CC Attribution Non-Commercial Share Alike'
+                    ccbyncnd: 'CC Attribution Non-Commercial No Derivatives'
+                cc_license.icon:
+                  type: toggle
+                  label: 'Display Only CC License Icon'
+                  highlight: 1
+                  default: 0
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool
+                cc_license.text:
+                  type: text
+                  size: long
+                  description: 'For example, ''except where otherwise noted.'''
+                  label: 'Additional CC License Text'
+                  validate:
+                    type: text
             menuoptions:
               type: section
               title: Menu
@@ -164,48 +196,14 @@ form:
             dropdown.enabled:
               type: toggle
               label: 'Display Dropdowns in Menu'
-              help: "On sites with guides, consider turning this off, so a guide's sections don't also appear in the menu."
+              help: "On sites with guides or courses, consider turning this off, so their pages don't also appear in the menu."
               highlight: 1
               default: 1
               options:
-                '0': Disabled
-                '1': Enabled
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
               validate:
                 type: bool
-            guidesoptions:
-              type: section
-              title: 'Guides'
-              underline: true
-            sidebar_hide_button:
-              type: toggle
-              label: 'Hide Sidebar Button'
-              help: "Let readers hide a guide's sidebar on wider screens to focus on the page."
-              highlight: 1
-              default: 1
-              options:
-                '0': Disabled
-                '1': Enabled
-              validate:
-                type: bool
-            phone_sections_link:
-              type: toggle
-              label: 'Sections Link on Phones'
-              help: "Show a link at the top of guide pages on phones that jumps to the section list."
-              highlight: 1
-              default: 0
-              options:
-                '0': Disabled
-                '1': Enabled
-              validate:
-                type: bool
-            logo_link_target:
-              type: select
-              label: 'Single Guide or Course Logo Link'
-              help: 'Where the logo goes when the site has only one guide or course.'
-              default: single_course
-              options:
-                single_course: 'Guide or Course Home Page (default)'
-                site_home: 'Site Home Page'
             typographyoptions:
               type: section
               title: 'Typography'
@@ -218,6 +216,21 @@ form:
                 lighter: 'Lighter (as the font is designed)'
                 quark2: 'Quark 2 default (bolder)'
               help: 'Headings across the site. Quark 2''s heading font has one weight; its bolder default is drawn by the browser.'
+            chromelessoptions:
+              type: section
+              title: 'Embedding in an LMS'
+              underline: true
+            chromeless.enabled:
+              type: toggle
+              label: 'Hide Site Menu, Sidebar and Footer'
+              help: 'Site-wide. To embed a single page, add ?embedded=true to its address instead.'
+              highlight: 1
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
             h5psetup:
               type: section
               title: 'H5P Setup'
@@ -227,13 +240,12 @@ form:
               size: long
               label: 'H5P Embed Source URL'
               default: 'https://h5p.org/h5p/embed/'
-              help: 'Enter the embed source URL path up to, but not including, the H5P Content ID.'
               description: 'H5P embed source URL path up to, but not including, the Content ID. For example, ''https://h5p.org/h5p/embed/'' or ''https://[organization].h5p.com/content/''.'
               validate:
                 type: URL
         quark2_info:
           type: tab
-          title: 'Quark 2 Options'
+          title: 'Quark 2'
           fields:
             theme-mode:
               type: select
@@ -305,18 +317,6 @@ form:
             header-animated:
               type: toggle
               label: Header Animated
-              highlight: 1
-              default: 1
-              options:
-                1: PLUGIN_ADMIN.ENABLED
-                0: PLUGIN_ADMIN.DISABLED
-              validate:
-                type: bool
-
-            header_hide_on_scroll:
-              type: toggle
-              label: Hide Header While Scrolling (phones)
-              help: 'On guide pages on phones, with Header Fixed on, the header slides away while scrolling down and returns when scrolling up.'
               highlight: 1
               default: 1
               options:
@@ -407,7 +407,7 @@ form:
 
             fontawesome.local:
               type: toggle
-              label: Serve Font Awesome locally
+              label: Serve Font Awesome Locally
               help: When enabled, expects `css/fontawesome/all.min.css` to exist in the theme. Otherwise uses the official CDN.
               highlight: 0
               default: 0
@@ -428,8 +428,8 @@ form:
               default: 0
               highlight: 1
               options:
-                '0': 'No'
-                '1': 'Yes'
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
               validate:
                 type: bool
             menu:
@@ -507,7 +507,7 @@ form:
             git_sync_edit_note_text:
               type: text
               size: medium
-              label: 'Text before Page Link'
+              label: 'Text before Git Sync Link'
               description: 'The text before Git Sync Link located on a Page, e.g. ''Have a suggestion or correction?'' or ''Want to reuse this open content?''.'
             gitsyncadvanced:
               type: section
