@@ -1151,3 +1151,9 @@ body.layout-fluid.reading-width #body-wrapper .container,
 body.layout-fluid.reading-width .course-navbar-inner {
     max-width: 1200px;
 }
+
+/* A blog post's date sits on its hero image (Quark 2's item template), but keeps Quark 2's muted grey, which is hard
+   to read on a dark image. On light-text heroes it now uses light text too, like the title - hibbittsdesign.org */
+.hero.text-light .blog-date {
+    color: rgba(255, 255, 255, 0.85);
+}
