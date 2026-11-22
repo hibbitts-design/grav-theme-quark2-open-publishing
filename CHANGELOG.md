@@ -1,3 +1,9 @@
+# v1.2.15
+## XX/XX/2026
+
+1. [](#new)
+    * Show Search Box on This Page: a guide's home page can hide its search box while its sections and their pages keep theirs
+
 # v1.2.14
 ## 11/21/2026
 
