@@ -134,6 +134,7 @@
     {% set resume_text = modules_mode ? 'THEME_QUARK_OPEN_PUBLISHING.COURSE_RESUME' : 'THEME_QUARK_OPEN_PUBLISHING.READER_RESUME' %}
     {% set resume_dismiss_text = modules_mode ? 'THEME_QUARK_OPEN_PUBLISHING.COURSE_RESUME_DISMISS' : 'THEME_QUARK_OPEN_PUBLISHING.READER_RESUME_DISMISS' %}
     {% set show_reader_search = not modules_mode and (page.header.show_search_box is not defined or page.header.show_search_box)
+      and (page.header.show_search_box_on_page is not defined or page.header.show_search_box_on_page)
       and (config.plugins.simplesearch.enabled or config.plugins.tntsearch.enabled) and not embedded_mode %}
 
     {% if show_reader_resume or show_reader_search %}
