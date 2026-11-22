@@ -1,3 +1,9 @@
+# v1.2.14
+## XX/XX/2026
+
+1. [](#improved)
+    * A course's Modules page says "Continue where you left off", as in Open Matter and Helios Course Hub (guides keep "Continue reading")
+
 # v1.2.13
 ## 11/18/2026
 

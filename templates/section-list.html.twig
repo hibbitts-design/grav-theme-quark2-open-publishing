@@ -127,9 +127,12 @@
        - A search box for this guide on the right (Show Search Box setting, on unless turned off; hidden in embedded
          mode). #}
     {# On a course's Modules page, Keep My Place too (the module pages save the place; a course can turn it off with
-       keep_my_place: false on its own page, as in Open Matter); its search box comes with the course's sidebar #}
+       keep_my_place: false on its own page, as in Open Matter); its search box comes with the course's sidebar.
+       There the bar says "Continue where you left off", as in Open Matter and Helios Course Hub. #}
     {% set course_keeps_place = not modules_mode or not course_page or course_page.header.keep_my_place is not defined or course_page.header.keep_my_place %}
     {% set show_reader_resume = course_keeps_place and (page.header.keep_my_place is not defined or page.header.keep_my_place) %}
+    {% set resume_text = modules_mode ? 'THEME_QUARK_OPEN_PUBLISHING.COURSE_RESUME' : 'THEME_QUARK_OPEN_PUBLISHING.READER_RESUME' %}
+    {% set resume_dismiss_text = modules_mode ? 'THEME_QUARK_OPEN_PUBLISHING.COURSE_RESUME_DISMISS' : 'THEME_QUARK_OPEN_PUBLISHING.READER_RESUME_DISMISS' %}
     {% set show_reader_search = not modules_mode and (page.header.show_search_box is not defined or page.header.show_search_box)
       and (config.plugins.simplesearch.enabled or config.plugins.tntsearch.enabled) and not embedded_mode %}
 
@@ -138,8 +141,8 @@
         {% if show_reader_resume %}
           <div class="reader-resume" data-reader-home="{{ page.url }}" hidden>
             <i class="fa fa-bookmark-o" aria-hidden="true"></i>
-            <a class="reader-resume-link" href="#">{{ 'THEME_QUARK_OPEN_PUBLISHING.READER_RESUME'|t }}: <span class="reader-resume-title"></span></a>
-            <button type="button" class="reader-resume-dismiss" aria-label="{{ 'THEME_QUARK_OPEN_PUBLISHING.READER_RESUME_DISMISS'|t|e('html_attr') }}"><span aria-hidden="true">&times;</span></button>
+            <a class="reader-resume-link" href="#">{{ resume_text|t }}: <span class="reader-resume-title"></span></a>
+            <button type="button" class="reader-resume-dismiss" aria-label="{{ resume_dismiss_text|t|e('html_attr') }}"><span aria-hidden="true">&times;</span></button>
           </div>
         {% endif %}
         {% if show_reader_search %}
