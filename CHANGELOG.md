@@ -2,7 +2,7 @@
 ## XX/XX/2026
 
 1. [](#new)
-    * Search Box Text (Guides List page): the search box's own words, such as "Search all books" for a site of books, instead of "Search all guides"
+    * Search Box Text (Guides List and Courses pages): the search box's own words, such as "Search all books" for a site of books, instead of "Search all guides" or "Search all courses"
 
 # v1.2.16
 ## 11/26/2026
