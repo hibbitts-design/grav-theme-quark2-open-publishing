@@ -145,6 +145,13 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
     background: color-mix(in oklab, var(--card-band-color, var(--q2-accent)) 55%, transparent);
 }
 
+/* A portrait card image, such as a book cover: shown whole at its own shape, centred on a light band in the image's
+   usual place and size, instead of cropped to fill it (see reader-list.html.twig) */
+.section-card .card-image-portrait img {
+    object-fit: contain;
+    background: var(--q2-bg-muted);
+}
+
 /* Cards side by side line up: each card's image, title and details share rows with the other cards in its row,
    so a one-line title leaves space to match a two-line title next to it (subgrid; older browsers keep each card's
    own heights). Only in lists without side-image cards, which have their own layout. */
@@ -589,6 +596,11 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
         object-fit: cover;
     }
 
+    /* a portrait image is shown whole in its column instead (see above) */
+    .section-card-image-side .card-image-portrait img {
+        object-fit: contain;
+    }
+
     .section-card-image-side .card-header {
         padding: 1.5rem 1.5rem 0;
     }
@@ -607,6 +619,10 @@ Quark 2's --q2-* tokens, so Light and Dark mode both work without extra rules.
         height: 10rem;
         aspect-ratio: auto;
         object-fit: cover;
+    }
+
+    .section-card-image-side .card-image-portrait img {
+        object-fit: contain;
     }
 }
 
