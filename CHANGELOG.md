@@ -1,3 +1,9 @@
+# v1.2.18
+## 11/27/2026
+
+1. [](#improved)
+    * Guide pages: the guide settings in Admin, such as Learning Objectives, Side Box and card details, now have their own Guide Page tab instead of sharing the Options tab, and "Reader Details" is now "Guide Page Details"
+
 # v1.2.17
 ## 11/26/2026
 
